@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: auto; /* Allow vertical scrolling if content exceeds viewport height */
+  overflow-y: auto;
 }
 
 .hero-text {
@@ -23,20 +23,60 @@
 .hero-content {
   display: flex;
   flex-direction: column;
-  margin-bottom: 200px; 
+  align-items: center;
 }
 
 .hero-buttons {
   display: flex;
   justify-content: flex-start;
   margin-top: 150px;
-
 }
-
+input{
+  border:none;
+}
 .button-card {
   margin-right: 10px;
+  background-color: transparent;
+  border:0;
+  color: #fff;
+  left:0;
+
 }
 
 .research-card {
-  width: 700px;
+  width: 1000px;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.research-card label {
+  margin-bottom: 5px;
+}
+
+input,
+button,
+.date-picker-container {
+  display: inline-block;
+  margin-right: 10px; 
+}
+
+.research-card .date-picker-container label {
+  margin-right: 10px;
+}
+
+.icon {
+  color: rgb(10, 94, 197);
+}
+.hero-tabs .nav-link {
+  color: #fff;
+
+}
+.hero-tabs .nav-link :hover{
+  color: #fff;
+  
+}
+
+.hero-tabs .nav-link.active {
+  background-color: #007bff; 
 }
