@@ -1,0 +1,16 @@
+.destinations-carousel {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .carousel-image {
+    max-height: 400px;
+    width: 100%;
+    object-fit: cover;
+  }
+.destinations{
+  margin-top: 100px;
+  align-items: center;
+  text-align: center;
+  
+}

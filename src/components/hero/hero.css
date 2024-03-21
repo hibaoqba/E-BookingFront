@@ -1,0 +1,42 @@
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(rgba(37, 37, 37, 0.5), rgba(68, 68, 68, 0.5)), url(src/assets/agadir.jpg);
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds viewport height */
+}
+
+.hero-text {
+  text-align: center;
+  max-width: 800px;
+  margin-top: 300px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 200px; 
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 150px;
+
+}
+
+.button-card {
+  margin-right: 10px;
+}
+
+.research-card {
+  width: 700px;
+}

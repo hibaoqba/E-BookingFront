@@ -1,0 +1,79 @@
+.top-navbar {
+  width: 100%;
+  background-color: transparent;
+  color: #fff;
+  padding: 10px 0;
+  position: absolute; 
+  display: flex;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 200;
+  border-bottom: 0.2px solid white; 
+}
+
+.top-navbar .left-section {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-left: 20px;
+}
+
+.top-navbar .left-section li {
+  margin-right: 10px;
+}
+
+.top-navbar .left-section .icon,.top-navbar .right-section .icon {
+  font-size: 15px; 
+}
+
+.top-navbar .right-section {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.top-navbar .right-section span {
+  margin-right: 20px;
+}
+
+.divider {
+  width: 1px;
+  height: 20px; 
+  background-color: #ccc; 
+  margin: 0 10px; 
+}
+.top-navbar .right-section span,
+.top-navbar .right-section a {
+  font-size: 11px; 
+}
+
+
+.dropdown .toggle,
+.dropdown .toggle:focus,
+.dropdown .toggle:active {
+  color: #fff;
+}
+
+.dropdown .toggle:hover {
+  color: #919191;
+}
+
+.flag{
+  width: 20px;
+  height: 20px;
+}
+.top-navbar .right-section a::before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 12px; 
+  background-color: white;
+  margin:0 15px ;
+  
+}
+.transparent-dropdown {
+  background-color: transparent !important;
+  border: none; 
+}
