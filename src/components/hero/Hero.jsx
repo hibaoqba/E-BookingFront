@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { faLocationDot, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faCalendarDays,faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -28,15 +28,14 @@ const Hero = () => {
           id="reservation-tabs"
           activeKey={key}
           onSelect={(k) => setKey(k)}
-          className='hero-buttons hero-tabs' // Add hero-tabs class
+          className='hero-buttons hero-tabs' 
         >
           <Tab eventKey="voiture" title="Voiture">
             {key === 'voiture' && (
               <div className="research-card">
-                <Card>
-                  <Card.Body>
-                    <div>
-                      <label>Destination:</label><br />
+                <Card className="card">
+                  <Card.Body className="card-body">
+                    <div className="input-with-icon">
                       <FontAwesomeIcon icon={faLocationDot} className='icon' />
                       <input
                         type="text"
@@ -45,20 +44,20 @@ const Hero = () => {
                         onChange={(e) => setDestination(e.target.value)}
                       />
                     </div>
-                    <div>
-                      <label>De</label>
-                      <FontAwesomeIcon icon={faCalendarDays} className='icon'  />
+                    <div className="input-with-icon">
+                      <FontAwesomeIcon icon={faCalendarDays} className='icon' />
                       <DatePicker
-                        placeholderText='MM/JJ/YYYY'
+                        placeholderText='De'
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
                         startDate={startDate}
                         endDate={endDate}
                       />
-                      <label>à</label>
-                      <FontAwesomeIcon icon={faCalendarDays}  className='icon' />
+                    </div>
+                    <div className="input-with-icon">
+                      <FontAwesomeIcon icon={faCalendarDays} className='icon' />
                       <DatePicker
-                        placeholderText='MM/JJ/YYYY'
+                        placeholderText='à'
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}
                         startDate={startDate}
@@ -66,7 +65,7 @@ const Hero = () => {
                         minDate={startDate}
                       />
                     </div>
-                    <button>Rechercher</button>
+                    <button><FontAwesomeIcon icon={faMagnifyingGlass} /> Rechercher</button>
                   </Card.Body>
                 </Card>
               </div>
@@ -77,9 +76,8 @@ const Hero = () => {
               <div className="research-card">
                 <Card>
                   <Card.Body>
-                    <div>
-                      <label>Destination:</label><br />
-                      <FontAwesomeIcon icon={faLocationDot} className='icon'  />
+                    <div className="input-with-icon">
+                      <FontAwesomeIcon icon={faLocationDot} className='icon' />
                       <input
                         type="text"
                         placeholder="Où vas-tu?"
@@ -87,20 +85,22 @@ const Hero = () => {
                         onChange={(e) => setDestination(e.target.value)}
                       />
                     </div>
-                    <div>
-                      <label>De</label>
-                      <FontAwesomeIcon icon={faCalendarDays} className='icon'  />
+                    <div className="input-with-icon">
+                      <FontAwesomeIcon icon={faCalendarDays} className='icon' />
                       <DatePicker
-                        placeholderText='MM/JJ/YYYY'
+                        placeholderText='De'
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
                         startDate={startDate}
                         endDate={endDate}
                       />
-                      <label>à</label>
-                      <FontAwesomeIcon icon={faCalendarDays} className='icon'  />
+                      
+                    </div>
+                    
+                    <div className="input-with-icon">
+                      <FontAwesomeIcon icon={faCalendarDays} className='icon' />
                       <DatePicker
-                        placeholderText='MM/JJ/YYYY'
+                        placeholderText='à'
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}
                         startDate={startDate}
@@ -108,8 +108,7 @@ const Hero = () => {
                         minDate={startDate}
                       />
                     </div>
-                    
-                    <button>Rechercher</button>
+                    <button><FontAwesomeIcon icon={faMagnifyingGlass} />Rechercher</button>
                   </Card.Body>
                 </Card>
               </div>
