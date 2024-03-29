@@ -1,36 +1,42 @@
-nav {
+
+.middle-navbar {
   width: 100%;
   background-color: transparent;
   color: #fff;
-  padding: 10px 0;
+  padding: 20px 0;
   position: absolute; 
-  display: flex;
-  top: 60px; /* Adjust this value according to the height of your main navbar */
-  left: 0;
-  align-items: center;
+  margin-top: 60px;
   justify-content: space-between;
-  z-index: 100; 
-  
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+
 }
 
-nav ul {
-  margin: 0;
-  padding: 0; 
+.right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 150px;
+  list-style-type: none;
+}
+.right li {
+  margin-left: 15px;
 }
 
-nav ul li {
-  display: inline-block;
-  list-style: none;
-  font-size: 16px;
-  margin: 5px 20px;
+.middle-navbar .right span {
+  margin-right: 20px;
 }
 
-.logo {
-  width: 35px;
-  height: 30px;
+.right li a {
+  text-decoration: none; 
+  color: #ffffff; 
+  font-weight: bold;
+  font-size: 20px; 
 }
 
-.container {
-  padding-left: 10%;
-  padding-right: 10%;
-}
+
+
+
+
+

@@ -1,0 +1,94 @@
+
+.hero-buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 150px;
+    margin-bottom: 20px;
+    border: none;
+   
+  }
+ 
+  .research-card {
+    width: 1200px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .card-body {
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 20px; 
+  }
+  .tabIcon{
+    height: 20px;
+    width: 23px;
+    margin-right: 10px;
+  }
+  .input-with-icon {
+    display: flex; 
+    align-items: center; 
+  }
+  .guests{
+    align-items: center;
+    display:flex;
+  
+  
+  }
+  .input-with-icon input {
+    padding: 12px 20px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 5px;
+    width: calc(100% - 40px); 
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-with-icon input:focus {
+    outline: none;
+    border-color: #6c63ff;
+  }
+  .tabText{
+    font-size: 20px;
+  }
+  .input-with-icon .icon {
+    margin-right: 5px;
+    margin-left: 20px;
+    color: #1c58ff; 
+    height: 30px;
+    width: 30px;
+  }
+  
+  button {
+    width: 190px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px !important;
+    background-color: #1c58ff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .card{
+    width: 1100px;
+  }
+  button:hover {
+    background-color: rgb(2, 58, 226);
+  }
+  
+  .hero-tabs .nav-link {
+    color: #fff;
+  }
+
+
+  .hero-tabs .nav-link :hover{
+    color: #fff;
+    
+  }
+  
+  .hero-tabs .nav-link.active {
+    background-color: #007bff; 
+    color:#fff;
+  }
+  

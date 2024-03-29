@@ -1,0 +1,24 @@
+.card-container-class {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card-class {
+    width: 25rem;
+    margin: 10px;
+  }
+  
+  .card-img-class {
+    height: 300px;
+    object-fit: cover;
+  }
+  .card-body-class{
+    display: flex;
+    flex-direction: column;
+  }
+ .card-link-class{
+    font-size: 24px;
+    font-weight:545;
+    font-family:Georgia, 'Times New Roman', Times, serif
+ }

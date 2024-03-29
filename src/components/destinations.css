@@ -1,12 +1,15 @@
 .destinations-carousel {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
+    border-radius: 8px;
   }
   
   .carousel-image {
     max-height: 400px;
     width: 100%;
     object-fit: cover;
+    border-radius: 8px;
+    
   }
 .destinations{
   margin-top: 100px;
@@ -14,4 +17,27 @@
   text-align: center;
   color:#383838;
   
+}
+.carousel-caption{
+  text-shadow: 4px 4px 2px rgb(55, 62, 93);
+  font-size: 28px;
+  text-align: center;
+  top: 130px;
+ 
+  
+}
+h3{
+  font-size: 70px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.horizontal-line-container1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.horizontal-line1 {
+  border-top: 4px solid #1d47df;
+  width: 160px;
+  border-radius: 10px;
 }

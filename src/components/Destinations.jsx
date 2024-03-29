@@ -12,12 +12,20 @@ const cities = [
     imageUrl: 'src/assets/marrakech.jpg',
     descriptionUrl: '/marrakech-description',
   },
+  {
+    name: 'Fes',
+    imageUrl: 'src/assets/fez.jpg',
+    descriptionUrl: '/fes-description',
+  },
 ];
 
 const DestinationsCarousel = () => {
     return (
         <div className="destinations">
-            <h1>Meilleures Destinations</h1>
+            <h2>Meilleures Destinations</h2>
+            <div className="horizontal-line-container1">
+        <div className="horizontal-line1"></div>
+      </div>
       <Carousel className="destinations-carousel">
         {cities.map((city, index) => (
           <Carousel.Item key={index}>

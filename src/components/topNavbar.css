@@ -1,3 +1,4 @@
+
 .top-navbar {
   width: 100%;
   background-color: transparent;
@@ -46,9 +47,11 @@
 }
 .top-navbar .right-section span,
 .top-navbar .right-section a {
-  font-size: 11px; 
+  font-size: 14px; 
 }
-
+.dropdown .toggle{
+  border:none;
+}
 
 .dropdown .toggle,
 .dropdown .toggle:focus,
@@ -62,7 +65,8 @@
 
 .flag{
   width: 20px;
-  height: 20px;
+  height: 20px; 
+  margin-right: 10px;
 }
 .top-navbar .right-section a::before {
   content: '';

@@ -1,0 +1,65 @@
+.dropdown-menu {
+    width: 200px; 
+    align-items: center;
+   
+
+}
+.select-guests-dropdown {
+    width: 200px;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.dropdown{
+    margin-right: 20px;
+}
+.dropdown-item:hover{
+    background-color: rgb(237, 237, 237);
+   
+
+}
+.val{
+    align-items: center;
+}
+.dropdown-toggle{
+    background-color: transparent ;
+    color: rgb(60, 60, 60);
+    border-color: rgb(175, 175, 175);
+}
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.dropdown-toggle:active  {
+    background-color: transparent !important;
+    color: rgb(60, 60, 60);;
+}
+
+
+
+
+
+
+.val {
+    display: flex;
+    align-items: center;
+}
+
+.count-display input {
+    width: 40px;
+    text-align: center;
+    margin: 0 10px;
+    border:none;
+}
+
+.btn-minus,
+.btn-add {
+    cursor: pointer;
+}
+
+.btn-minus:hover,
+.btn-add:hover {
+    color: #007bff; /* Change color on hover */
+}
+
+/* Add any additional styling as needed */

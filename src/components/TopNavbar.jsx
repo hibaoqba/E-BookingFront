@@ -5,7 +5,8 @@ import { faFacebook, faLinkedin, faGoogle } from '@fortawesome/free-brands-svg-i
 import { faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from 'react-bootstrap/Dropdown';
-import LoginModal from './LoginModal'; // Import the renamed LoginModal component
+import LoginModal from './LoginModal'; 
+import { Navbar } from 'react-bootstrap';
 
 const TopNavbar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -14,12 +15,12 @@ const TopNavbar = () => {
   const handleShowModal = () => setShowModal(true);
 
   return (
-    <>
+   <>
     <nav className='top-navbar'>
       <ul className='left-section'>
-        <li><FontAwesomeIcon icon={faFacebook} /></li>
-        <li><FontAwesomeIcon icon={faLinkedin} /></li>
-        <li><FontAwesomeIcon icon={faGoogle} /></li>
+        <li><a href='#'><FontAwesomeIcon icon={faFacebook} /></a></li>
+        <li><a href='#'><FontAwesomeIcon icon={faLinkedin} /></a></li>
+        <li><a href='#'><FontAwesomeIcon icon={faGoogle} /></a></li>
         <li><a href="mailto:contact@angbies.com">contact@angbies.com</a></li>
       </ul>
       
@@ -39,12 +40,11 @@ const TopNavbar = () => {
         <div className="divider"></div>
         <span><FontAwesomeIcon icon={faPhone} /> 05 28 22 53 04 </span>
         <a href='#' onClick={handleShowModal}><FontAwesomeIcon icon={faUser} /> connexion ou inscription</a>
-      </div>
-
-      
+      </div>   
     </nav>
-    <LoginModal show={showModal} handleClose={handleCloseModal} /> 
-    </>
+       <LoginModal show={showModal} handleClose={handleCloseModal} /> 
+      
+      </>
   );
 }
 

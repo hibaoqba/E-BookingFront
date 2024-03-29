@@ -1,0 +1,38 @@
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: rgb(235, 235, 235); /* Apply background color to footer */
+    position: relative;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    margin-top: 100px;
+  }
+  
+  .sub-container {
+    flex: 1 0 200px;
+    margin-right: 20px;
+  }
+  
+  .inline {
+    display: inline-block;
+  }
+  
+  .div1 {
+    display: flex;
+    margin-bottom: 30px;
+  }
+  
+  .icon {
+    width: 40px;
+    height: 40px;
+    color: rgb(29, 108, 255);
+    margin-right: 10px;
+  }
+  
+  .footer-container a {
+    display: block;
+    margin-bottom: 5px;
+  }
+  

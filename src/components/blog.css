@@ -1,0 +1,20 @@
+.title{
+    text-align: center;
+    
+}
+.blog{
+
+    margin-top: 100px;
+}
+.horizontal-line-container {
+    display: flex;
+    justify-content: center;
+ margin-bottom: 20px;
+  }
+  
+  .horizontal-line {
+    border-top: 4px solid #1d47df;
+    width: 50px;
+    border-radius: 10px;
+  }
+  
