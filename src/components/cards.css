@@ -2,11 +2,19 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
   }
   
   .card-class {
     width: 25rem;
     margin: 10px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Use cubic bezier for smoother transition */
+
+
+  }
+  .card-class:hover {
+    transform: translateY(-3px);
+    box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.1);
   }
   
   .card-img-class {
@@ -20,5 +28,4 @@
  .card-link-class{
     font-size: 24px;
     font-weight:545;
-    font-family:Georgia, 'Times New Roman', Times, serif
  }

@@ -7,17 +7,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import LoginModal from './LoginModal'; 
 import { Navbar } from 'react-bootstrap';
-
+import { useLocation } from 'react-router-dom';
 const TopNavbar = () => {
   const [showModal, setShowModal] = useState(false);
-
+  const location = useLocation();
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
   return (
    <>
-    <nav className='top-navbar'>
-      <ul className='left-section'>
+<nav className={`top-navbar ${location.pathname === '/car'||location.pathname==='/agadir-description'||location.pathname==='/fez-description'||location.pathname==='/marrakech-description' || location.pathname === '/apartment' ? 'dark-nav' : ''}`}> 
+     <ul className='left-section'>
         <li><a href='#'><FontAwesomeIcon icon={faFacebook} /></a></li>
         <li><a href='#'><FontAwesomeIcon icon={faLinkedin} /></a></li>
         <li><a href='#'><FontAwesomeIcon icon={faGoogle} /></a></li>
@@ -39,6 +39,7 @@ const TopNavbar = () => {
         </Dropdown>
         <div className="divider"></div>
         <span><FontAwesomeIcon icon={faPhone} /> 05 28 22 53 04 </span>
+        <div className="divider"></div>
         <a href='#' onClick={handleShowModal}><FontAwesomeIcon icon={faUser} /> connexion ou inscription</a>
       </div>   
     </nav>
