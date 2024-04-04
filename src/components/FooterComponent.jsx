@@ -47,14 +47,7 @@ const FooterComponent = () => {
         <a href="#">declaration confidentialité</a>
         <a href="#">donnez nous un commentaire</a>
       </div>
-      <div className='sub-container'>
-        <h5>Société</h5>
-        <a href="#">A propos de nous</a>
-        <a href="#">carriere</a>
-        <a href="#">conditions d'utilisation</a>
-        <a href="#">declaration confidentialité</a>
-        <a href="#">donnez nous un commentaire</a>
-      </div>
+      
     </footer>
   );
 };

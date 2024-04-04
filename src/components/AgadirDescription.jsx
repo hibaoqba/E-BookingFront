@@ -49,7 +49,7 @@ const AgadirDescription = () => {
             </ul>
           </div>
         </div>
-        <Map center={[30.400451,-9.579330]} zoom={12} width={600} height={400}>
+        <Map center={[30.400451,-9.579330]} zoom={12} width={900} height={600} className='agadir-map'>
 
 </Map>
 

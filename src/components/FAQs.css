@@ -1,0 +1,10 @@
+.accordion-item{
+    width: 800px;
+}
+.accordion-item :hover{
+background-color: transparent;    
+}
+.accordion-item :active :focus{
+    background-color: transparent;    
+    }
+    

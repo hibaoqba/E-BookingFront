@@ -1,0 +1,122 @@
+.car-details-container{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+    font-size: 20px;
+    color:rgb(49, 49, 49);
+    
+}
+.car-details-subcontainer {
+    display: flex;
+    justify-content: center;
+    width: 100%; 
+  }
+  .details-left-section {
+    margin-right:40px ;
+    margin-left: 30px;
+    width: auto;
+  }
+  
+  .details-right-section {
+    margin-right: 50px;
+   
+
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+   
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .car-features{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+  }
+  .details-feature{
+    margin-right: 100px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+.details-icon{
+    display: flex;
+    align-items: center;
+   
+}
+.details-icon > svg{
+    height: 40px;
+    width: 40px;
+   
+}
+.features-text{
+font-size: 20px;
+}
+.car-carousel-image {
+    width: 100%; /* Ensures image fills the width of the carousel */
+    height: auto; /* Allows the image to adapt its height accordingly */
+    object-fit: contain; /* Maintains aspect ratio without cropping */
+  }
+  
+
+.car-carousel{
+    width: 780px;
+    height: 500px;
+}
+.additional-features{
+    margin-top:40px;
+    color:rgb(50, 50, 50);
+    margin-bottom: 40px;
+}
+.additional-features ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.additional-features li {
+    display: inline-block;
+    width: 33.33%; 
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.additional-icon {
+    vertical-align: middle; 
+    color:rgb(77, 77, 77);
+}
+.car-description
+{
+    margin-top:40px ;
+    margin-bottom:40px;
+}
+.additional-icon{
+    height: 20px;
+    width: 20px;
+}
+.FAQs{
+  margin-top: 40px;
+}
+.FAQs-accordion{
+  margin-top: 20px;
+}
+.reservation{
+  border:1.5px solid ;
+  border-radius: 6px;
+  border-color: rgb(192, 192, 192);
+  width: 350px;
+  display: flex;
+    justify-content: center;
+}
+.price-header{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+
+}
+.price{
+  margin-left: 30px;
+}

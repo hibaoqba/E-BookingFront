@@ -4,10 +4,13 @@ import Navbar from './components/Navbar'
 import TopNavbar from './components/TopNavbar'
 import FooterComponent from './components/FooterComponent'
 import Home from './components/Home';
+import { Card} from 'react-bootstrap';
+
 import './App.css'
 import Apartment from './components/Apartment';
 import Car from './components/Car';
 import AgadirDescription from './components/AgadirDescription';
+import CarComponent from './components/CarComponent';
 const App = () => {
   return (
     <div>
@@ -19,6 +22,7 @@ const App = () => {
         <Route path='/car' element={<Car/>}/>
         <Route path='/apartment' element={<Apartment/>}/>
         <Route path='/agadir-description' element={<AgadirDescription/>}/>
+        <Route path="/car/:id" element={<CarComponent/>} />
       </Routes>
       <FooterComponent/>
       </BrowserRouter>

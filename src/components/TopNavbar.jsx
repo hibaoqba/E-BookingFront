@@ -16,7 +16,7 @@ const TopNavbar = () => {
 
   return (
    <>
-<nav className={`top-navbar ${location.pathname === '/car'||location.pathname==='/agadir-description'||location.pathname==='/fez-description'||location.pathname==='/marrakech-description' || location.pathname === '/apartment' ? 'dark-nav' : ''}`}> 
+<nav className={`top-navbar ${location.pathname !== '/' ? 'dark-nav' : ''}`}>
      <ul className='left-section'>
         <li><a href='#'><FontAwesomeIcon icon={faFacebook} /></a></li>
         <li><a href='#'><FontAwesomeIcon icon={faLinkedin} /></a></li>

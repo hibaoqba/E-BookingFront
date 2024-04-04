@@ -13,6 +13,7 @@
   z-index: 200;
   border-bottom: 0.05px solid rgb(208, 208, 208); 
 }
+
 .dark-nav {
   color: rgb(52, 52, 52) !important; 
   border-bottom: 0.05px solid rgb(214, 214, 214); 
