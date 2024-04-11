@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import { Card} from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { faLocationDot, faCalendarDays, faMagnifyingGlass,faCar, faBuilding} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+
 import './hero.css';
 import TabComponent from '../TabComponent';
 

@@ -7,11 +7,13 @@ import './signupmodal.css';
 
 const SignUpModal = ({ show, handleClose }) => {
   const [formData, setFormData] = useState({
-    nom: '',
-    prenom: '',
-    telephone: '',
+    firstname: '',
+    lastname: '',
+    phoneNumber: '',
     email: '',
-    password: ''
+    password: '',
+    role:'CLIENT',
+    avatar:'/src/assets/avatar.png'
   });
   const [isChecked, setIsChecked] = useState(false);
   const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -54,9 +56,9 @@ const SignUpModal = ({ show, handleClose }) => {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit}>
-            <input type="text" name="nom" placeholder='Nom' value={formData.nom} onChange={handleInputChange} />
-            <input type="text" name="prenom" placeholder='Prenom' value={formData.prenom} onChange={handleInputChange} />
-            <input type="text" name="telephone" placeholder='Téléphone' value={formData.telephone} onChange={handleInputChange} />
+            <input type="text" name="firstname" placeholder='Nom' value={formData.firstname} onChange={handleInputChange} />
+            <input type="text" name="lastname" placeholder='Prenom' value={formData.lastname} onChange={handleInputChange} />
+            <input type="text" name="phoneNumber" placeholder='Téléphone' value={formData.phoneNumber} onChange={handleInputChange} />
             <input type="email" name="email" placeholder='Adresse Email' value={formData.email} onChange={handleInputChange} />
             <input type="password" name="password" placeholder='Mot de Passe' value={formData.password} onChange={handleInputChange} />
             <div className="checkbox-container">

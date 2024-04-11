@@ -5,7 +5,7 @@ import TopNavbar from './components/TopNavbar'
 import FooterComponent from './components/FooterComponent'
 import Home from './components/Home';
 import { Card} from 'react-bootstrap';
-
+import Profile from './components/Profile';
 import './App.css'
 import Apartment from './components/Apartment';
 import Car from './components/Car';
@@ -23,6 +23,7 @@ const App = () => {
         <Route path='/apartment' element={<Apartment/>}/>
         <Route path='/agadir-description' element={<AgadirDescription/>}/>
         <Route path="/car/:id" element={<CarComponent/>} />
+        <Route path='/user/profile' element={<Profile/>}/>
       </Routes>
       <FooterComponent/>
       </BrowserRouter>

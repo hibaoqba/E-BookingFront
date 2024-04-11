@@ -20,12 +20,14 @@
   
   .details-right-section {
     margin-right: 50px;
+    display: flex;
+    flex-direction: column;
    
 
   }
   .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
    
     flex-wrap: wrap;
     margin-bottom: 40px;
@@ -50,15 +52,16 @@
 .details-icon > svg{
     height: 40px;
     width: 40px;
+    color: #3387d6;
    
 }
 .features-text{
 font-size: 20px;
 }
 .car-carousel-image {
-    width: 100%; /* Ensures image fills the width of the carousel */
-    height: auto; /* Allows the image to adapt its height accordingly */
-    object-fit: contain; /* Maintains aspect ratio without cropping */
+    width: 100%; 
+    height: auto; 
+    object-fit: contain; 
   }
   
 
@@ -72,7 +75,7 @@ font-size: 20px;
     margin-bottom: 40px;
 }
 .additional-features ul {
-    list-style: none; /* Remove bullet points */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
@@ -86,8 +89,8 @@ font-size: 20px;
 
 .additional-icon {
     vertical-align: middle; 
-    color:rgb(77, 77, 77);
-}
+    color:#3387d6;
+  }
 .car-description
 {
     margin-top:40px ;
@@ -99,6 +102,7 @@ font-size: 20px;
 }
 .FAQs{
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 .FAQs-accordion{
   margin-top: 20px;
@@ -109,14 +113,86 @@ font-size: 20px;
   border-color: rgb(192, 192, 192);
   width: 350px;
   display: flex;
-    justify-content: center;
+  flex-direction: column;
+  justify-content: center;
 }
 .price-header{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 30px;
 
 }
 .price{
   margin-left: 30px;
+}
+.date-picker{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pick-text{
+text-align: center;
+}
+.list-tarifs {
+  font-family: Arial, sans-serif;
+  font-size: 25px;
+  margin-left: 30px;
+}
+
+.list-tarifs ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-tarifs li {
+  margin-bottom: 10px;
+}
+
+.list-tarifs input[type="checkbox"] {
+  display: none; 
+ 
+}
+.list-tarifs label {
+  margin-left: 20px;
+ 
+}
+
+.list-tarifs input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 40px; /* Add padding to create space between label and checkbox */
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.list-tarifs input[type="checkbox"] + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #aaaaaa; 
+  border-radius: 3px;
+}
+
+.list-tarifs input[type="checkbox"]:checked + label::after {
+  content: '✔'; 
+  position: absolute;
+  left: 3px;
+  top: -5px;
+  font-weight: 900;
+  font-size: 25px;
+  color: #007bff; /* Checkmark color */
+}
+
+/* Hover effect */
+.list-tarifs input[type="checkbox"] + label:hover::before {
+  border-color: #0056b3; /* Hover state border color */
+}
+
+/* Focus effect */
+.list-tarifs input[type="checkbox"]:focus + label::before {
+  outline: none;
+  border-color: #0056b3; /* Focus state border color */
 }

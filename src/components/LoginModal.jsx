@@ -5,7 +5,7 @@ import SignUpModal from './SignUpModal';
 import axios from 'axios';
 import './LoginModal.css';
 
-const LoginModal = ({ show, handleClose }) => {
+const LoginModal = ({ show, handleClose, handleLoginSuccess }) => { // Accept handleLoginSuccess as prop
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,16 +15,24 @@ const LoginModal = ({ show, handleClose }) => {
   const handleSignUpShow = () => setShowSignUpModal(true);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8080/api/auth/authenticate', { email, password });
-      console.log('Login successful:', response.data);
-    } catch (error) {
-      setError('Invalid email or password');
-      console.error('Login error:', error);
-    }
-  };
+  e.preventDefault();
+  try {
+    const response = await axios.post('http://localhost:8080/api/auth/authenticate', { email, password });
+   
+    const authToken = response.data.access_token;
+   
+    localStorage.setItem('authToken', authToken);
+    
+    handleLoginSuccess(); 
+    handleClose(); 
+  } catch (error) {
+    setError('Invalid email or password');
+    console.error('Login error:', error);
+  }
+};
 
+  
+  
   return (
     <div>
       <Modal show={show} onHide={handleClose} centered className="login-modal">

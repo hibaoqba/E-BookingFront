@@ -6,7 +6,7 @@ import './FAQs.css'
 const FAQS = () => {
   return (
     <div>
-      <Accordion defaultActiveKey="0" >
+      <Accordion  >
        
           <Accordion.Item eventKey="0">
             <Accordion.Header>

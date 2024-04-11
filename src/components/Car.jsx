@@ -7,7 +7,7 @@ import { LuBadgeDollarSign } from "react-icons/lu";
 import { BsSuitcaseLg } from "react-icons/bs";
 import { BsFuelPumpDiesel } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
+import DoubleDateInput from './DoubleDateInput'
 import { Card} from 'react-bootstrap';
 import { faLocationDot, faCalendarDays, faMagnifyingGlass,faCar, faBuilding} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,7 +36,9 @@ const Car = () => {
   useEffect(() => {
     sortCars();
   }, [sortBy, cars]);
-
+  const handleDateRangeSelect = (dateRange) => {
+    console.log('Selected date range:', dateRange);
+  };
   const sortCars = () => {
     let sorted = [...cars];
     switch (sortBy) {
@@ -66,27 +68,12 @@ const Car = () => {
              <FontAwesomeIcon icon={faLocationDot} className='car-icon' />
               <input
           type="text"
-            placeholder="Où vas-tu?"
-                                            
-                                            />
-                                        </div>
-                                        <div className="input-with-icon-car">
-                                            <FontAwesomeIcon icon={faCalendarDays} className='car-icon' />
-                                            <DatePicker
-                                                placeholderText='Date Arrivée'
-                                           
-                                            />
-                                        </div>
-                                        <div className="input-with-icon-car">
-                                            <FontAwesomeIcon icon={faCalendarDays} className='car-icon' />
-                                            <DatePicker
-                                                placeholderText='Date Départ'
-                                              
-                                            />
-                                        </div>
-                                        <button><FontAwesomeIcon icon={faMagnifyingGlass} /> Rechercher</button>
-                                    </Card.Body>
-                                </Card>
+            placeholder="Où vas-tu?" /></div>
+            <label > choisir une date:</label>
+       <div className='date-picker-car'> <DoubleDateInput onDateRangeSelect={handleDateRangeSelect} /></div>                                       
+       <button className='car-research-body-button'><FontAwesomeIcon icon={faMagnifyingGlass} /> Rechercher</button>
+          </Card.Body>
+         </Card>
       </div>
       <div className='car-right-section'>
       <div className='car-header'>
@@ -116,7 +103,7 @@ const Car = () => {
               <div className="car-card-details">
                 <h2 className="car-card-title">{car.brand} - {car.model}</h2>
                 <p className="car-card-text">Year: {car.year}</p>
-                <div className="price"><LuBadgeDollarSign className='dollar'/> {car.price}</div>
+                <div className="car-price"><LuBadgeDollarSign className='dollar'/> {car.price}</div>
                 <hr />
                 <div className="features-container">
                   <div className="feature"><BsSuitcaseLg/>{car.carFeatures.suitCases} bagages</div>

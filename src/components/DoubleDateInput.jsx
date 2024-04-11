@@ -1,32 +1,32 @@
-import * as React from 'react';
-import dayjs from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// DoubleDateInput.js
 
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+import React, { useState } from 'react';
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
-export default function DateRangePickerValue() {
-  const [value, setValue] = React.useState([
-    dayjs('2022-04-17'),
-    dayjs('2022-04-21'),
+const DoubleDateInput = ({ onDateRangeSelect }) => {
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
   ]);
 
+  const handleSelect = (ranges) => {
+    setDateRange([ranges.selection]);
+    onDateRangeSelect(ranges.selection); // Pass selected date range back to parent
+  };
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DateRangePicker', 'DateRangePicker']}>
-        <DemoItem label="Uncontrolled picker" component="DateRangePicker">
-          <DateRangePicker
-            defaultValue={[dayjs('2022-04-17'), dayjs('2022-04-21')]}
-          />
-        </DemoItem>
-        <DemoItem label="Controlled picker" component="DateRangePicker">
-          <DateRangePicker
-            value={value}
-            onChange={(newValue) => setValue(newValue)}
-          />
-        </DemoItem>
-      </DemoContainer>
-    </LocalizationProvider>
+    <DateRange
+      editableDateInputs={true}
+      onChange={handleSelect}
+      moveRangeOnFirstSelection={false}
+      ranges={dateRange}
+    />
   );
-}
+};
+
+export default DoubleDateInput;

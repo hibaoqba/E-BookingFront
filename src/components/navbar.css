@@ -40,9 +40,30 @@
   font-weight: bold;
   font-size: 20px; 
 }
+.right  a:hover {
+ color: rgb(44, 130, 216);
+}
 .dark-middle-nav li a{
   color: #404040; 
 }
+.fixed-navbar {
+  position: fixed;
+  top: 0;
+  margin-top: 0;
+  background-color: #fff; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 99999;
+  transition: background-color 0.4s ease-in; 
+}
+.grey-links li a {
+  color: #323232; 
+}
+hr{
+  z-index: 1;
+}
+
+
+
 
 
 

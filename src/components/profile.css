@@ -1,0 +1,61 @@
+.profile-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 60px;
+
+  }
+  
+  .profile-left-container {
+    flex: 1;
+    background-color: rgb(25, 35, 78);
+    color: #fff;
+    z-index: 20000;
+
+  }
+  .profile-divider{
+    color: rgb(127, 131, 157);
+    z-index: 1;
+  }
+  .profile-right-container {
+    flex: 3;
+    margin-top: 100px;
+  }
+  
+  .profile-header {
+    margin-bottom: 20px;
+  }
+  
+  .profile-navigation {
+    margin-bottom: 20px;
+  }
+  
+  .profile-logout {
+    margin-bottom: 20px;
+  }
+  .profile-navigation{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-link{
+    margin-bottom: 30px;
+    margin-left: 15px;
+    font-size: 20px;
+  }
+  .selected-profile{
+    color: rgb(107, 157, 233);
+  }
+  .profile-link:hover{
+    color: rgb(76, 145, 236);
+  }
+  .parametres{
+    margin-left: 100px;
+   
+    font-size: 40px;
+    font-weight: bold;
+  }
+  .profile-divider1{
+    width: 90%;
+    margin: 0 auto; 
+    margin-bottom: 30px;
+  }
