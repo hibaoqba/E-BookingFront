@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(rgba(37, 37, 37, 0.5), rgba(68, 68, 68, 0.5)),
-   url(src/assets/agadir.jpg);
+   url(/src/assets/agadir.jpg);
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center;

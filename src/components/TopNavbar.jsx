@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import './topNavbar.css';
 import axios from 'axios'; // Changed from { Axios } to axios
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faLinkedin, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faPhone, faUser,faLock,faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import {faClock} from '@fortawesome/free-regular-svg-icons';
-
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -16,10 +16,11 @@ const TopNavbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const location = useLocation();
-
+  const navigate = useNavigate(); // Get the navigate function
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+  
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
@@ -38,36 +39,30 @@ const TopNavbar = () => {
     }
   }, []); 
   
-  // TopNavbar.jsx
+  const handleLoginSuccess = async () => {
+    setIsLoggedIn(true);
+    try {
+      const authToken = localStorage.getItem('authToken');
+      const response = await axios.get('http://localhost:8080/api/users/info', {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      });
+      setUserInfo(response.data);
+      localStorage.setItem('authToken', authToken);
+      localStorage.setItem('userInfo', JSON.stringify(response.data));
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+  };
 
-const handleLoginSuccess = async () => {
-  setIsLoggedIn(true);
-  try {
-    const authToken = localStorage.getItem('authToken');
-    const response = await axios.get('http://localhost:8080/api/users/info', {
-      headers: {
-        Authorization: `Bearer ${authToken}`
-      }
-    });
-    setUserInfo(response.data);
-    localStorage.setItem('authToken', authToken);
-    localStorage.setItem('userInfo', JSON.stringify(response.data));
-  } catch (error) {
-    console.error('Error fetching user info:', error);
-  }
-};
-
-const handleLogout = () => {
-  localStorage.removeItem('authToken');
-  localStorage.removeItem('userInfo');
-  setIsLoggedIn(false);
-  setUserInfo(null);
-};
-
-  
-
-  
-
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userInfo');
+    setIsLoggedIn(false);
+    setUserInfo(null);
+    navigate("/"); // Use navigate function to redirect to "/"
+  };
   return (
     <>
       <nav className={`top-navbar ${location.pathname !== '/' ? 'dark-nav' : ''}`}>
@@ -81,7 +76,7 @@ const handleLogout = () => {
         <div className='right-section'>
           <Dropdown className='language-dropdown'>
             <Dropdown.Toggle variant="transparent" id="dropdown-basic" className='toggle'>
-              <img src="src/assets/fr.png" alt="France Flag" className='flag'/> 
+              <img src="/src/assets/fr.png" alt="France Flag" className='flag'/> 
               Français
             </Dropdown.Toggle>
             <Dropdown.Menu className='language-menu'>

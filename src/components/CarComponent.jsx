@@ -18,7 +18,7 @@ const CarComponent = () => {
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
-
+  const today = new Date().toISOString().split('T')[0];
   const updateTotalPrice = (newTotalPrice) => {
     setTotalPrice(newTotalPrice);
   };
@@ -122,7 +122,7 @@ const CarComponent = () => {
             <hr />
             <div className='date-picker'>
               <div className='pick-text'>Veuillez choisir une date:</div>
-              <div className='date-picker-car'> <DoubleDateInput onDateRangeSelect={handleDateRangeSelect} /></div>
+              <div className='date-picker-car'> <DoubleDateInput onDateRangeSelect={handleDateRangeSelect}  /></div>
             </div>
             <hr />
             <div className='tarif-supp'>

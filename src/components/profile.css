@@ -10,6 +10,7 @@
     background-color: rgb(25, 35, 78);
     color: #fff;
     z-index: 20000;
+    min-height: 100vh;
 
   }
   .profile-divider{
@@ -42,9 +43,7 @@
     margin-left: 15px;
     font-size: 20px;
   }
-  .selected-profile{
-    color: rgb(107, 157, 233);
-  }
+
   .profile-link:hover{
     color: rgb(76, 145, 236);
   }
@@ -58,4 +57,7 @@
     width: 90%;
     margin: 0 auto; 
     margin-bottom: 30px;
+  }
+  .selected-profile{
+   color: rgb(107, 157, 233);
   }

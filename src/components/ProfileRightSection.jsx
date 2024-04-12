@@ -47,6 +47,10 @@ const ProfileRightSection = () => {
   }
   return (
     <>
+    <div className='parametres'> 
+     <p>Paramètres</p>
+     </div>
+     <hr className='profile-divider1'/>
              <h2 className='header2'>Personal Information</h2>
 
       <div className="profile-right-section">

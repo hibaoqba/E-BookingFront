@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-
 const DoubleDateInput = ({ onDateRangeSelect }) => {
+ const today = new Date();
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
@@ -25,6 +25,7 @@ const DoubleDateInput = ({ onDateRangeSelect }) => {
       onChange={handleSelect}
       moveRangeOnFirstSelection={false}
       ranges={dateRange}
+      minDate={today}
     />
   );
 };
