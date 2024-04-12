@@ -5,6 +5,9 @@
   flex-wrap: wrap;
   margin-bottom: 40px;
 }
+.heart-button.clicked {
+  color: rgb(255, 63, 98);
+}
 
 .car-sections-container {
   display: flex;
@@ -111,10 +114,24 @@ max-width: 350px;
 
 .car-card-image {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
 }
+.heart-button {
+  position: absolute;
+  background-color: transparent;
+  width: 20px;
+  z-index: 1; /* Ensure the heart button stays above other elements */
 
+}
+
+.heart-button:hover{
+  background-color: transparent;
+}
+.heart-icon{
+  height: 20px;
+  width: 20px;
+}
 .car-card-details {
   padding: 20px;
 }

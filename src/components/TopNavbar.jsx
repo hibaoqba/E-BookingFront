@@ -38,30 +38,35 @@ const TopNavbar = () => {
     }
   }, []); 
   
-  const handleLoginSuccess = async () => {
-    setIsLoggedIn(true);
-    try {
-      const authToken = localStorage.getItem('authToken');
-      const response = await axios.get('http://localhost:8080/api/users/info', {
-        headers: {
-          Authorization: `Bearer ${authToken}`
-        }
-      });
-      setUserInfo(response.data);
-    } catch (error) {
-      console.error('Error fetching user info:', error);
-    }
-  };
+  // TopNavbar.jsx
+
+const handleLoginSuccess = async () => {
+  setIsLoggedIn(true);
+  try {
+    const authToken = localStorage.getItem('authToken');
+    const response = await axios.get('http://localhost:8080/api/users/info', {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    });
+    setUserInfo(response.data);
+    localStorage.setItem('authToken', authToken);
+    localStorage.setItem('userInfo', JSON.stringify(response.data));
+  } catch (error) {
+    console.error('Error fetching user info:', error);
+  }
+};
+
+const handleLogout = () => {
+  localStorage.removeItem('authToken');
+  localStorage.removeItem('userInfo');
+  setIsLoggedIn(false);
+  setUserInfo(null);
+};
+
   
 
-  const handleLogout = () => {
-    // Clear authentication token from local storage
-    localStorage.removeItem('authToken');
-    // Set isLoggedIn to false
-    setIsLoggedIn(false);
-    // Clear user info
-    setUserInfo(null);
-  };
+  
 
   return (
     <>

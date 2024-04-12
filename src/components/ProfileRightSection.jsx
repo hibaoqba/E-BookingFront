@@ -3,12 +3,18 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import './profileRightSection.css';
-
+import { countries } from 'countries-list';
+import Select from 'react-select';
 const ProfileRightSection = () => {
   const [userData, setUserData] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
-
+  const [selectedCountry, setSelectedCountry] = useState(null); // State for selected country
+  const countryOptions = Object.keys(countries).map(countryCode => ({
+    value: countryCode,
+    label: countries[countryCode].name
+  }));
+  
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
@@ -39,10 +45,10 @@ const ProfileRightSection = () => {
   if (!userData) {
     return <div>Loading...</div>;
   }
-
   return (
     <>
-      <h2 className='header2'>Personal Information</h2>
+             <h2 className='header2'>Personal Information</h2>
+
       <div className="profile-right-section">
         <div className="column">
           <div className="profile-field">
@@ -62,12 +68,16 @@ const ProfileRightSection = () => {
             <input type="tel" name="phone" defaultValue={userData.phoneNumber} />
           </div>
           <div className="profile-field">
+            <label>Anniversaire</label>
+            <input type="date" name="birthday" defaultValue={userData.birthDate} />
+          </div>
+          <div className="profile-field">
             <div>
             <img
-  src={avatarUrl || (userData && userData.avatar) || "/default-avatar.png"}
-  alt="Avatar"
-  style={{ width: '100px', height: '100px' }}
-/>
+              src={avatarUrl || (userData && userData.avatar) || "/src/assets/avatar.png"}
+                alt="Avatar"
+                      style={{ width: '100px', height: '100px' }}
+                        />
 
               <input type="file" onChange={handleFileChange} />
     
@@ -76,18 +86,33 @@ const ProfileRightSection = () => {
           <div> <button className='save-button'><FontAwesomeIcon className='save-icon' icon={faFloppyDisk} />Enregistrer vos modifications</button></div>
         </div>
         <div className="column">
-          <div className="profile-field">
-            <label>Anniversaire</label>
-            <input type="date" name="birthday" defaultValue={userData.birthDate} />
-          </div>
-          <div className="profile-field">
-            <label>Adresse</label>
-            <input type="text" name="address" defaultValue={userData.address} />
-          </div>
-          <div className="profile-field">
-            <label>A propos de toi</label>
-            <textarea name="about" defaultValue={userData.description} ></textarea>
-          </div>
+        <div className="profile-field">
+          <label>pays:</label>
+          <Select
+          className='select-country'
+              options={countryOptions}
+              value={selectedCountry}
+              onChange={(option) => setSelectedCountry(option)}
+              placeholder="Select a country"
+            />   </div> 
+
+<div className="profile-field">
+  <label>Adresse ligne 1:</label>
+  <input type="text" name="addressLine1" placeholder='line1' defaultValue={userData.address ? userData.address.addressLine1 || '' : ''} />
+</div>
+<div className="profile-field">
+  <label>ligne 2:</label>
+  <input type="text" name="addressLine2" placeholder='line2' defaultValue={userData.address ? userData.address.addressLine2 || '' : ''} />
+</div>
+<div className="profile-field">
+  <label>zip code:</label>
+  <input type="text" name="zipCode" defaultValue={userData.address ? userData.address.zipCode || '' : ''} />
+</div>
+<div className="profile-field">
+  <label>city:</label>
+  <input type="text" name="city" defaultValue={userData.address ? userData.address.city || '' : ''} />
+</div>
+
         </div>
       </div>
     </>

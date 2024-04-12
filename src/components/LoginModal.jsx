@@ -14,22 +14,22 @@ const LoginModal = ({ show, handleClose, handleLoginSuccess }) => { // Accept ha
   const handleLoginClose = () => handleClose();
   const handleSignUpShow = () => setShowSignUpModal(true);
 
-  const handleLogin = async (e) => {
+  // LoginModal.jsx
+
+const handleLogin = async (e) => {
   e.preventDefault();
   try {
     const response = await axios.post('http://localhost:8080/api/auth/authenticate', { email, password });
-   
     const authToken = response.data.access_token;
-   
     localStorage.setItem('authToken', authToken);
-    
-    handleLoginSuccess(); 
-    handleClose(); 
+    handleLoginSuccess(); // Call handleLoginSuccess after successful login
+    handleClose(); // Close the modal after successful login
   } catch (error) {
     setError('Invalid email or password');
     console.error('Login error:', error);
   }
 };
+
 
   
   

@@ -58,7 +58,7 @@ const TabComponent = () => {
                                                 minDate={startDate}
                                             />
                                         </div>
-                                        <button><FontAwesomeIcon icon={faMagnifyingGlass} /> Rechercher</button>
+                                        <button className="tab-button"><FontAwesomeIcon icon={faMagnifyingGlass} /> Rechercher</button>
                                     </Card.Body>
                                 </Card>
                             </div>
@@ -102,7 +102,7 @@ const TabComponent = () => {
                                         <div className="guests">
                                         <People/>
                                        </div>
-                                        <button><FontAwesomeIcon icon={faMagnifyingGlass} /> Rechercher</button>
+                                        <button className="tab-button"><FontAwesomeIcon icon={faMagnifyingGlass} /> Rechercher</button>
                                     </Card.Body>
                                 </Card>
                             </div>
