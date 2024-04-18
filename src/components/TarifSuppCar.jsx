@@ -1,22 +1,24 @@
-// TarifSuppCar.js
 import React, { useState } from 'react';
 
-const TarifSuppCar = ({ onUpdateTotalPrice }) => {
-  const [totalPrice, setTotalPrice] = useState(0);
+const TarifSuppCar = ({ onUpdateStates }) => {
+  const [siegeEnfantChecked, setSiegeEnfantChecked] = useState(false);
+  const [gpsSatelliteChecked, setGpsSatelliteChecked] = useState(false);
 
   const handleCheckboxChange = (event) => {
     const checkbox = event.target;
-    const price = parseInt(checkbox.dataset.price, 10);
     const isChecked = checkbox.checked;
 
-    if (isChecked) {
-      setTotalPrice((prevTotal) => prevTotal + price);
-    } else {
-      setTotalPrice((prevTotal) => prevTotal - price);
+    if (checkbox.id === 'siegeEnfant') {
+      setSiegeEnfantChecked(isChecked);
+    } else if (checkbox.id === 'gpsSatellite') {
+      setGpsSatelliteChecked(isChecked);
     }
 
-    // Pass the updated total price to the CarComponent
-    onUpdateTotalPrice(totalPrice);
+    // Notify the parent component about the checkbox changes
+    onUpdateStates({
+      siegeEnfantChecked: checkbox.id === 'siegeEnfant' ? isChecked : siegeEnfantChecked,
+      gpsSatelliteChecked: checkbox.id === 'gpsSatellite' ? isChecked : gpsSatelliteChecked
+    });
   };
 
   return (
@@ -25,16 +27,25 @@ const TarifSuppCar = ({ onUpdateTotalPrice }) => {
       <div className='list-tarifs'>
         <ul>
           <li>
-            <input type="checkbox" id="siegeEnfant" data-price="100" onChange={handleCheckboxChange} />
-            <label htmlFor="siegeEnfant">Siège enfant - 100 dh</label>
+            <input
+              type="checkbox"
+              id="siegeEnfant"
+              onChange={handleCheckboxChange}
+              checked={siegeEnfantChecked}
+            />
+            <label htmlFor="siegeEnfant">Siège enfant</label>
           </li>
           <li>
-            <input type="checkbox" id="gpsSatellite" data-price="100" onChange={handleCheckboxChange} />
-            <label htmlFor="gpsSatellite">GPS Satellite - 100 dh</label>
+            <input
+              type="checkbox"
+              id="gpsSatellite"
+              onChange={handleCheckboxChange}
+              checked={gpsSatelliteChecked}
+            />
+            <label htmlFor="gpsSatellite">GPS Satellite</label>
           </li>
         </ul>
       </div>
-      <div>total: {totalPrice} dh</div>
     </div>
   );
 };

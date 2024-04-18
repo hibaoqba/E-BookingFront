@@ -5,11 +5,12 @@ import './profileHeader.css'
 const ProfileHeader = () => {
     const [userInfo, setUserInfo] = useState({});
     const [loading, setLoading] = useState(true);
+    const isClient = userInfo && userInfo.role === "CLIENT";
 
     useEffect(() => {
         const authToken = localStorage.getItem('authToken');
         if (authToken) {
-            axios.get('http://localhost:8080/api/users/info', {
+            axios.get('http://localhost:8080/api/users/currentUser', {
                 headers: {
                     Authorization: `Bearer ${authToken}`
                 }
@@ -37,7 +38,10 @@ const ProfileHeader = () => {
         <Badge bg="warning">{userInfo.role}</Badge>
         </div>
         <div className='profile-name'>{userInfo.firstname} {userInfo.lastname}</div>
-        <div ><button className='vendor-button'>devenez vendeur</button></div>
+        {isClient && (
+            <div >
+            <button className='vendor-button'>devenez vendeur</button></div>
+        )}
         </div>
     );
 }

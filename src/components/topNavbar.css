@@ -27,6 +27,7 @@
 .dark-nav.right-section .divider {
 
   background-color: rgb(59, 59, 59)!important;
+  margin-left: 10px;
   
 }
 .dark-nav .right-section .dropdown .toggle
@@ -89,6 +90,7 @@
   height: 20px; 
   background-color: #ffffff; 
   margin: 0 10px; 
+  
 }
 .top-navbar .right-section span,
 .top-navbar .right-section a {

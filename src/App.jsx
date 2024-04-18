@@ -14,8 +14,10 @@ import CarComponent from './components/CarComponent';
 import Wishlist from './components/Wishlist';
 import History from './components/History';
 import Password from './components/Password'
-
+import SellerCar from './components/SellerCar';
+import SellerAddCar from './components/SellerAddCar'
 import ProfileRightSection from './components/ProfileRightSection';
+import SellerReservations from './components/SellerReservations';
 const App = () => {
   return (
     <div>
@@ -35,6 +37,10 @@ const App = () => {
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="history" element={<History />} />
             <Route path="password" element={<Password />} />
+            <Route path="cars" element={<SellerCar />} />
+            <Route path="addCar" element={<SellerAddCar />} />
+
+
           </Route>
         </Routes>
         <FooterComponent />

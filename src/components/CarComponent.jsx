@@ -1,4 +1,3 @@
-// CarComponent.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -17,11 +16,34 @@ const CarComponent = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [userInfo, setUserInfo] = useState(null);
+
   const today = new Date().toISOString().split('T')[0];
-  const updateTotalPrice = (newTotalPrice) => {
-    setTotalPrice(newTotalPrice);
-  };
+  const [reservationData, setReservationData] = useState({
+    startDate: '',
+    endDate: '',
+    gps: false,
+    childSeat: false,
+    siegeEnfantChecked: false,
+    gpsSatelliteChecked: false
+  });
+
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      axios.get('http://localhost:8080/api/users/currentUser', {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      })
+      .then(response => {
+        setUserInfo(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching user info:', error);
+      });
+    }
+  }, []); 
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -34,25 +56,45 @@ const CarComponent = () => {
         setLoading(false);
       }
     };
-    const updateTotalPrice = (newPrice) => {
-      setTotalPrice(newPrice);
-    };
   
     fetchCar();
   }, [id]);
 
   const handleDateRangeSelect = (dateRange) => {
-    console.log('Selected date range:', dateRange);
+    setReservationData(prevData => ({
+      ...prevData,
+      startDate: dateRange.startDate,
+      endDate: dateRange.endDate
+    }));
   };
 
+  const handleReservationSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/reservations', {
+       "user":{id:userInfo.id},
+        "car": {id:car.id},
+        "startDate": reservationData.startDate,
+        "endDate": reservationData.endDate,
+        "gps": reservationData.gps,
+        "childSeat": reservationData.siegeEnfantChecked,
+        "gps": reservationData.gpsSatelliteChecked
+        
+      });
+      console.log('Reservation created:', response.data);
+      // Optionally, you can navigate to a confirmation page or display a success message here
+    } catch (error) {
+      console.error('Error creating reservation:', error);
+    }
+  };
+  
   if (loading) {
-    return   <Loading/>
-  ;
+    return   <Loading/>;
   }
 
   if (!car) {
     return <div>Car not found</div>;
   }
+
 
   return (
     <div className='car-details-container'>
@@ -126,8 +168,11 @@ const CarComponent = () => {
             </div>
             <hr />
             <div className='tarif-supp'>
-              <TarifSuppCar onUpdateTotalPrice={updateTotalPrice} />
-            </div>
+            <TarifSuppCar onUpdateStates={(states) => setReservationData(prevData => ({
+            ...prevData,
+            ...states
+          }))} />            </div>
+            <button onClick={handleReservationSubmit}>Réserver</button>
           </div>
           <div className='why-us'></div>
         </div>

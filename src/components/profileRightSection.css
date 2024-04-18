@@ -37,7 +37,14 @@
 .profile-field input[type="date"] {
   /* Add specific styles for date input if needed */
 }
-
+.error-message {
+  color: red;
+}
+.success-message{
+  color:rgb(0, 173, 0);
+  margin-bottom: 10px;
+  font-size: 18px;
+}
 .profile-field textarea {
   min-height: 100px;
 }

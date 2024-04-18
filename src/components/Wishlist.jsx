@@ -9,7 +9,7 @@ const Wishlist = () => {
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
-      axios.get('http://localhost:8080/api/users/info', {
+      axios.get('http://localhost:8080/api/users/currentUser', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }

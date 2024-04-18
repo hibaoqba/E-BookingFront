@@ -25,7 +25,7 @@ const TopNavbar = () => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
       setIsLoggedIn(true);
-      axios.get('http://localhost:8080/api/users/info', {
+      axios.get('http://localhost:8080/api/users/currentUser', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
@@ -43,7 +43,7 @@ const TopNavbar = () => {
     setIsLoggedIn(true);
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await axios.get('http://localhost:8080/api/users/info', {
+      const response = await axios.get('http://localhost:8080/api/users/currentUser', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
@@ -81,7 +81,7 @@ const TopNavbar = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu className='language-menu'>
               <Dropdown.Item href="#/anglais">
-                <img src="src/assets/uk.png" alt="uk Flag" className='flag'/> 
+                <img src="/src/assets/uk.png" alt="uk Flag" className='flag'/> 
                 Anglais
               </Dropdown.Item>
             </Dropdown.Menu>
@@ -103,10 +103,15 @@ const TopNavbar = () => {
                 
                   </Dropdown.Item>
                   <Dropdown.Item className='user-item'>
+                  <Link to="/user/history">
                   <FontAwesomeIcon className='user-icon' icon={faClock} />    Historique des réservations
-                  </Dropdown.Item>
-                  <Dropdown.Item className='user-item'>
+                  
+                  </Link></Dropdown.Item>
+                  <Dropdown.Item className='user-item' >
+                    <Link to="/user/password">
                   <FontAwesomeIcon className='user-icon' icon={faLock} /> Changer mon Mot De Passe
+                  </Link>
+                  
                   </Dropdown.Item>
                   <Dropdown.Item  onClick={handleLogout} className='user-item'>
                   <FontAwesomeIcon icon={faArrowRightFromBracket} className='user-icon logout-icon' />Déconnexion

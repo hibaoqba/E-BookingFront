@@ -1,8 +1,8 @@
 .hero {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(rgba(37, 37, 37, 0.5), rgba(68, 68, 68, 0.5)),
-   url(/src/assets/agadir.jpg);
+  background: linear-gradient(rgba(67, 67, 67, 0.8), rgba(144, 144, 144, 0.2)),
+   url(/src/assets/island.jpg);
   background-blend-mode: multiply;
   background-size: cover;
   background-position: center;

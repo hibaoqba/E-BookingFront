@@ -90,6 +90,18 @@ max-width: 350px;
 .dropdown-toggle {
   text-align: left; 
 }
+.heart-button.clicked {
+  animation: beat 0.65s 2 alternate;
+}
+
+@keyframes beat {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
 
 .car-container {
   display: flex;
@@ -113,8 +125,8 @@ max-width: 350px;
 }
 
 .car-card-image {
-  width: 100%;
-  height: 100%;
+  width:100%;
+  height: 190px;
   object-fit: cover;
 }
 .heart-button {
@@ -129,8 +141,8 @@ max-width: 350px;
   background-color: transparent;
 }
 .heart-icon{
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
 }
 .car-card-details {
   padding: 20px;

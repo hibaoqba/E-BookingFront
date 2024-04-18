@@ -15,7 +15,7 @@ const Car = () => {
   const [cars, setCars] = useState([]);
   const [sortedCars, setSortedCars] = useState([]);
   const [sortBy, setSortBy] = useState('price_asc');
-  const [clickedHeartIds, setClickedHeartIds] = useState([]); // Initialize with an empty array
+  const [clickedHeartIds, setClickedHeartIds] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +26,7 @@ const Car = () => {
       const authToken = localStorage.getItem('authToken');
       if (authToken) {
         try {
-          const response = await axios.get('http://localhost:8080/api/users/info', {
+          const response = await axios.get('http://localhost:8080/api/users/currentUser', {
             headers: {
               Authorization: `Bearer ${authToken}`
             }
@@ -91,7 +91,6 @@ const Car = () => {
     navigate(`/car/${carId}`);
   };
 
-  // Check if the car is in the wishlist when the component mounts
   useEffect(() => {
     const checkInitialHeartStatus = async () => {
       try {
