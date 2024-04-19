@@ -4,6 +4,9 @@
     padding: 20px;
     background-color: #f7f7f7;
     border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
    
   }
   form{
@@ -14,7 +17,14 @@
   .column {
     flex: 0 0 calc(50% - 20px);
   }
-  
+  .form-display{
+    display: flex;
+    flex-direction: column;
+  }
+  .feature-group{
+    display: flex;
+    flex-wrap: wrap;
+  }
   .form-group {
     margin-bottom: 1rem;
   }
@@ -39,12 +49,10 @@
     color: #555;
   }
   
-  input[type="text"],
-  input[type="number"],
-  textarea,
-  select,
-  button {
-    width: 100%;
+  .add-car-input,
+  
+  .add-car-button {
+    width: 399px;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -53,20 +61,19 @@
     transition: border-color 0.3s ease;
   }
   
-  input[type="text"]:focus,
-  input[type="number"]:focus,
-  textarea:focus,
-  select:focus,
-  button:focus {
+  .add-car-input:focus,
+  
+  .add-car-button:focus
+   {
     border-color: #007bff;
     outline: none;
   }
   
-  input[type="checkbox"] {
-    margin-right: 5px;
+   .add-car-check{
+    margin-left: 10px;
   }
   
-  button {
+  .add-car-button {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -75,7 +82,7 @@
     transition: background-color 0.3s ease;
   }
   
-  button:hover {
+  .add-car-button:hover {
     background-color: #0056b3;
   }
   

@@ -1,0 +1,83 @@
+.car-item {
+    display: flex;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    width: 1000px;
+    height: 200px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    
+  }
+  
+  .car-image {
+    width: 35%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }   
+
+  
+  .car-details {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .car-details h2 {
+    margin-top: 0;
+  }
+  .btn-danger{
+    width: 40px;
+    margin-left: 10px;
+  }
+  .confirmation-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 250px;
+  }
+  
+  .modal-content {
+    width: 600px;
+  }
+  
+  .modal-body {
+    text-align: center;
+  }
+  
+  .cancel-delete {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    margin-left: 40px;
+
+  }
+  .cancel-delete:hover {
+    background-color: rgb(95, 95, 95);
+    color: #fff;
+    border: none;
+
+  }
+ .cancel-delete:focus{
+    background-color: rgb(95, 95, 95);
+    color: #fff;
+    border: none;
+
+  }
+  
+  .confirm-delete {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+  }
+  
+  .confirm-delete:hover ,  .confirm-delete:active
+
+  {
+    opacity: 0.9;
+    background-color: #aa2a37;
+
+  }
+  .delete-buttons{
+ display: flex;
+justify-content: space-evenly;
+ 
+  }
