@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import './hero.css';
-import TabComponent from '../TabComponent';
+import TabComponent from '../common/TabComponent';
 
 const Hero = () => {
     

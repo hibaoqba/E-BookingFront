@@ -1,5 +1,5 @@
 import React from 'react';
-import './agadirDescription.css';
+import '../styles/agadirDescription.css';
 import { Map, Marker } from 'pigeon-maps';
 const AgadirDescription = () => {
   return (

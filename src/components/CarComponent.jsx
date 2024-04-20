@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap'; 
-import './carComponent.css'
+import '../styles/carComponent.css'
 import { TbManualGearbox, TbGps } from "react-icons/tb";
 import { FaPeopleGroup, FaSnowflake } from "react-icons/fa6";
 import { BsSuitcaseLg, BsFuelPumpDiesel } from "react-icons/bs";
 import { PiEngineBold } from "react-icons/pi";
-import FAQs from './FAQs'
+import FAQs from './common/FAQs'
 import DoubleDateInput from './DoubleDateInput';
 import TarifSuppCar from './TarifSuppCar';
-import Loading from './Loading';
-
+import Loading from './common/Loading';
+import UseFetchUserInfo from './UseFetchUserInfo';
 const CarComponent = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userInfo, setUserInfo] = useState(null);
+  const userInfo=UseFetchUserInfo();
 
   const today = new Date().toISOString().split('T')[0];
   const [reservationData, setReservationData] = useState({
@@ -28,22 +28,8 @@ const CarComponent = () => {
     gpsSatelliteChecked: false
   });
 
-  useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken) {
-      axios.get('http://localhost:8080/api/users/currentUser', {
-        headers: {
-          Authorization: `Bearer ${authToken}`
-        }
-      })
-      .then(response => {
-        setUserInfo(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching user info:', error);
-      });
-    }
-  }, []); 
+
+
 
   useEffect(() => {
     const fetchCar = async () => {
