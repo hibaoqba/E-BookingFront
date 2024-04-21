@@ -12,6 +12,8 @@ import DoubleDateInput from './DoubleDateInput';
 import TarifSuppCar from './TarifSuppCar';
 import Loading from './common/Loading';
 import UseFetchUserInfo from './UseFetchUserInfo';
+import CarImages from './profile/CarImages'; // Import CarImages component
+
 const CarComponent = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
@@ -110,17 +112,21 @@ const CarComponent = () => {
           </div>
           <hr />
           <div className='car-details-carrousel'>
-            <Carousel className="car-carousel">
-              {car.images.map((image, index) => (
-                <Carousel.Item key={index}>
-                  <img
-                    className="car-carousel-image"
-                    src={image}
-                  />
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </div>
+      <Carousel className="car-carousel">
+        {car && car.images && (
+          car.images.map((image, index) => (
+            <Carousel.Item key={index}>
+              <img
+                className="car-carousel-image"
+                src={`data:image/png;base64,${image}`}
+                alt={`Car Image ${index}`}
+                style={{ width: '100%' }}
+              />
+            </Carousel.Item>
+          ))
+        )}
+      </Carousel>
+    </div>
           <div className='car-description'>
             <h4>Description</h4>
             {car.description}

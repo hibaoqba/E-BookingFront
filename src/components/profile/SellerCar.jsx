@@ -5,6 +5,7 @@ import '../../styles/sellerCar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button } from 'react-bootstrap';
+import CarImage from '../CarImage'; // Import CarImages component
 
 const SellerCar = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -69,7 +70,9 @@ const SellerCar = () => {
     <div>
       {cars.map(car => (
         <div key={car.id} className="car-item">
-          <img src={car.images[0]} alt={car.brand} className="car-image" />
+        <div className='car-image'>  <CarImage  carId={car.id} /> 
+         
+        </div>
           <div className="car-details">
             <h2>{car.brand} {car.model}</h2>
             <p>{car.description}</p>

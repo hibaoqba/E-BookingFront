@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link if needed
 import '../../styles/wishlist.css'
-import UseFetchUserInfo from '../UseFetchUserInfo';;
+import UseFetchUserInfo from '../UseFetchUserInfo';
+import CarImage from '../CarImage'; // Import CarImages component
+
 const Wishlist = () => {
   
   const [wishes, setWishes] = useState([]);
@@ -27,7 +29,7 @@ const Wishlist = () => {
     <div>
       {wishes.map(wish => (
         <div key={wish.id} className="wish-item">
-          <img src={wish.car.images[0]} alt={wish.car.brand} className="wish-image" />
+      <div className='wish-image'>    <CarImage carId={wish.car.id} /> </div>
           <div className="wish-details">
             <h2>{wish.car.brand} {wish.car.model}</h2>
             <p>{wish.car.description}</p>

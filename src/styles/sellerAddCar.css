@@ -1,88 +1,70 @@
-.add-car-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-   
-  }
-  .form-display{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .column {
-    flex: 0 0 calc(50% - 20px);
-  }
-  .form-display{
-    display: flex;
-    flex-direction: column;
-  }
-  .feature-group{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .form-group {
-    margin-bottom: 1rem;
-  }
+/* styles.css */
+
+/* Form container */
+.form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Form title */
+.form-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Form fields */
+.form-field {
+  margin-bottom: 20px;
   
-  .column:nth-child(2) {
-    margin-left: 2rem;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .add-car-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
-  }
-  
-  .add-car-input,
-  
-  .add-car-button {
-    width: 399px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-  }
-  
-  .add-car-input:focus,
-  
-  .add-car-button:focus
-   {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-   .add-car-check{
-    margin-left: 10px;
-  }
-  
-  .add-car-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-car-button:hover {
-    background-color: #0056b3;
-  }
-  
+}
+.form-check {
+  margin-bottom: 20px;
+  display: flex;
+}
+.form-check label {
+  margin-right: 20px;
+}
+.form-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.form-field input[type="checkbox"] {
+  width: auto;
+  display: inline-block; 
+  margin-right: 5px; 
+}
+
+
+.form-submit {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.form-submit:hover {
+  background-color: #0056b3;
+}
+
+
+.error-message {
+  color: #ff0000;
+  margin-top: 5px;
+}
+
+

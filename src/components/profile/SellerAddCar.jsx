@@ -1,64 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import '../../styles/sellerAddCar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-regular-svg-icons';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import "leaflet/dist/leaflet.css";
+import UseFetchUserInfo from '../UseFetchUserInfo';
+import MapPicker from '../common/MapPicker'
+import '../../styles/sellerAddCar.css'
 import FormWizard from "react-form-wizard-component";
-import "react-form-wizard-component/dist/style.css";
-import UseFetchUserInfo from '../UseFetchUserInfo';;
+import 'react-form-wizard-component/dist/style.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCar, faGear, faImage, faLocation, faMapLocation } from '@fortawesome/free-solid-svg-icons';
 const SellerAddCar = () => {
-  const userInfo=UseFetchUserInfo(); 
-   const [selectedImages, setSelectedImages] = useState([]); // State to store selected images
-  const [formData, setFormData] = useState({
-    brand: '',
-    model: '',
-    description: '',
-    year: new Date(),
-    availability: true,
-    price: '',
-    carFeatures: {
-      fuelType: '',
-      transmissionType: '',
-      horsePower: '',
-      place: '',
-      suitCases: '',
-      ac: true,
-      gps: true
-    },
-    seller: {
-      id: null
-    },
-    latitude: 34.0084,
-    longitude: -6.8539,
-  });
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
+  const [description, setDescription] = useState('');
+  const [year, setYear] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [price, setPrice] = useState('');
+  const [fuelType, setFuelType] = useState('');
+  const [transmissionType, setTransmissionType] = useState('');
+  const [horsePower, setHorsePower] = useState('');
+  const [place, setPlace] = useState('');
+  const [suitCases, setSuitCases] = useState('');
+  const [gps, setGPS] = useState(true); // Default value true
+  const [ac, setAC] = useState(true); // Default value true
+  const [images, setImages] = useState([]);
+  const [message, setMessage] = useState('');
+  const userInfo = UseFetchUserInfo();
 
-
-  
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
-    setSelectedImages(files); // Update selectedImages state
+    const imageFiles = await Promise.all(files.map(async (file) => {
+      const base64String = await convertToBase64(file);
+      return base64String;
+    }));
+    setImages(imageFiles);
   };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+  const handleLocationChange = (lat, lng) => {
+    setLatitude(lat);
+    setLongitude(lng);
   };
-
-  const handleCarFeaturesChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      carFeatures: {
-        ...formData.carFeatures,
-        [name]: value
-      }
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64String = reader.result.split(',')[1]; 
+        resolve(base64String);
+      };
+      reader.onerror = (error) => reject(error);
     });
   };
 
@@ -67,290 +55,127 @@ const SellerAddCar = () => {
       e.preventDefault();
     }
       try {
-      // Set seller ID
-      formData.seller.id = userInfo.id;
-  
-      // Create form data object to append car object and images
-      const formDataWithImages = new FormData();
-      formDataWithImages.append('car', JSON.stringify(formData)); // Append car object as JSON
-      formData.images.forEach((file, index) => {
-        formDataWithImages.append(`images`, file); // Append each image file
-      });
-  
-      // Send formData to backend to add the car with the integer year
-      const response = await axios.post('http://localhost:8080/api/cars', formDataWithImages, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      console.log('Car added successfully:', response.data);
-  
-      // Reset form after successful submission
-      setFormData({
-        brand: '',
-        model: '',
-        description: '',
-        year: new Date(),
-        availability: true,
-        price: '',
-        images: [],
+      const response = await axios.post('http://localhost:8080/api/cars', {
+        brand,
+        model,
+        description,
+        year,
+        latitude,
+        longitude,
+        price,
         carFeatures: {
-          fuelType: '',
-          transmissionType: '',
-          horsePower: '',
-          place: '',
-          suitCases: '',
-          ac: true,
-          gps: true
+          fuelType,
+          transmissionType,
+          horsePower,
+          place,
+          suitCases,
+          gps,
+          ac
         },
-        seller: {
-          id: null
-        },
-        latitude: 0,
-        longitude: 0,
+        images,
+        seller: { id: userInfo.id }, 
       });
+      setMessage('Car added successfully');
+      console.log(response.data);
     } catch (error) {
-      console.error('Error adding car:', error);
+      setMessage('Error adding car');
+      console.error(error);
     }
   };
-  
-  
 
-  // Map component to allow the seller to select a location
-  function LocationPicker() {
-    const map = useMapEvents({
-      click(e) {
-        const { lat, lng } = e.latlng;
-        setFormData({
-          ...formData,
-          latitude: lat, // Update latitude
-          longitude: lng, // Update longitude
-        });
-      },
-    });
-
-    return null;
-  }
-
-  const handleComplete = () => {
-    console.log("Form completed!");
-    // Handle form completion logic here
-  };
-
-  const tabChanged = ({
-    prevIndex,
-    nextIndex,
-  }) => {
-    console.log("prevIndex", prevIndex);
-    console.log("nextIndex", nextIndex);
-  };
-  
   return (
-    <>
-      <FormWizard
-        shape="circle"
-        color="#626fe6"
-        onComplete={handleSubmit}
-        onTabChange={tabChanged}
-      >
-        
-        <FormWizard.TabContent title="Car Information" icon="ti-car">
-          <div className="add-car-container">
-            <h2>Add a Car - Step 1</h2>
-            <form className='form-display'>
-            <div className="form-group">
-            <label htmlFor="brand" className='add-car-label'>Brand:</label>
-            <input  className='add-car-input'
-              type="text"
-              id="brand"
-              name="brand"
-              value={formData.brand}
-              onChange={handleChange}
-              required
+    <div className="form-container">
+    <FormWizard onComplete={handleSubmit}>
+      <FormWizard.TabContent title="informations" icon={<FontAwesomeIcon icon={faCar}/>}>
+        <h2>Add Car</h2>
+        <div className="form-field">
+          <label>Brand:</label>
+          <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} />
+        </div>
+        <div className="form-field">
+          <label>Model:</label>
+          <input type="text" value={model} onChange={(e) => setModel(e.target.value)} />
+        </div>
+        <div className="form-field">
+          <label>Description:</label>
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+        </div>
+        <div className="form-field">
+          <label>Year:</label>
+          <input type="number" value={year} onChange={(e) => setYear(e.target.value)} />
+        </div>
+        <div className="form-field">
+          <label>Price:</label>
+          <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+        </div>
+      </FormWizard.TabContent>
+  
+      <FormWizard.TabContent title="Caractéristiques" icon={<FontAwesomeIcon icon={faGear}/>}>
+        <div className="form-field">
+          <label>Fuel Type:</label>
+          <select value={fuelType} onChange={(e) => setFuelType(e.target.value)}>
+            <option value="">Select Fuel Type</option>
+            <option value="GASOLINE">Essence</option>
+            <option value="DIESEL">Diesel</option>
+            <option value="ELECTRIC">Electrique</option>
+            <option value="HYBRID">Hybride</option>
+          </select>
+        </div>
+        <div className="form-field">
+          <label>Transmission Type:</label>
+          <select value={transmissionType} onChange={(e) => setTransmissionType(e.target.value)}>
+            <option value="">Select Transmission Type</option>
+            <option value="AUTOMATIC">Automatic</option>
+            <option value="MANUAL">Manuelle</option>
+            <option value="SEMIAUTOMATIC">CVT</option>
+          </select>
+        </div>
+        <div className="form-field">
+          <label>Horse Power:</label>
+          <input type="number" value={horsePower} onChange={(e) => setHorsePower(e.target.value)} />
+        </div>
+        <div className="form-field">
+          <label>Place:</label>
+          <input type="number" value={place} onChange={(e) => setPlace(e.target.value)} />
+        </div>
+        <div className="form-field">
+          <label>Suit Cases:</label>
+          <input type="number" value={suitCases} onChange={(e) => setSuitCases(e.target.value)} />
+        </div>
+        <div className='form-check'>
+          <label>GPS:</label>
+          <input type="checkbox" checked={gps} onChange={(e) => setGPS(e.target.checked)} />
+        </div>
+        <div className='form-check'>
+          <label>AC:</label>
+          <input type="checkbox" checked={ac} onChange={(e) => setAC(e.target.checked)} />
+        </div>
+      </FormWizard.TabContent>
+  
+      <FormWizard.TabContent title="images" icon={<FontAwesomeIcon icon={faImage}/>}>
+        <MapPicker onLocationChange={handleLocationChange} />
+      </FormWizard.TabContent>
+  
+      <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faLocation}/>}>
+        <div className="form-field">
+          <label>Images:</label>
+          <input type="file" accept="image/*" multiple onChange={handleImageChange} />
+        </div>
+        {message && <p>{message}</p>}
+        <div>
+          {images.map((image, index) => (
+            <img
+              key={index}
+              src={`data:image/png;base64,${image}`} // Corrected interpolation
+              alt={`Car Image ${index}`}
+              style={{ width: '200px', height: 'auto', margin: '5px' }}
             />
-          </div>
-          <div className="form-group">
-            <label className='add-car-label' htmlFor="model">Model:</label>
-            <input  className='add-car-input'
-              type="text"
-              id="model"
-              name="model"
-              value={formData.model}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label className='add-car-label' htmlFor="description">Description:</label>
-            <textarea  className='add-car-input'
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label  className='add-car-label' htmlFor="year">Year:</label>
-            <DatePicker className='add-car-input'
-              selected={formData.year}
-              onChange={(date) => setFormData({ ...formData, year: date })}
-              showYearPicker
-              dateFormat="yyyy"
-              required
-            />
-      
-          </div>
-          <div className="form-group">
-            <label  className='add-car-label' htmlFor="price">Price:</label>
-            <input  className='add-car-input'
-              type="number"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              required
-            />
-          </div>
-            </form>
-          </div>
-        </FormWizard.TabContent>
-        <FormWizard.TabContent title="Car Features" icon="ti-settings">
-          <div className="add-car-container">
-            <h2>Add a Car - Step 2</h2>
-            <form className='form-display'>
-            <div className="form-group">
-            <label  className='add-car-label' htmlFor="fuelType">Fuel Type:</label>
-            <select  className='add-car-input'
-              id="fuelType"
-              name="fuelType"
-              value={formData.carFeatures.fuelType}
-              onChange={handleCarFeaturesChange}
-            >
-              <option value="">Select Fuel Type</option>
-              <option value="GASOLINE">Essence</option>
-              <option value="DIESEL">Diesel</option>
-              <option value="ELECTRIC">Electrique</option>
-              <option value="HYBRID">Hybride</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label className='add-car-label' htmlFor="transmissionType">Transmission Type:</label>
-            <select  className='add-car-input'
-              id="transmissionType"
-              name="transmissionType"
-              value={formData.carFeatures.transmissionType}
-              onChange={handleCarFeaturesChange}
-            >
-              <option value="">Select Transmission Type</option>
-              <option value="AUTOMATIC">Automatic</option>
-              <option value="MANUAL">Manuelle</option>
-              <option value="SEMIAUTOMATIC">CVT</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label className='add-car-label' htmlFor="horsePower">Horse Power:</label>
-            <input  className='add-car-input'
-              type="number"
-              id="horsePower"
-              name="horsePower"
-              value={formData.carFeatures.horsePower}
-              onChange={handleCarFeaturesChange}
-            />
-          </div>
-          <div className="form-group">
-            <label className='add-car-label' htmlFor="place">Place:</label>
-            <input  className='add-car-input'
-              type="number"
-              id="place"
-              name="place"
-              value={formData.carFeatures.place}
-              onChange={handleCarFeaturesChange}
-            />
-          </div>
-          <div className="form-group">
-            <label className='add-car-label' htmlFor="suitCases">Suit Cases:</label>
-            <input  className='add-car-input'
-              type="number"
-              id="suitCases"
-              name="suitCases"
-              value={formData.carFeatures.suitCases}
-              onChange={handleCarFeaturesChange}
-            />
-          </div>
-          <div className="form-group feature-group">
-            <label  className='add-car-label' htmlFor="ac">AC:</label>
-            <input  className='add-car-check'
-              type="checkbox"
-              id="ac"
-              name="ac"
-              checked={formData.carFeatures.ac}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  carFeatures: {
-                    ...formData.carFeatures,
-                    ac: !formData.carFeatures.ac
-                  }
-                })
-              }
-            />
-          </div>
-          <div className="form-group feature-group" >
-            <label className='add-car-label' htmlFor="gps">GPS:</label>
-            <input className='add-car-check'
-              type="checkbox"
-              id="gps"
-              name="gps"
-              checked={formData.carFeatures.gps}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  carFeatures: {
-                    ...formData.carFeatures,
-                    gps: !formData.carFeatures.gps
-                  }
-                })
-              }
-            />
-          </div>
-            </form>
-          </div>
-        </FormWizard.TabContent>
-        <FormWizard.TabContent title="images" icon={<FontAwesomeIcon icon={faImage}/>}>
-          <div className="form-group">
-            <label>Images:</label>
-            <input
-              type="file"
-              id="images"
-              name="images"
-              onChange={handleImageChange}
-              multiple
-              accept="image/*"
-              required
-            />
-          </div>
-        </FormWizard.TabContent>
-        <FormWizard.TabContent title="Location" icon="ti-location-pin">
-  <div className="form-group">
-    <label className='add-car-label'>Location:</label>
-    <MapContainer center={[formData.latitude, formData.longitude]} zoom={5} scrollWheelZoom={true} style={{ height: '400px', width: '100%' }}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <LocationPicker />
-      <Marker position={[formData.latitude, formData.longitude]}>
-        <Popup>You have selected this location</Popup>
-      </Marker>
-    </MapContainer>
+          ))}
+        </div>
+      </FormWizard.TabContent>
+    </FormWizard>
   </div>
-
-</FormWizard.TabContent>
-
-      </FormWizard>
-     
-      <style>{`
-        @import url("https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css");
-      `}</style>
-    </>
+  
   );
 };
 

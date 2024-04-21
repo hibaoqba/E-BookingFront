@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Card, Dropdown } from 'react-bootstrap';
 import DoubleDateInput from '../components/DoubleDateInput';
-
+import CarImage from '../components/CarImage';
 const Car = () => {
   const [cars, setCars] = useState([]);
   const [sortedCars, setSortedCars] = useState([]);
@@ -179,7 +179,7 @@ const Car = () => {
                     >
                       <FontAwesomeIcon className='heart-icon' icon={faHeart} />
                     </button>
-                    <img className="car-card-image" src={car.images[0]} alt="Car" />
+                    <CarImage carId={car.id} /> 
                   </div>
                   <div className="car-card-details">
                     <h2 className="car-card-title">{car.brand} - {car.model}</h2>
