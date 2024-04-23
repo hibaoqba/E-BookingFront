@@ -1,0 +1,33 @@
+.confirmation-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 200px;
+}
+.confirmation-left-section{
+background-color:#ffff;
+    width: 1100px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+.confirm-button{
+    width: 300px;
+    margin-left: 170px;
+ text-align: left;
+ font-size: 18px;
+}
+.confirm-button>svg{
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.info-container{
+    align-items: center;
+    margin-top: 20px;
+
+}
+.confirmation-right-section{
+    margin-bottom: 50px;
+    margin-left: 20px;
+}

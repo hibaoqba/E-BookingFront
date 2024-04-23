@@ -7,17 +7,18 @@ const TarifSuppCar = ({ onUpdateStates }) => {
   const handleCheckboxChange = (event) => {
     const checkbox = event.target;
     const isChecked = checkbox.checked;
+    const checkboxId = checkbox.id;
 
-    if (checkbox.id === 'siegeEnfant') {
+    if (checkboxId === 'siegeEnfant') {
       setSiegeEnfantChecked(isChecked);
-    } else if (checkbox.id === 'gpsSatellite') {
+    } else if (checkboxId === 'gpsSatellite') {
       setGpsSatelliteChecked(isChecked);
     }
 
     // Notify the parent component about the checkbox changes
     onUpdateStates({
-      siegeEnfantChecked: checkbox.id === 'siegeEnfant' ? isChecked : siegeEnfantChecked,
-      gpsSatelliteChecked: checkbox.id === 'gpsSatellite' ? isChecked : gpsSatelliteChecked
+      siegeEnfantChecked: checkboxId === 'siegeEnfant' ? isChecked : siegeEnfantChecked,
+      gpsSatelliteChecked: checkboxId === 'gpsSatellite' ? isChecked : gpsSatelliteChecked
     });
   };
 

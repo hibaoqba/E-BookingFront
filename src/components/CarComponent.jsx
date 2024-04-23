@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap'; 
 import '../styles/carComponent.css'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 import { TbManualGearbox, TbGps } from "react-icons/tb";
 import { FaPeopleGroup, FaSnowflake } from "react-icons/fa6";
 import { BsSuitcaseLg, BsFuelPumpDiesel } from "react-icons/bs";
 import { PiEngineBold } from "react-icons/pi";
 import FAQs from './common/FAQs'
 import DoubleDateInput from './DoubleDateInput';
-import TarifSuppCar from './TarifSuppCar';
 import Loading from './common/Loading';
 import UseFetchUserInfo from './UseFetchUserInfo';
 import CarImages from './profile/CarImages'; // Import CarImages component
 
 const CarComponent = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
-  const userInfo=UseFetchUserInfo();
+  const userInfo = UseFetchUserInfo();
 
   const today = new Date().toISOString().split('T')[0];
   const [reservationData, setReservationData] = useState({
     startDate: '',
     endDate: '',
     gps: false,
-    childSeat: false,
-    siegeEnfantChecked: false,
-    gpsSatelliteChecked: false
+    childSeat: false
   });
-
-
-
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -44,7 +41,7 @@ const CarComponent = () => {
         setLoading(false);
       }
     };
-  
+
     fetchCar();
   }, [id]);
 
@@ -56,33 +53,25 @@ const CarComponent = () => {
     }));
   };
 
-  const handleReservationSubmit = async () => {
-    try {
-      const response = await axios.post('http://localhost:8080/api/reservations', {
-       "user":{id:userInfo.id},
-        "car": {id:car.id},
-        "startDate": reservationData.startDate,
-        "endDate": reservationData.endDate,
-        "gps": reservationData.gps,
-        "childSeat": reservationData.siegeEnfantChecked,
-        "gps": reservationData.gpsSatelliteChecked
-        
-      });
-      console.log('Reservation created:', response.data);
-      // Optionally, you can navigate to a confirmation page or display a success message here
-    } catch (error) {
-      console.error('Error creating reservation:', error);
-    }
+  const handleCheckboxChange = (event) => {
+    const { id, checked } = event.target;
+    setReservationData(prevData => ({
+      ...prevData,
+      [id]: checked
+    }));
   };
-  
+
+  const handleReservationSubmit = () => {
+    navigate(`/car/confirmation`, { state: { reservationData, car } });
+  };
+
   if (loading) {
-    return   <Loading/>;
+    return <Loading />;
   }
 
   if (!car) {
     return <div>Car not found</div>;
   }
-
 
   return (
     <div className='car-details-container'>
@@ -112,21 +101,21 @@ const CarComponent = () => {
           </div>
           <hr />
           <div className='car-details-carrousel'>
-      <Carousel className="car-carousel">
-        {car && car.images && (
-          car.images.map((image, index) => (
-            <Carousel.Item key={index}>
-              <img
-                className="car-carousel-image"
-                src={`data:image/png;base64,${image}`}
-                alt={`Car Image ${index}`}
-                style={{ width: '100%' }}
-              />
-            </Carousel.Item>
-          ))
-        )}
-      </Carousel>
-    </div>
+            <Carousel className="car-carousel">
+              {car && car.images && (
+                car.images.map((image, index) => (
+                  <Carousel.Item key={index}>
+                    <img
+                      className="car-carousel-image"
+                      src={`data:image/png;base64,${image}`}
+                      alt={`Car Image ${index}`}
+                      style={{ width: '100%' }}
+                    />
+                  </Carousel.Item>
+                ))
+              )}
+            </Carousel>
+          </div>
           <div className='car-description'>
             <h4>Description</h4>
             {car.description}
@@ -142,6 +131,23 @@ const CarComponent = () => {
               <li><PiEngineBold className="additional-icon"/> {car.carFeatures.horsePower} ch</li>
             </ul>
           </div>
+          <hr />
+          <h4>Localisation</h4>
+          <MapContainer center={[car.latitude, car.longitude]} zoom={4} style={{ height: '400px', width: '100%' }}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={[car.latitude, car.longitude]}>
+        <Popup><div>{car.brand} {car.model}-{car.year}</div> 
+         <img
+                      className="car-carousel-image"
+                      src={`data:image/png;base64,${car.images[0]}`}
+                      
+                      style={{ width: '150px' }}
+                    /></Popup>
+      </Marker>
+    </MapContainer>
           <hr />
           <div className='FAQs'>
             <h4>FAQs</h4>
@@ -160,10 +166,30 @@ const CarComponent = () => {
             </div>
             <hr />
             <div className='tarif-supp'>
-            <TarifSuppCar onUpdateStates={(states) => setReservationData(prevData => ({
-            ...prevData,
-            ...states
-          }))} />            </div>
+              <h2>Tarifs supplémentaires</h2>
+              <div className='list-tarifs'>
+                <ul>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="childSeat"
+                      onChange={handleCheckboxChange}
+                      checked={reservationData.childSeat}
+                    />
+                    <label htmlFor="childSeat">Siège enfant    100dh</label>
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      id="gps"
+                      onChange={handleCheckboxChange}
+                      checked={reservationData.gps}
+                    />
+                    <label htmlFor="gps">GPS Satellite  100dh</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <button onClick={handleReservationSubmit}>Réserver</button>
           </div>
           <div className='why-us'></div>

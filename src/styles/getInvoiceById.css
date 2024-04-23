@@ -1,0 +1,28 @@
+.invoice-modal{
+
+z-index: 99999;
+
+}
+.invoice-modal {
+    z-index: 99999;
+  }
+  
+  .invoice-modal-body {
+    max-width: 90vw; 
+    max-height: 90vh;/* Adjust the width as needed */
+  }
+  .invoice-show{
+    width: auto;
+    padding: 5px;
+    font-size: 17px;
+    margin-top: 10px;
+    background-color: rgb(59, 120, 217);
+  }
+  .invoice-show:hover{
+    background-color: rgb(50, 103, 187);
+  }
+  .invoice-show>svg{
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+  }

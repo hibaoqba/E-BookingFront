@@ -6,6 +6,7 @@
     height: 200px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
+    border: 0.2px rgb(202, 202, 202) solid;
     
   }
   
@@ -25,9 +26,18 @@
   .car-details h2 {
     margin-top: 0;
   }
-  .btn-danger{
-    width: 40px;
+  .car-delete-button{
+    width: auto;
     margin-left: 10px;
+    margin-right: 10px;
+  }
+  .car-delete-button>svg{
+    margin-right: 10px;
+  }
+  .car-update-button{
+    width: auto;
+   color: white;
+    margin-right: 20px;
   }
   .confirmation-modal {
     display: flex;

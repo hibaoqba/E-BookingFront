@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/history.css'; // Import CSS file for styling
 import UseFetchUserInfo from '../UseFetchUserInfo';;
-
+import GetInvoiceById from './GetInvoiceById';
+import GetReservationDetails from './GetReservationDetails'
 const SellerReservationList = () => {
   const userInfo=UseFetchUserInfo();
   const [reservations, setReservations] = useState([]);
@@ -36,14 +37,13 @@ const SellerReservationList = () => {
             <th>Type</th>
             <th>Status</th>
             <th>montant</th>
-            <th>client</th>
+   
 
             <th>Autres details</th>
 
 
 
-
-            {/* Add more table headings as needed */}
+            
           </tr>
         </thead>
         <tbody>
@@ -56,7 +56,8 @@ const SellerReservationList = () => {
               <td>{reservation.type}</td>
               <td>{reservation.status}</td>
               <td>{reservation.totalPrice}</td>
-              
+              <td><GetInvoiceById reservationId={reservation.id} />
+             <GetReservationDetails reservationId={reservation.id} /></td>
 
             </tr>
           ))}

@@ -1,0 +1,71 @@
+.car-reservation-card {
+    display: flex;
+    flex-direction: column !important;
+   background-color: #ffff;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 400px !important;
+    padding: 20px;
+  }
+  .confirmation-card-body{
+    display: flex;
+    flex-direction: column !important;
+    justify-content: left;
+    height: 100%;
+  }
+  .location-line{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .car-conf-image {
+   width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .car-title {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .location-icon {
+    color: #387cc1;
+    margin-right: 15px;
+  }
+  
+  .reservation-dates {
+
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+  }
+  
+  .prices {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .feature {
+    font-weight: bold;
+  }
+  
+  .price {
+    color: #28a745;
+  }
+  
+  .fee {
+    font-weight: bold;
+  }
+  
+  .total {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #dc3545;
+  }
+  
+  

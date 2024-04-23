@@ -16,7 +16,8 @@ import ProfileRightSection from '../components/profile/ProfileRightSection';
 import Dashboard from '../components/profile/Dashboard'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Profile from '../components/profile/Profile';
-
+import ReservationConfirmation from '../components/CarReservation/ReservationConfirmation';
+import Invoice from '../components/invoice/Invoice';
 const CreateRoutes = () => {
   return (
     <BrowserRouter>
@@ -28,6 +29,9 @@ const CreateRoutes = () => {
       <Route path="/apartment" element={<Apartment />} />
       <Route path="/agadir-description" element={<AgadirDescription />} />
       <Route path="/car/:id" element={<CarComponent />} />
+      <Route path="/car/confirmation" element={<ReservationConfirmation />} />
+      <Route path="/invoice/:reservationId" element={<Invoice/>} />
+
       <Route path="/user" element={<Profile />}>
         <Route path="profile" element={<Outlet />}>
           <Route index element={<ProfileRightSection />} />

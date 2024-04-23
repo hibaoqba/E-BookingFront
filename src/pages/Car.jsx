@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/car.css'; 
+import Loading from '../components/common/Loading';
+
 import { TbManualGearbox } from "react-icons/tb";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { LuBadgeDollarSign } from "react-icons/lu";
@@ -127,7 +129,9 @@ const Car = () => {
       console.error('Error updating heart status:', error);
     }
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className='car-page-container'>
       <div className='car-sections-container'>

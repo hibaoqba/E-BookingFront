@@ -25,6 +25,7 @@ const SellerAddCar = () => {
   const [images, setImages] = useState([]);
   const [message, setMessage] = useState('');
   const userInfo = UseFetchUserInfo();
+  
 
   const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
@@ -151,12 +152,12 @@ const SellerAddCar = () => {
           <input type="checkbox" checked={ac} onChange={(e) => setAC(e.target.checked)} />
         </div>
       </FormWizard.TabContent>
-  
-      <FormWizard.TabContent title="images" icon={<FontAwesomeIcon icon={faImage}/>}>
+      <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faLocation}/>}>
+
         <MapPicker onLocationChange={handleLocationChange} />
       </FormWizard.TabContent>
   
-      <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faLocation}/>}>
+      <FormWizard.TabContent title="images" icon={<FontAwesomeIcon icon={faImage}/>}>
         <div className="form-field">
           <label>Images:</label>
           <input type="file" accept="image/*" multiple onChange={handleImageChange} />
