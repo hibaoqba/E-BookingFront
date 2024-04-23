@@ -1,0 +1,71 @@
+* {
+    padding: 0;
+    margin: 0;
+  
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.countup-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.1s ease-in-out;
+    width: 250px;
+    margin: 15px;
+}
+
+.charts{
+    display: flex;
+    margin-top: 60px;
+}
+.pie-chart{
+    width: 400px;
+    border-radius:10px ;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+.chart{
+    width: 700px;
+    border-radius:10px ;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+.countup-container:hover {
+    transform: scale(1.05);
+}
+
+.icon {
+    font-size: 2.5em;
+}
+
+span.num {
+    font-weight: 600;
+    font-size: 2.5em;
+}
+
+span.text {
+    font-size: 1.2em;
+    padding: 0.7em 0;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.countup-elements{
+    display: flex;
+}
+
+.countup-icon>svg{
+    margin-top: 10px;
+    color:#0278ae;
+    height: 30px;
+    width: 30px;
+}

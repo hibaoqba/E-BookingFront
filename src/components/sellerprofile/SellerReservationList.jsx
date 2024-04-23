@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/history.css'; // Import CSS file for styling
 import UseFetchUserInfo from '../UseFetchUserInfo';;
-import GetInvoiceById from './GetInvoiceById';
-import GetReservationDetails from './GetReservationDetails'
+import GetInvoiceById from '../profile/GetInvoiceById';
+import GetReservationDetails from '../profile/GetReservationDetails'
 const SellerReservationList = () => {
   const userInfo=UseFetchUserInfo();
   const [reservations, setReservations] = useState([]);
@@ -26,7 +26,7 @@ const SellerReservationList = () => {
 
   return (
     <div>
-      <h2>Your Reservations</h2>
+      <div><h2>rapport de réservations</h2></div>
       <table className="reservations-table">
         <thead>
           <tr>

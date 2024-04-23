@@ -10,10 +10,11 @@ import CarComponent from '../components/CarComponent';
 import Wishlist from '../components/profile/Wishlist';
 import History from '../components/profile/History';
 import Password from '../components/profile/Password'
-import SellerCar from '../components/profile/SellerCar';
-import SellerAddCar from '../components/profile/SellerAddCar'
+import SellerCar from '../components/sellerprofile/SellerCar';
+import SellerAddCar from '../components/sellerprofile/SellerAddCar'
 import ProfileRightSection from '../components/profile/ProfileRightSection';
-import Dashboard from '../components/profile/Dashboard'
+import Dashboard from '../components/sellerprofile/Dashboard'
+import SellerReservationList from '../components/sellerprofile/SellerReservationList';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Profile from '../components/profile/Profile';
 import ReservationConfirmation from '../components/CarReservation/ReservationConfirmation';
@@ -42,6 +43,7 @@ const CreateRoutes = () => {
         <Route path="cars" element={<SellerCar />} />
         <Route path="addCar" element={<SellerAddCar />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="reservations" element={<SellerReservationList />} />
 
 
 
