@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const CarImage = ({ carId }) => {
+const CarImage = ({ carId ,left,right}) => {
   const [firstImage, setFirstImage] = useState(null);
   const [error, setError] = useState('');
 
@@ -33,7 +33,7 @@ const CarImage = ({ carId }) => {
         <img
           src={`data:image/png;base64,${firstImage}`}
           alt="Car Image"
-          style={{ width: '100%', height:'200px',borderTopLeftRadius:'10px',borderBottomLeftRadius:'10px' }}
+          style={{ width: '100%', height:'200px',borderTopLeftRadius:`${left}px`,borderBottomLeftRadius:`${left}px`,borderTopRightRadius:`${right}px`,borderBottomRightRadius:`${right}px` }}
         />
       )}
     </div>

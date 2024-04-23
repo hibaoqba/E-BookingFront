@@ -83,7 +83,7 @@ const SellerCar = () => {
       {cars.map(car => (
         <div key={car.id} className="car-item">
           <div className='car-image'>  
-            <CarImage  carId={car.id} /> 
+            <CarImage  carId={car.id} left={10} right={0} /> 
           </div>
           <div className="car-details">
             <h2>{car.brand} {car.model}</h2>

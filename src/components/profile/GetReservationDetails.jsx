@@ -4,6 +4,10 @@ import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo} from '@fortawesome/free-solid-svg-icons';
 import '../../styles/getInvoiceById.css'
+import '../../styles/getReservationDetails.css'
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import CarImage from '../CarImage';
 const GetReservationDetails = ({ reservationId }) => {
   const [reservation, setReservation] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -41,6 +45,8 @@ const GetReservationDetails = ({ reservationId }) => {
 
   return (
     <div>
+       
+      
       <Button variant="primary" className='invoice-show' onClick={() => setShowModal(true)}>
        <FontAwesomeIcon icon={faCircleInfo} /> détails
       </Button>
@@ -50,13 +56,31 @@ const GetReservationDetails = ({ reservationId }) => {
           <Modal.Title>Reservation Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>ID: {reservation.id}</p>
-          <p>Title: {reservation.titre}</p>
-          <p>Brand: {reservation.car.brand}</p>
-          <p>Model: {reservation.car.model}</p>
-          <p>Description: {reservation.car.description}</p>
-          <p>Year: {reservation.car.year}</p>
-          {/* Add more reservation details here */}
+        <Tabs
+      defaultActiveKey="reservation"
+      id="uncontrolled-tab-example"
+      className="mb-3"
+    >
+      <Tab eventKey="reservation" title="Réservation" className='details-tab'>
+   
+          <div className='details-modal-image'><CarImage className='details-modal-image' carId={reservation.car.id}left={10} right={10} /></div>
+          <h2> {reservation.titre}</h2>
+          <div>numero: {reservation.id}</div>
+          
+          <div>Brand: {reservation.car.brand}</div>
+          <div>Model: {reservation.car.model}</div>
+          <div>Description: {reservation.car.description}</div>
+          <div>Year: {reservation.car.year}</div>
+           <div> Frais supplémentaire: {reservation.f}</div>
+   </Tab>
+   <Tab eventKey="client" title="client" className='details-tab'>
+        
+        <div>nom:{reservation.user.lastname}</div>
+        <div>prenom:{reservation.user.firstname}</div>
+        <div></div>
+      </Tab>
+      
+    </Tabs>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>

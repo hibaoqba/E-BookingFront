@@ -173,7 +173,19 @@ const Car = () => {
             </div>
           </div>
           <div className="car-container">
-            {sortedCars.map(car => (
+          {sortedCars
+    .filter(car => (
+      car.brand !== null &&
+      car.model !== null &&
+      car.year !== null &&
+      car.price !== null &&
+      car.carFeatures &&
+      car.carFeatures.suitCases !== null &&
+      car.carFeatures.place !== null &&
+      car.carFeatures.fuelType !== null &&
+      car.carFeatures.transmissionType !== null
+    ))
+.map(car => (
               <div key={car.id} className="car-link">
                 <div className="car-card" onClick={() => handleCarClick(car.id)}>
                   <div>

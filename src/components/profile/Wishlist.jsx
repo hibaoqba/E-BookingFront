@@ -29,7 +29,7 @@ const Wishlist = () => {
     <div>
       {wishes.map(wish => (
         <div key={wish.id} className="wish-item">
-      <div className='wish-image'>    <CarImage carId={wish.car.id} /> </div>
+      <div className='wish-image'>    <CarImage carId={wish.car.id} left={10} right={0} /> </div>
           <div className="wish-details">
             <h2>{wish.car.brand} {wish.car.model}</h2>
             <p>{wish.car.description}</p>
