@@ -1,3 +1,9 @@
+:root {
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --box-shadow-offset-x: 0px;
+  --box-shadow-offset-y: 2px;
+  --box-shadow-blur-radius: 4px;
+}
 .profile-right-section {
   margin: 0 auto;
   padding: 20px;
@@ -24,7 +30,7 @@
 .profile-field textarea {
   width: calc(100% - 22px); /* Adjust width to account for padding and borders */
   padding: 10px;
-  border: 1px solid #ccc;
+  box-shadow: var(--box-shadow-offset-x) var(--box-shadow-offset-y) var(--box-shadow-blur-radius) var(--box-shadow-color);  border: none;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -34,9 +40,7 @@
   margin-bottom: 10px;
 }
 
-.profile-field input[type="date"] {
-  /* Add specific styles for date input if needed */
-}
+
 .error-message {
   color: red;
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../styles/sellerCar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPencil,faEye } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button } from 'react-bootstrap';
 import CarImage from '../CarImage'; 
 import CarUpdateModal from '../updateCar/CarUpdateModal';
@@ -52,9 +52,8 @@ const SellerCar = () => {
     try {
       const response = await axios.delete(`http://localhost:8080/api/cars/${carId}`);
       console.log('Car deleted successfully:', response.data);
-      // Filter out the deleted car from the state
       setCars(cars.filter(car => car.id !== carId));
-      setshowDeleteModal(false); // Close the modal after deletion
+      setshowDeleteModal(false); 
     } catch (error) {
       console.error('Error deleting car:', error);
     }
@@ -70,12 +69,12 @@ const SellerCar = () => {
   };
 
   const handleShowUpdateModal = (car) => {
-    setSelectedCar(car); // Set the selected car object
-    setShowUpdateModal(true); // Show the update modal
+    setSelectedCar(car); 
+    setShowUpdateModal(true); 
   };
 
   const handleCloseUpdateModal = () => {
-    setShowUpdateModal(false); // Hide the update modal
+    setShowUpdateModal(false); 
   };
 
   return (
@@ -88,9 +87,9 @@ const SellerCar = () => {
           <div className="car-details">
             <h2>{car.brand} {car.model}</h2>
             <p>{car.description}</p>
-            <Link to={`/car/${car.id}`} className="btn btn-primary">View Details</Link>
-            <button className="btn btn-danger car-delete-button" onClick={() => handleshowDeleteModal(car.id)}> <FontAwesomeIcon icon={faTrash}/> supprimer</button>
-            <button className='btn btn-info car-update-button' onClick={() => handleShowUpdateModal(car)}><FontAwesomeIcon icon={faPencil}/> modifier</button>          
+            <Link to={`/car/${car.id}`} className="btn btn-primary car-details-button"><FontAwesomeIcon icon={faEye}/> </Link>
+            <button className="btn btn-danger car-delete-button" onClick={() => handleshowDeleteModal(car.id)}> <FontAwesomeIcon icon={faTrash}/> </button>
+            <button className='btn btn-info car-update-button' onClick={() => handleShowUpdateModal(car)}><FontAwesomeIcon icon={faPencil}/> </button>          
           </div>
         </div>
       ))}

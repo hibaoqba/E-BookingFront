@@ -3,26 +3,31 @@ import axios from 'axios';
 import '../../styles/history.css'; // Import CSS file for styling
 import UseFetchUserInfo from '../UseFetchUserInfo';
 import GetInvoiceById from './GetInvoiceById';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import GetReservationDetails from './GetReservationDetails'
+import { DeleteReservation } from '../../actions/DeleteReservation';
 const History = () => {
   const userInfo=UseFetchUserInfo();
   const [reservations, setReservations] = useState([]);
 
 
-  useEffect(() => {
-    const fetchReservations = async () => {
-      try {
-        if (userInfo && userInfo.id) {
-          const response = await axios.get(`http://localhost:8080/api/reservations/user/${userInfo.id}`);
-          setReservations(response.data);
-        }
-      } catch (error) {
-        console.error('Error fetching reservations:', error);
+  const fetchReservations = async () => {
+    try {
+      if (userInfo && userInfo.id) {
+        const response = await axios.get(`http://localhost:8080/api/reservations/seller/${userInfo.id}`);
+        setReservations(response.data);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching reservations:', error);
+    }
+  };
 
-    fetchReservations();
+  useEffect(() => {
+    fetchReservations(); // Call fetchReservations directly here
   }, [userInfo]);
+
+
 
   return (
     <div>
@@ -38,6 +43,7 @@ const History = () => {
             <th>Status</th>
             <th>prix</th>
             <th>Autres details</th>
+            <th>Actions</th>
 
 
 
@@ -57,6 +63,7 @@ const History = () => {
               <td>{reservation.totalPrice}</td>
               <td><GetInvoiceById reservationId={reservation.id} />
              <GetReservationDetails reservationId={reservation.id} /></td>
+              <td><button className='btn btn-danger delete-reservation-button' onClick={() => DeleteReservation(reservation.id,fetchReservations)}><FontAwesomeIcon icon={faTrash}/></button></td>
 
             </tr>
           ))}

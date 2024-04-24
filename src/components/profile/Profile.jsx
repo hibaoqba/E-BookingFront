@@ -61,7 +61,7 @@ const Profile = () => {
                   <FontAwesomeIcon icon={faCarSide}/> Mes Voitures
                   </Link>
                 
-                  <Link className={`profile-link ${location.pathname === '/user/addCar' ? 'selected-profile' : ''} voiture-link `} to='/user/reservations'>
+                  <Link className={`profile-link ${location.pathname === '/user/addCar' ? 'selected-profile' : ''} voiture-link `} to='/user/addCar'>
                    <FontAwesomeIcon icon={faPlus}/> Ajouter une Voiture
                   </Link>
                 </>

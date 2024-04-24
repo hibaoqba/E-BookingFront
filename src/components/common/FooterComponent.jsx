@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/footer.css';
+import Broadcast from './Broadcast';
 
 const FooterComponent = () => {
   return (
@@ -32,12 +33,13 @@ const FooterComponent = () => {
         <a href="#">donnez nous un commentaire</a>
       </div>
       <div className='sub-container'>
-        <h5>Société</h5>
-        <a href="#">A propos de nous</a>
-        <a href="#">carriere</a>
-        <a href="#">conditions d'utilisation</a>
-        <a href="#">declaration confidentialité</a>
-        <a href="#">donnez nous un commentaire</a>
+        <h5>Nos Services</h5>
+        <a href="#">Relations avec les investisseurs</a>
+        <a href="#">Programme de récompenses</a>
+        <a href="#">PointsPLUS</a>
+        <a href="#">Partenaires</a>
+        <a href="#">Répertorier mon hôtel
+</a>
       </div>
       <div className='sub-container'>
         <h5>Société</h5>
@@ -46,6 +48,11 @@ const FooterComponent = () => {
         <a href="#">conditions d'utilisation</a>
         <a href="#">declaration confidentialité</a>
         <a href="#">donnez nous un commentaire</a>
+      </div>
+      <div className='sub-container'>
+        <h5>liste de diffusion</h5>
+        <div>Inscrivez-vous à notre liste de diffusion pour recevoir les dernières mises à jour et offres.</div>
+        <Broadcast/>
       </div>
       
     </footer>

@@ -6,14 +6,15 @@
     position: relative;
     bottom: 0;
     left: 0;
-    padding: 20px;
+
     z-index: 100;
     color:rgb(88, 88, 88)
   }
   
   .sub-container {
     flex: 1 0 200px;
-    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
   }
   
   .inline {
@@ -34,10 +35,12 @@
   
   .footer-container a {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    color:rgb(172, 172, 172) ;
+    
 
   }
   .footer-container a:hover {
 text-decoration: underline;
-color:rgb(30, 96, 208)
+color:rgb(99, 158, 235)
 }
