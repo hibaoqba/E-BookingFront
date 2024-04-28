@@ -25,6 +25,9 @@ import ApartmentComponent from '../components/apartmentComponents/ApartmentCompo
 import ApartmentReservations from '../components/apartmentSellerProfile/ApartmentReservations';
 import ApartmentDashboard from '../components/apartmentSellerProfile/ApartmentDashboard';
 import ApReservationConfirmation from '../components/apartmentComponents/ApReservationConfirmation';
+import AdminSellerDashboard from '../components/profile/AdminSellerDashboard';
+import AdminSellerReservation from '../components/profile/AdminSellerReservation';
+import AdminDashboard from '../components/profile/AdminDashboard'
 const CreateRoutes = () => {
   return (
     <BrowserRouter>
@@ -56,6 +59,10 @@ const CreateRoutes = () => {
         <Route path="addApartment" element={<SellerAddApartment />} />
 
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="admin/sellerDashboard" element={<AdminSellerDashboard />} />
+        <Route path="admin/sellerReservation" element={<AdminSellerReservation />} />
+        <Route path="adminDashboard" element={<AdminDashboard />} />
+
         <Route path="reservations" element={<SellerReservationList />} />
         <Route path="apartment/reservations" element={<ApartmentReservations />} />
         <Route path="apartment/dashboard" element={<ApartmentDashboard />} />

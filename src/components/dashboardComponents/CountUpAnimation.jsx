@@ -1,8 +1,9 @@
+import { init } from 'echarts';
 import React, { useEffect, useState } from 'react';
 
 const CountUpAnimation = ({ iconComponent, initialValue, targetValue, text , className}) => {
     const [count, setCount] = useState(initialValue);
-    const duration = 4000;
+    const duration = 1000;
 
     useEffect(() => {
         let startValue = initialValue;

@@ -3,10 +3,11 @@ import ProfileHeader from './ProfileHeader';
 import '../../styles/profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
-import { faUser, faLock, faArrowRightFromBracket, faCar,faPlus,faCarSide,faChartLine ,faChevronDown,faChevronUp, faUserGroup, faUserTie, faBuilding} from '@fortawesome/free-solid-svg-icons';
-import { faClock, faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faUser, faLock, faArrowRightFromBracket, faCar,faPlus,faCarSide,faChartLine ,faChevronDown,faChevronUp, faUserGroup, faUserTie, faBuilding, faGaugeHigh, faList, faNewspaper, faFile} from '@fortawesome/free-solid-svg-icons';
+import { faClock, faHeart, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { Outlet } from 'react-router-dom';
 import UseFetchUserInfo from '../UseFetchUserInfo';
+import { BsBuilding,BsBuildingAdd,BsBuildings } from 'react-icons/bs';
 
 import { IoPieChart } from "react-icons/io5";
 import AdminLinks from '../adminComponents/AdminLinks';
@@ -19,13 +20,19 @@ const Profile = () => {
   const userInfo=UseFetchUserInfo();
 
   const isCarSeller = userInfo && userInfo.role === "CARSELLER";
+  const isCarSellerOrAdmin = userInfo && userInfo.role === "CARSELLER" ||"admin";
+  const isApartmentSellerOrAdmin = userInfo && userInfo.role === "APARTMENTSELLER"||"ADMIN";
+  const [apartmentsExpanded, setApartmentsExpanded] = useState(false);
+
   const isNotClient = userInfo && userInfo.role !== "CLIENT";
   const isAdmin = userInfo && userInfo.role === "ADMIN";
 const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
   const handleVoituresToggle = () => {
     setVoituresExpanded(!voituresExpanded);
   };
-  
+  const handleApartmentsToggle = () => {
+    setApartmentsExpanded(!apartmentsExpanded);
+};
   return (
     <div className='profile-container'>
       <div className='profile-left-container'>
@@ -51,13 +58,16 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
             <>
           <hr className="hr-text gradient" data-content="Espace Vendeur"/>  
              {isCarSeller && (
+
               <>
+              
             <Link className={`profile-link ${location.pathname === '/user/dashboard' ? 'selected-profile' : ''}`} to='/user/dashboard'>
-                    <FontAwesomeIcon icon={faChartLine} /> car Dashboard
+                    <FontAwesomeIcon icon={faChartLine} />Dashboard
                   </Link>
                   <Link className={`profile-link ${location.pathname === '/user/reservations' ? 'selected-profile' : ''} `} to='/user/reservations'>
-                 <IoPieChart/>car rapport de réservations
-                  </Link> 
+                 <IoPieChart/>rapport de réservations
+                </Link>
+                
                   <div className={`profile-link ${voituresExpanded ? 'expanded' : ''}`} onClick={handleVoituresToggle}>
                  <FontAwesomeIcon icon={faCar} /> Voitures
                 <FontAwesomeIcon icon={voituresExpanded ? faChevronUp : faChevronDown} className='expand-icon' />
@@ -77,13 +87,56 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
                   </>
                 
                 )}
+                
                 {isAdmin && (
+                  
               <>
-            <Link className={`profile-link ${location.pathname === '/user/dashboard' ? 'selected-profile' : ''}`} to='/user/dashboard'>
-                    <FontAwesomeIcon icon={faChartLine} />admin   Dashboard
+                <Link className={`profile-link ${location.pathname === '/user/admin/sellerDashboard' ? 'selected-profile' : ''}`} to='/user/admin/sellerDashboard'>
+                    <FontAwesomeIcon icon={faChartLine} />Dashboard
+                  </Link>
+                  <Link className={`profile-link ${location.pathname === '/user/admin/sellerReservation' ? 'selected-profile' : ''} `} to='/user/admin/sellerReservation'>
+                 <IoPieChart/>rapport de réservations
+                </Link>
+                
+              <div className={`profile-link ${voituresExpanded ? 'expanded' : ''}`} onClick={handleVoituresToggle}>
+                 <FontAwesomeIcon icon={faCar} /> Voitures
+                <FontAwesomeIcon icon={voituresExpanded ? faChevronUp : faChevronDown} className='expand-icon' />
+              </div>
+              {voituresExpanded && (
+                <>
+                  
+                  <Link className={`profile-link ${location.pathname === '/user/cars' ? 'selected-profile' : ''} voiture-link `} to='/user/cars'>
+                  <FontAwesomeIcon icon={faCarSide}/> Mes Voitures
+                  </Link>
+                
+                  <Link className={`profile-link ${location.pathname === '/user/addCar' ? 'selected-profile' : ''} voiture-link `} to='/user/addCar'>
+                   <FontAwesomeIcon icon={faPlus}/> Ajouter une Voiture
+                  </Link>
+                </>
+              )}
+
+              <div className={`profile-link ${apartmentsExpanded ? 'expanded' : ''}`} onClick={handleApartmentsToggle}>
+                <BsBuildings/> Appartements
+                <FontAwesomeIcon icon={apartmentsExpanded ? faChevronUp : faChevronDown} className='expand-icon' />
+            </div>
+            {apartmentsExpanded && (
+                <>
+                    <Link className={`profile-link ${location.pathname === '/user/apartments' ? 'selected-profile' : ''} apartment-link `} to='/user/apartments'>
+                    <BsBuilding
+                    /> Mes Apartments
+                    </Link>
+                    <Link className={`profile-link ${location.pathname === '/user/addApartment' ? 'selected-profile' : ''} apartment-link `} to='/user/addApartment'>
+                       <BsBuildingAdd/> Ajouter un Appartement
+                    </Link>
+                </>
+            )}
+                        <hr className="hr-text gradient" data-content="Espace Admin"/>  
+
+            <Link className={`profile-link ${location.pathname === '/user/adminDashboard' ? 'selected-profile' : ''}`} to='/user/adminDashboard'>
+                    <FontAwesomeIcon icon={faGaugeHigh} />admin   Dashboard
                   </Link>
                   <Link className={`profile-link ${location.pathname === '/user/reservations' ? 'selected-profile' : ''} `} to='/user/reservations'>
-                 <IoPieChart/> admin  rapport de réservations
+                  <FontAwesomeIcon icon={faFile} /> toutes les réservations
                   </Link> 
                   </>
                 
@@ -102,9 +155,7 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
           </>
         )}
 
-      {isAdmin && (
-            <AdminLinks/>
-          )}
+  
         </div>
         <hr className='profile-divider' />
         <Link className='profile-link' to='/' >
