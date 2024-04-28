@@ -76,3 +76,29 @@
 .expand-icon {
   margin-left: auto; /* Move the chevron to the right */
 }
+.hr-text {
+  border: 0;
+  font-size: 20px;
+  height: 1.5em;
+  line-height: 1em;
+  position: relative;
+  text-align: center;
+}
+.hr-text::before {
+  content: "";
+  background: linear-gradient(to right, transparent, white, transparent);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+}
+.hr-text::after {
+  background-color: rgb(25, 35, 78);
+  color: rgb(255, 255, 255);
+  content: attr(data-content);
+  line-height: 1.5em;
+  padding: 0 7px;
+  position: relative;
+  opacity: 100%;
+}

@@ -21,7 +21,7 @@ const CarComponent = () => {
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const userInfo = UseFetchUserInfo();
-
+  const [disabledDates, setDisabledDates] = useState([]);
   const today = new Date().toISOString().split('T')[0];
   const [reservationData, setReservationData] = useState({
     startDate: '',
@@ -44,6 +44,19 @@ const CarComponent = () => {
 
     fetchCar();
   }, [id]);
+  useEffect(() => {
+    const fetchReservationDates = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/cars/${id}/reservationdates`);
+        setDisabledDates(response.data);
+      } catch (error) {
+        console.error('Error fetching reservation dates:', error);
+      }
+    };
+
+    fetchReservationDates();
+  }, [id]);
+
 
   const handleDateRangeSelect = (dateRange) => {
     setReservationData(prevData => ({
@@ -162,11 +175,16 @@ const CarComponent = () => {
             <hr />
             <div className='date-picker'>
               <div className='pick-text'>Veuillez choisir une date:</div>
-              <div className='date-picker-car'> <DoubleDateInput onDateRangeSelect={handleDateRangeSelect}  /></div>
+              <div className='date-picker-car'> 
+              <DoubleDateInput 
+            onDateRangeSelect={handleDateRangeSelect}  
+            disabledDates={disabledDates} 
+          />
+</div>
             </div>
             <hr />
             <div className='tarif-supp'>
-              <h2>Tarifs supplémentaires</h2>
+              <h4>Tarifs supplémentaires</h4>
               <div className='list-tarifs'>
                 <ul>
                   <li>

@@ -20,8 +20,8 @@ const SellerAddCar = () => {
   const [horsePower, setHorsePower] = useState('');
   const [place, setPlace] = useState('');
   const [suitCases, setSuitCases] = useState('');
-  const [gps, setGPS] = useState(true); // Default value true
-  const [ac, setAC] = useState(true); // Default value true
+  const [gps, setGPS] = useState(true); 
+  const [ac, setAC] = useState(true); 
   const [images, setImages] = useState([]);
   const [message, setMessage] = useState('');
   const userInfo = UseFetchUserInfo();
@@ -154,7 +154,7 @@ const SellerAddCar = () => {
       </FormWizard.TabContent>
       <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faLocation}/>}>
 
-        <MapPicker onLocationChange={handleLocationChange} />
+        <MapPicker onLocationChange={handleLocationChange} defaultPosition={[0,0]} />
       </FormWizard.TabContent>
   
       <FormWizard.TabContent title="images" icon={<FontAwesomeIcon icon={faImage}/>}>

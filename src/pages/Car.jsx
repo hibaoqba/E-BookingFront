@@ -22,7 +22,6 @@ const Car = () => {
   const [loading, setLoading] = useState(true);
 
   const [userInfo, setUserInfo] = useState({});
-
   useEffect(() => {
     const fetchUserInfo = async () => {
       const authToken = localStorage.getItem('authToken');
@@ -54,6 +53,8 @@ const Car = () => {
         const response = await axios.get('http://localhost:8080/api/cars');
         setCars(response.data);
         setSortedCars(response.data);
+        setLoading(false);
+
       } catch (error) {
         console.error('Error fetching cars:', error);
       }
@@ -144,7 +145,7 @@ const Car = () => {
               </div>
               <label> choisir une date:</label>
               <div className='date-picker-car'>
-                <DoubleDateInput onDateRangeSelect={handleDateRangeSelect} />
+                <DoubleDateInput onDateRangeSelect={handleDateRangeSelect} disabledDates={[]} />
               </div>
               <button className='car-research-body-button'>
                 <FontAwesomeIcon icon={faMagnifyingGlass} /> Rechercher

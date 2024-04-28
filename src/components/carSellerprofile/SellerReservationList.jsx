@@ -14,7 +14,6 @@ const SellerReservationList = () => {
   const [selectedReservationId, setSelectedReservationId] = useState(null);
   const [newStatus, setNewStatus] = useState('');
 
-  // Define fetchReservations function outside useEffect
   const fetchReservations = async () => {
     try {
       if (userInfo && userInfo.id) {

@@ -82,20 +82,20 @@ const Password = () => {
       <div className='inputContainer'>
         <form onSubmit={handleSubmit}>
           <div className='inputGroup'>
-            <label className='label' htmlFor='oldPassword'>
+            <label className='password-label' htmlFor='oldPassword'>
               Ancien mot de passe
             </label>
             <div className='inputWithIcon'>
-              <input type='password' name='oldPassword' value={oldPassword} onChange={handleChange} className='input' placeholder='Ancien mot de passe' />
+              <input type='password' name='oldPassword' value={oldPassword} onChange={handleChange} className='password-input' placeholder='Ancien mot de passe' />
               <FontAwesomeIcon icon={faLock} className='inputIcon' />
             </div>
           </div>
           <div className='inputGroup'>
-            <label className='label' htmlFor='newPassword'>
+            <label className='password-label' htmlFor='newPassword'>
               Nouveau mot de passe
             </label>
             <div className='inputWithIcon'>
-              <input type='password' name='newPassword' value={newPassword} onChange={handleChange} className='input' placeholder='Nouveau mot de passe' />
+              <input type='password' name='newPassword' value={newPassword} onChange={handleChange} className='password-input' placeholder='Nouveau mot de passe' />
               <FontAwesomeIcon icon={faLock} className='inputIcon' />
             </div>
           </div>
@@ -104,7 +104,7 @@ const Password = () => {
               Confirmer le nouveau mot de passe
             </label>
             <div className='inputWithIcon'>
-              <input type='password' name='confirmPassword' value={confirmPassword} onChange={handleChange} className='input' placeholder='Confirmer le nouveau mot de passe' />
+              <input type='password' name='confirmPassword' value={confirmPassword} onChange={handleChange} className='password-input' placeholder='Confirmer le nouveau mot de passe' />
               <FontAwesomeIcon icon={faLock} className='inputIcon' />
             </div>
           </div>

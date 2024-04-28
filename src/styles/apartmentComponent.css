@@ -1,4 +1,4 @@
-.car-details-container{
+.apartment-details-container{
     margin-top: 200px;
     display: flex;
     justify-content: center; 
@@ -7,7 +7,7 @@
     color:rgb(49, 49, 49);
     
 }
-.car-details-subcontainer {
+.apartment-details-subcontainer {
     display: flex;
     justify-content: center;
     width: 100%; 
@@ -16,6 +16,7 @@
     margin-right:40px ;
     margin-left: 30px;
     width: auto;
+    justify-content: center;
   }
   
   .details-right-section {
@@ -32,10 +33,11 @@
     flex-wrap: wrap;
     margin-bottom: 40px;
   }
-  .car-features{
+  .apartment-features{
     display: flex;
     flex-wrap: wrap;
-   justify-content: center;
+    align-items: center;
+    justify-content: space-between;
 
   }
   .details-feature{
@@ -52,20 +54,20 @@
 .details-icon > svg{
     height: 40px;
     width: 40px;
-    color: #3387d6;
+    color: #00509a;
    
 }
 .features-text{
 font-size: 20px;
 }
-.car-carousel-image {
+.apartment-carousel-image {
     width: 100%; 
     height: auto; 
     object-fit: contain; 
   }
   
 
-.car-carousel{
+.apartment-carousel{
     width: 780px;
     height: 500px;
 }
@@ -73,6 +75,7 @@ font-size: 20px;
     margin-top:40px;
     color:rgb(50, 50, 50);
     margin-bottom: 40px;
+    max-width: 780px;
 }
 .additional-features ul {
     list-style: none;
@@ -89,9 +92,10 @@ font-size: 20px;
 
 .additional-icon {
     vertical-align: middle; 
-    color:#3387d6;
+    color:#00396d; 
+    margin-right: 10px;
   }
-.car-description
+.apartment-description
 {
     margin-top:40px ;
     margin-bottom:40px;

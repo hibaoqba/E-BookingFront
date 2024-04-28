@@ -16,13 +16,31 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
-    background-color: #ffffff;
+    color:#ffffff;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     text-align: center;
     transition: transform 0.1s ease-in-out;
     width: 250px;
     margin: 15px;
+}
+.client-count-up{
+    background-color: #7ec899;
+ 
+}
+.revenue-count-up{
+    background-color: #f9c45b;
+    
+}
+.car-count-up{
+    background-color: #73c0de;
+   
+}
+
+.reservation-count-up{
+    background-color: #546fc6;
+  
+   
 }
 
 .charts{
@@ -65,7 +83,7 @@ span.text {
 
 .countup-icon>svg{
     margin-top: 10px;
-    color:#0278ae;
+
     height: 30px;
     width: 30px;
 }

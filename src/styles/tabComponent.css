@@ -80,18 +80,21 @@
   
   .hero-tabs .nav-link {
     color: #fff;
+    border: 0px !important;
+    margin-right: 10px ;
+
   }
 
 
   .hero-tabs .nav-link :hover{
     color: #fff;
-    border: none;
+    border: 0px !important;
     
   }
   
   .hero-tabs .nav-link.active {
     background-color: #3796ef;
        color:#fff;
-       border: none;
-  }
+       border: 0px !important;
+      }
   

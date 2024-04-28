@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-const MapPicker = ({ onLocationChange }) => {
-  const [position, setPosition] = useState([0, 0]);
+const MapPicker = ({ onLocationChange,defaultPosition }) => {
+  const [position, setPosition] = useState(defaultPosition);
 
   
   function LocationPicker() {
@@ -19,7 +19,7 @@ const MapPicker = ({ onLocationChange }) => {
 
   return (
     <div className="map-container">
-      <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: '400px', width: '100%' }}>
+      <MapContainer center={defaultPosition} zoom={7} scrollWheelZoom={true} style={{ height: '400px', width: '100%' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <LocationPicker />
         <Marker position={position}>

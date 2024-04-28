@@ -163,7 +163,7 @@ const CarUpdateModal = ({ car, onClose }) => {
            
 
             <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faLocation} />}>
-              <MapPicker onLocationChange={handleLocationChange} />
+              <MapPicker onLocationChange={handleLocationChange} defaultPosition={[latitude,longitude]} />
             </FormWizard.TabContent>
             <FormWizard.TabContent title="images" icon={<FontAwesomeIcon icon={faImage} />}>
               <div className="form-field">

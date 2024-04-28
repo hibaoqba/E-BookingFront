@@ -1,20 +1,19 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import UseFetchUserInfo from '../UseFetchUserInfo';
-import CarReservationCard from './CarReservationCard';
 import '../../styles/reservationConfirmation.css'
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk,faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 import {faCheck  } from '@fortawesome/free-solid-svg-icons';
-
+import ApartmentReservationCard from './ApartmentReservationCard';
 import '../../styles/profileRightSection.css';
 import { countries } from 'countries-list';
 import Select from 'react-select';
 import * as Yup from 'yup';
-const ReservationConfirmation = () => {
+const ApReservationConfirmation = () => {
   const location = useLocation();
-  const { reservationData, car } = location.state;
+  const { reservationData, apartment } = location.state;
   const navigate = useNavigate();
   const userInfo = UseFetchUserInfo();
   const [userData, setUserData] = useState(null);
@@ -80,19 +79,17 @@ const ReservationConfirmation = () => {
       // Update user data
       await updateUser();
   
-      // Proceed with reservation confirmation
       const response = await axios.post('http://localhost:8080/api/reservations', {
         user: { id: userInfo.id },
-        car: { id: car.id },
+        apartment: { id: apartment.id },
         startDate: reservationData.startDate,
         endDate: reservationData.endDate,
-        gps: reservationData.gps,
-        childSeat: reservationData.childSeat
+    
       });
       console.log('Reservation created:', response.data);
   
       // Navigate to invoice page
-      navigate(`/carInvoice/${response.data.id}`);
+      navigate(`/apartmentInvoice/${response.data.id}`);
     } catch (error) {
       if (error.name === 'ValidationError') {
         // Handle validation errors
@@ -223,11 +220,11 @@ const ReservationConfirmation = () => {
     </div>
       </div>
       <div className='confirmation-right-section'>
-        <CarReservationCard car={car} reservation={reservationData} />
-       
+      <ApartmentReservationCard apartment={apartment} reservation={reservationData} />
+
       </div>
     </div>
   );
 };
 
-export default ReservationConfirmation;
+export default ApReservationConfirmation;

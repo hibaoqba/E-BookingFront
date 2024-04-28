@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const CountUpAnimation = ({ iconComponent, initialValue, targetValue, text }) => {
+const CountUpAnimation = ({ iconComponent, initialValue, targetValue, text , className}) => {
     const [count, setCount] = useState(initialValue);
     const duration = 4000;
 
@@ -22,7 +22,7 @@ const CountUpAnimation = ({ iconComponent, initialValue, targetValue, text }) =>
     }, [targetValue, initialValue]);
 
     return (
-        <div className="countup-container">
+        <div className={className} >
             <div className="countup-icon">{iconComponent}</div>
             <span className="num">{count}</span>
             <span className="text">{text}</span>
