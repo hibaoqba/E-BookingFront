@@ -144,6 +144,9 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
                   <Link className={`profile-link ${location.pathname === '/user/allApartments' ? 'selected-profile' : ''} `} to='/user/allApartments'>
                   <FontAwesomeIcon icon={faBuilding} /> tous les apartements
                   </Link>
+                  <Link className={`profile-link ${location.pathname === '/user/allUsers' ? 'selected-profile' : ''} `} to='/user/allUsers'>
+                  <FontAwesomeIcon icon={faUserGroup} /> Utilisateurs
+                  </Link>
                   </>
                 
                 )}

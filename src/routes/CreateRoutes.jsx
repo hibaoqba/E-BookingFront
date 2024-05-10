@@ -33,6 +33,7 @@ import AllReservations from '../components/adminComponents/AllReservations';
 import ApartmentInvoice from '../components/invoice/ApartmentInvoice';
 import AllCars from '../components/adminComponents/AllCars';
 import AllApartments from '../components/adminComponents/AllApartments';
+import AllUsers from '../components/adminComponents/AllUsers';
 const CreateRoutes = () => {
   return (
     <BrowserRouter>
@@ -66,6 +67,7 @@ const CreateRoutes = () => {
         <Route path="addCar" element={<SellerAddCar />} />
         <Route path="apartments" element={<SellerApartments />} />
         <Route path="addApartment" element={<SellerAddApartment />} />
+        <Route path="allUsers" element={<AllUsers />} />
 
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="admin/sellerDashboard" element={<AdminSellerDashboard />} />
