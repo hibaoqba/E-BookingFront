@@ -20,6 +20,9 @@ const SellerAddApartment = () => {
     const [airConditioning, setAirConditioning] = useState('');
     const [images, setImages] = useState([]);
     const [noBathroom, setNoBathroom] = useState('');
+    const [noAdults, setNoAdults] = useState('');
+    const [noChildren, setNoChildren] = useState('');
+
     const [parking, setParking] = useState(false);
     const [pool, setPool] = useState(false);
     const [wifiInternet, setWifiInternet] = useState(false);
@@ -77,7 +80,6 @@ const SellerAddApartment = () => {
             const response = await axios.post('http://localhost:8080/api/apartments', {
                 titre,
                 description,
-                city,
                 price,
                 latitude,
                 longitude,
@@ -89,6 +91,8 @@ const SellerAddApartment = () => {
                     pool,
                     wifiInternet,
                     kitchen,
+                    noChildren,
+                    noAdults,
                     square,
                     breakfast,
                     airConditioning
@@ -104,11 +108,16 @@ const SellerAddApartment = () => {
     };
 
     const validateTab1 = () => {
-        return titre !== '' && description !== '' && city !== '' && price !== '' && square !== '';
+        return titre !== '' && description !== '' && price !== '' && square !== ''
+    
+        ;
     };
 
     const validateTab2 = () => {
-        return noBed !== '' && noBathroom !== '';
+        return noBed !== '' && noBathroom !== ''
+        && noAdults !== ''
+        && noChildren !== ''
+        ;
     };
 
     const validateTab3 = () => {
@@ -131,10 +140,7 @@ const SellerAddApartment = () => {
                         <label>Description:</label>
                         <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
                     </div>
-                    <div className="form-field">
-                        <label>Ville:</label>
-                        <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
-                    </div>
+                    
                     <div className="form-field">
                         <label>Prix:</label>
                         <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
@@ -143,6 +149,7 @@ const SellerAddApartment = () => {
                         <label>Surface (m²):</label>
                         <input type="number" value={square} onChange={(e) => setSquare(e.target.value)} />
                     </div>
+                    
                     {errorMessage1 && <p className='error-message'>{errorMessage1}</p>}
 
                 </FormWizard.TabContent>
@@ -155,6 +162,14 @@ const SellerAddApartment = () => {
                     <div className="form-field">
                         <label>Salles de bain:</label>
                         <input type="number" value={noBathroom} onChange={(e) => setNoBathroom(e.target.value)} />
+                    </div>
+                    <div className="form-field">
+                        <label>Adultes :</label>
+                        <input type="number" value={noAdults} onChange={(e) => setNoAdults(e.target.value)} />
+                    </div>
+                    <div className="form-field">
+                        <label>Enfants :</label>
+                        <input type="number" value={noChildren} onChange={(e) => setNoChildren(e.target.value)} />
                     </div>
                     <div className="form-check">
                         <label>Parking:</label>

@@ -8,17 +8,21 @@ import { faPencil, faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg
 import GetInvoiceById from '../profile/GetInvoiceById';
 import GetReservationDetails from '../profile/GetReservationDetails';
 import { DeleteReservation } from '../../actions/DeleteReservation';
+import SearchBar from '../common/SearchBar';
+
 const AllCarReservations = () => {
   const userInfo = UseFetchUserInfo();
   const [reservations, setReservations] = useState([]);
   const [selectedReservationId, setSelectedReservationId] = useState(null);
   const [newStatus, setNewStatus] = useState('');
+  const [filteredReservations, setFilteredReservations] = useState([]);
 
   const fetchReservations = async () => {
     try {
       if (userInfo && userInfo.id) {
         const response = await axios.get(`http://localhost:8080/api/reservations`);
         setReservations(response.data);
+        setFilteredReservations(response.data);
       }
     } catch (error) {
       console.error('Error fetching reservations:', error);
@@ -28,7 +32,6 @@ const AllCarReservations = () => {
   useEffect(() => {
     fetchReservations(); // Call fetchReservations directly here
   }, [userInfo]);
-
 
 
   const handleUpdateStatus = async () => {
@@ -42,11 +45,20 @@ const AllCarReservations = () => {
     }
   };
 
+  
+  const handleSearch = (searchTerm) => {
+    const filtered = reservations.filter(reservation => reservation.id.toString().includes(searchTerm));
+    setFilteredReservations(filtered);
+  };
+
   return (
     <div>
+            <SearchBar onSearch={handleSearch} />
+
       <table className="reservations-table">
         <thead>
           <tr>
+            <th>numero</th>
             <th>titre</th>
             <th>Date de réservation</th>
             <th>Date Début</th>
@@ -60,8 +72,9 @@ const AllCarReservations = () => {
           </tr>
         </thead>
         <tbody>
-          {reservations.map(reservation => (
+          {filteredReservations.map(reservation => (
             <tr key={reservation.id}>
+              <td>{reservation.id}</td>
               <td>{reservation.titre}</td>
               <td>{reservation.cmndDate}</td>
               <td>{reservation.startDate}</td>

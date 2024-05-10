@@ -94,8 +94,7 @@ const SellerDashborad = () => {
                 text="reservations"
             /></Link> 
         </div>
-       <div className='charts'> <div className='pie-chart'><PieChart  /></div>
-       <div className='chart'> <DashboardChart/></div></div>
+       
     </div>
     
   )

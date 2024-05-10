@@ -138,6 +138,12 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
                   <Link className={`profile-link ${location.pathname === '/user/adminReservations' ? 'selected-profile' : ''} `} to='/user/adminReservations'>
                   <FontAwesomeIcon icon={faFile} /> toutes les réservations
                   </Link> 
+                  <Link className={`profile-link ${location.pathname === '/user/allCars' ? 'selected-profile' : ''} `} to='/user/allCars'>
+                  <FontAwesomeIcon icon={faCarSide} /> toutes les voitures
+                  </Link> 
+                  <Link className={`profile-link ${location.pathname === '/user/allApartments' ? 'selected-profile' : ''} `} to='/user/allApartments'>
+                  <FontAwesomeIcon icon={faBuilding} /> tous les apartements
+                  </Link>
                   </>
                 
                 )}

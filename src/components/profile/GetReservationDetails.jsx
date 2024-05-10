@@ -56,12 +56,8 @@ const GetReservationDetails = ({ reservationId }) => {
           <Modal.Title>Reservation Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Tabs
-      defaultActiveKey="reservation"
-      id="uncontrolled-tab-example"
-      className="mb-3"
-    >
-      <Tab eventKey="reservation" title="Réservation" className='details-tab'>
+       
+     
    
           <div className='details-modal-image'><CarImage className='details-modal-image' carId={reservation.car.id}left={10} right={10} /></div>
           <h2> {reservation.titre}</h2>
@@ -71,16 +67,10 @@ const GetReservationDetails = ({ reservationId }) => {
           <div>Model: {reservation.car.model}</div>
           <div>Description: {reservation.car.description}</div>
           <div>Year: {reservation.car.year}</div>
-           <div> Frais supplémentaire: {reservation.f}</div>
-   </Tab>
-   <Tab eventKey="client" title="client" className='details-tab'>
-        
-        <div>nom:{reservation.user.lastname}</div>
-        <div>prenom:{reservation.user.firstname}</div>
-        <div></div>
-      </Tab>
-      
-    </Tabs>
+         <div>Client: {reservation.user.id}</div>
+          <div>Vendeur: {reservation.car.seller.id}</div>
+
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>

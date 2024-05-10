@@ -30,6 +30,9 @@ import AdminSellerReservation from '../components/profile/AdminSellerReservation
 import AdminDashboard from '../components/profile/AdminDashboard'
 import ProtectedRoutes from './ProtectedRoutes';
 import AllReservations from '../components/adminComponents/AllReservations';
+import ApartmentInvoice from '../components/invoice/ApartmentInvoice';
+import AllCars from '../components/adminComponents/AllCars';
+import AllApartments from '../components/adminComponents/AllApartments';
 const CreateRoutes = () => {
   return (
     <BrowserRouter>
@@ -41,7 +44,7 @@ const CreateRoutes = () => {
       <Route path="/apartment" element={<Apartment />} />
       <Route path="/apartment/:id" element={<ApartmentComponent />} />
       <Route path="/apartment/confirmation" element={<ApReservationConfirmation />} />
-      <Route path="/apartmentInvoice/:reservationId" element={<Invoice/>} />
+      <Route path="/apartmentInvoice/:reservationId" element={<ApartmentInvoice/>} />
 
       <Route path="/agadir-description" element={<AgadirDescription />} />
       <Route path="/car/:id" element={<CarComponent />} />
@@ -68,6 +71,8 @@ const CreateRoutes = () => {
         <Route path="admin/sellerDashboard" element={<AdminSellerDashboard />} />
         <Route path="admin/sellerReservation" element={<AdminSellerReservation />} />
         <Route path="adminDashboard" element={<AdminDashboard />} />
+        <Route path="allCars" element={<AllCars />} />
+        <Route path="allApartments" element={<AllApartments />} />
 
         <Route path="reservations" element={<SellerReservationList />} />
         <Route path="adminReservations" element={<AllReservations />} />

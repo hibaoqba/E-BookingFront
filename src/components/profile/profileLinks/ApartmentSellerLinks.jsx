@@ -16,7 +16,7 @@ const ApartmentSellerLinks = () => {
     return (
         <div>
             <Link className={`profile-link ${location.pathname === '/user/apartment/dashboard' ? 'selected-profile' : ''}`} to='/user/apartment/dashboard'>
-                <FontAwesomeIcon icon={faChartLine} />  apt Dashboard
+                <FontAwesomeIcon icon={faChartLine} />Dashboard
             </Link>
             <Link className={`profile-link ${location.pathname === '/user/apartment/reservations' ? 'selected-profile' : ''} `} to='/user/apartment/reservations'>
                 <IoPieChart/> apt rapport de réservations

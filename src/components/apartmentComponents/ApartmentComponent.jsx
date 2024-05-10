@@ -10,7 +10,7 @@ import { FaWifi } from 'react-icons/fa';
 import DoubleDateInput from '../DoubleDateInput';
 import Loading from '../common/Loading';
 import UseFetchUserInfo from '../UseFetchUserInfo';
-import { FaKitchenSet } from 'react-icons/fa6';
+import { FaKitchenSet, FaPerson,FaChildren } from 'react-icons/fa6';
 
 const ApartmentComponent = () => {
   const { id } = useParams();
@@ -135,6 +135,9 @@ const ApartmentComponent = () => {
               <li><SlSizeFullscreen className="additional-icon"/>{apartment.apartmentFeatures.square} m²</li>
               <li><FaBed className="additional-icon"/>{apartment.apartmentFeatures.noBed} lits</li>
               <li><FaBath className="additional-icon"/> {apartment.apartmentFeatures.noBathroom} salles de bain</li>
+              <li><FaPerson className="additional-icon"/> {apartment.apartmentFeatures.noAdults} Adultes</li>
+              <li><FaChildren className="additional-icon"/> {apartment.apartmentFeatures.noChildren} Enfants</li>
+
               {apartment.apartmentFeatures.wifiInternet && <li><FaWifi className="additional-icon"/>WIFI</li>}
               {apartment.apartmentFeatures.parking && <li><FaParking className="additional-icon"/>Parking</li>}
               {apartment.apartmentFeatures.pool && <li><FaSwimmer className="additional-icon"/>Piscine</li>}

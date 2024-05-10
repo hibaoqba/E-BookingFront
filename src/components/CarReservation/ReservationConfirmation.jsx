@@ -91,7 +91,6 @@ const ReservationConfirmation = () => {
       });
       console.log('Reservation created:', response.data);
   
-      // Navigate to invoice page
       navigate(`/carInvoice/${response.data.id}`);
     } catch (error) {
       if (error.name === 'ValidationError') {

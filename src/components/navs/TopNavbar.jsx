@@ -76,7 +76,7 @@ const TopNavbar = () => {
           <li><a href='#'><FontAwesomeIcon icon={faFacebook} /></a></li>
           <li><a href='#'><FontAwesomeIcon icon={faLinkedin} /></a></li>
           <li><a href='#'><FontAwesomeIcon icon={faGoogle} /></a></li>
-          <li><a href="mailto:contact@angbies.com">contact@angbies.com</a></li>
+          <li><a href="mailto:contact@angbies.com">contact@mail.com</a></li>
         </ul>
         
         <div className='right-section'>    

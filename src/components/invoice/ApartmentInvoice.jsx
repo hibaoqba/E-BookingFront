@@ -5,7 +5,8 @@ import '../../styles/invoice.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { FaFileInvoiceDollar } from "react-icons/fa";
-const Invoice = () => {
+
+const ApartmentInvoice = () => {
   const [pdfData, setPdfData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +15,7 @@ const Invoice = () => {
   useEffect(() => {
     const fetchPdfData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/invoice/${reservationId}`, {
+        const response = await axios.get(`http://localhost:8080/api/invoiceApartment/${reservationId}`, {
           responseType: 'arraybuffer', // Ensure response is treated as binary data
         });
         setPdfData(response.data); // Set the binary PDF data directly
@@ -26,19 +27,7 @@ const Invoice = () => {
     };
 
     fetchPdfData();
-  }, [reservationId]); // Dependency array to re-fetch data when reservationId changes
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (!pdfData) {
-    return <div>No PDF data available</div>;
-  }
+  }, [reservationId]); 
 
   const handleDownloadPdf = () => {
     const pdfBlob = new Blob([pdfData], { type: 'application/pdf' });
@@ -70,9 +59,10 @@ const Invoice = () => {
         <h2>Votre réservation a été effectuée</h2>
       </div>
       <div className='button-container'>
-        <button className='download-button' onClick={handleDownloadPdf}>Télécharger Votre Reçu <FaFileInvoiceDollar/></button>
+      <button className='download-button' onClick={handleDownloadPdf}>Télécharger Votre Reçu <FaFileInvoiceDollar/></button>
       </div>
     </div>
   );
 };
-export default Invoice;
+
+export default ApartmentInvoice;

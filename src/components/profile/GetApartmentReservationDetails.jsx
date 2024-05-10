@@ -56,13 +56,7 @@ const GetApartmentReservationDetails = ({ reservationId }) => {
           <Modal.Title>Reservation Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Tabs
-      defaultActiveKey="reservation"
-      id="uncontrolled-tab-example"
-      className="mb-3"
-    >
-      <Tab eventKey="reservation" title="Réservation" className='details-tab'>
-   
+       
       <div className='details-modal-image'><ApartmentImage apartmentId={reservation.apartment.id} left={10} right={10} /></div>
 
           <h2> {reservation.titre}</h2>
@@ -70,15 +64,11 @@ const GetApartmentReservationDetails = ({ reservationId }) => {
           
           <div>titre: {reservation.apartment.titre}</div>
           <div>Description: {reservation.apartment.description}</div>
-   </Tab>
-   <Tab eventKey="client" title="client" className='details-tab'>
-        
-        <div>nom:{reservation.user.lastname}</div>
-        <div>prenom:{reservation.user.firstname}</div>
-        <div></div>
-      </Tab>
+          <div> id Client: {reservation.user.id}</div>
+          <div>id Vendeur: {reservation.apartment.seller.id}</div>
+     
       
-    </Tabs>
+    
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>

@@ -87,12 +87,10 @@ const ApReservationConfirmation = () => {
         breakfasts:reservationData.breakfast,
         clearning:reservationData.cleaning,
         
-
-
     
       });
       console.log('Reservation created:', response.data);
-  
+      navigate(`/apartmentInvoice/${response.data.id}`);
     } catch (error) {
       if (error.name === 'ValidationError') {
         // Handle validation errors
