@@ -40,6 +40,7 @@ const ApReservationConfirmation = () => {
         console.error('Error fetching user info:', error);
       });
     }
+
   }, []);
 
   const updateUser = () => {
@@ -76,20 +77,22 @@ const ApReservationConfirmation = () => {
       // Validate user input
       await validationSchema.validate(userData, { abortEarly: false });
   
-      // Update user data
       await updateUser();
   
-      const response = await axios.post('http://localhost:8080/api/reservations', {
+      const response = await axios.post('http://localhost:8080/api/apt_reservations', {
         user: { id: userInfo.id },
         apartment: { id: apartment.id },
         startDate: reservationData.startDate,
         endDate: reservationData.endDate,
+        breakfasts:reservationData.breakfast,
+        clearning:reservationData.cleaning,
+        
+
+
     
       });
       console.log('Reservation created:', response.data);
   
-      // Navigate to invoice page
-      navigate(`/apartmentInvoice/${response.data.id}`);
     } catch (error) {
       if (error.name === 'ValidationError') {
         // Handle validation errors

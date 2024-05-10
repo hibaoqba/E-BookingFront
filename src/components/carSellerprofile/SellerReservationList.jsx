@@ -44,7 +44,6 @@ const SellerReservationList = () => {
 
   return (
     <div>
-      <div><h2>rapport de réservations</h2></div>
       <table className="reservations-table">
         <thead>
           <tr>

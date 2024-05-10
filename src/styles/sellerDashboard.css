@@ -25,38 +25,67 @@
     margin: 15px;
 }
 .client-count-up{
-    background-color: #7ec899;
+    color: rgb(98, 98, 98);
  
 }
-.revenue-count-up{
-    background-color: #f9c45b;
+.client-icon{
+    color: #7ec899;
+  
+ }
+
+.apartment-count-up{
+    color: rgb(98, 98, 98);
+    
+}
+.chart-apartment-icon{
+    color: #f9c45b;
     
 }
 .car-count-up{
-    background-color: #73c0de;
+    color: rgb(98, 98, 98);
    
 }
+.car-icon{
+    color: #73c0de;
+     
+  }
 
 .reservation-count-up{
-    background-color: #546fc6;
+    color: rgb(98, 98, 98);
+  
+   
+}
+.reservation-icon{
+    color: #546fc6;
   
    
 }
 
 .charts{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     margin-top: 60px;
+    
 }
 .pie-chart{
-    width: 400px;
+    width: auto;
     border-radius:10px ;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.chart-title{
+    margin-top: 10px;
+    text-align: center;
 }
 .chart{
     width: 700px;
     border-radius:10px ;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+   
 }
 .countup-container:hover {
     transform: scale(1.05);
@@ -81,9 +110,10 @@ span.text {
     display: flex;
 }
 
-.countup-icon>svg{
-    margin-top: 10px;
 
-    height: 30px;
-    width: 30px;
+
+.chart-icon{
+    margin-bottom: 10px;
+    height: 40px;
+    width: 40px;
 }

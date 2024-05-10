@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const ReverseGeocoding = ({ latitude, longitude }) => {
   const [address, setAddress] = useState('');
-  const croppedAddress = address.split(', ').slice(2, 5).join(', ');
   useEffect(() => {
     const fetchAddress = async () => {
       try {
@@ -32,7 +31,7 @@ const ReverseGeocoding = ({ latitude, longitude }) => {
   return (
     <div>
      
-      <p>{croppedAddress}</p>
+      <p>{address}</p>
     </div>
   );
 };

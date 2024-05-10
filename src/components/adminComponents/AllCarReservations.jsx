@@ -3,13 +3,12 @@ import axios from 'axios';
 import '../../styles/history.css';
 import '../../styles/sellerReservationList.css'
 import UseFetchUserInfo from '../UseFetchUserInfo';
-import GetApartmentReservationDetails from '../profile/GetApartmentReservationDetails'
-import GetApartmentInvoiceById from '../profile/GetApartmentInvoiceById'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { DeleteApartmentReservation } from '../../actions/DeleteApartmentReservation';
-const ApartmentReservationList = () => {
+import GetInvoiceById from '../profile/GetInvoiceById';
+import GetReservationDetails from '../profile/GetReservationDetails';
+import { DeleteReservation } from '../../actions/DeleteReservation';
+const AllCarReservations = () => {
   const userInfo = UseFetchUserInfo();
   const [reservations, setReservations] = useState([]);
   const [selectedReservationId, setSelectedReservationId] = useState(null);
@@ -18,7 +17,7 @@ const ApartmentReservationList = () => {
   const fetchReservations = async () => {
     try {
       if (userInfo && userInfo.id) {
-        const response = await axios.get(`http://localhost:8080/api/apt_reservations/seller/${userInfo.id}`);
+        const response = await axios.get(`http://localhost:8080/api/reservations`);
         setReservations(response.data);
       }
     } catch (error) {
@@ -27,14 +26,14 @@ const ApartmentReservationList = () => {
   };
 
   useEffect(() => {
-    fetchReservations(); 
+    fetchReservations(); // Call fetchReservations directly here
   }, [userInfo]);
 
 
 
   const handleUpdateStatus = async () => {
     try {
-      await axios.post(`http://localhost:8080/api/apt_reservations/status/${selectedReservationId}/${newStatus}`);
+      await axios.post(`http://localhost:8080/api/reservations/status/${selectedReservationId}/${newStatus}`);
       fetchReservations();
       setSelectedReservationId(null);
       setNewStatus('');
@@ -48,7 +47,6 @@ const ApartmentReservationList = () => {
       <table className="reservations-table">
         <thead>
           <tr>
-            <th>numero</th>
             <th>titre</th>
             <th>Date de réservation</th>
             <th>Date Début</th>
@@ -64,7 +62,6 @@ const ApartmentReservationList = () => {
         <tbody>
           {reservations.map(reservation => (
             <tr key={reservation.id}>
-              <td>{reservation.id}</td>
               <td>{reservation.titre}</td>
               <td>{reservation.cmndDate}</td>
               <td>{reservation.startDate}</td>
@@ -96,10 +93,10 @@ const ApartmentReservationList = () => {
               </td>
               <td>{reservation.totalPrice}</td>
               <td>
-                <GetApartmentInvoiceById reservationId={reservation.id} />
-                <GetApartmentReservationDetails reservationId={reservation.id} />
+                <GetInvoiceById reservationId={reservation.id} />
+                <GetReservationDetails reservationId={reservation.id} />
               </td>
-              <td><button className='btn btn-danger delete-reservation-button' onClick={() => DeleteApartmentReservation(reservation.id,fetchReservations)}><FontAwesomeIcon icon={faTrash}/></button></td>
+              <td><button className='btn btn-danger delete-reservation-button' onClick={() => DeleteReservation(reservation.id,fetchReservations)}><FontAwesomeIcon icon={faTrash}/></button></td>
             </tr>
           ))}
         </tbody>
@@ -108,4 +105,4 @@ const ApartmentReservationList = () => {
   )
 }
 
-export default ApartmentReservationList;
+export default AllCarReservations;

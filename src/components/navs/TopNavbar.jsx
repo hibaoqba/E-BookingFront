@@ -5,12 +5,12 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faLinkedin, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faPhone, faUser,faLock,faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import {faClock} from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Dropdown from 'react-bootstrap/Dropdown';
+
 import LoginModal from '../modals/LoginModal';
+import LanguageDropdown from '../common/LanguageDropdown';
+import UserDropdown from '../common/UserDropdown';
 const TopNavbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,20 +24,26 @@ const TopNavbar = () => {
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
-      setIsLoggedIn(true);
       axios.get('http://localhost:8080/api/users/currentUser', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
       })
       .then(response => {
+        setIsLoggedIn(true);
         setUserInfo(response.data);
       })
       .catch(error => {
         console.error('Error fetching user info:', error);
+        setIsLoggedIn(false);
+        setUserInfo(null);
       });
+    } else {
+      setIsLoggedIn(false);
+      setUserInfo(null);
     }
-  }, []); 
+  }, []);
+  
   
   const handleLoginSuccess = async () => {
     setIsLoggedIn(true);
@@ -61,7 +67,7 @@ const TopNavbar = () => {
     localStorage.removeItem('userInfo');
     setIsLoggedIn(false);
     setUserInfo(null);
-    navigate("/"); // Use navigate function to redirect to "/"
+    navigate("/"); 
   };
   return (
     <>
@@ -73,53 +79,13 @@ const TopNavbar = () => {
           <li><a href="mailto:contact@angbies.com">contact@angbies.com</a></li>
         </ul>
         
-        <div className='right-section'>
-          <Dropdown className='language-dropdown'>
-            <Dropdown.Toggle variant="transparent" id="dropdown-basic" className='toggle'>
-              <img src="/src/assets/fr.png" alt="France Flag" className='flag'/> 
-              Français
-            </Dropdown.Toggle>
-            <Dropdown.Menu className='language-menu'>
-              <Dropdown.Item href="#/anglais">
-                <img src="/src/assets/uk.png" alt="uk Flag" className='flag'/> 
-                Anglais
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+        <div className='right-section'>    
+          <LanguageDropdown/>
           <div className="divider"></div>
           <span className='icon-with-info'><FontAwesomeIcon icon={faPhone} /> 05 28 22 53 04 </span>
           <div className="divider"></div>
           {isLoggedIn ? (
-            <div className='icon-with-info'>
-              <Dropdown className='user-dropdown'>
-                <Dropdown.Toggle variant="transparent" id="dropdown-basic" className='user-toggle'>
-                <FontAwesomeIcon icon={faUser} /> {userInfo ? `Hello ${userInfo.firstname}` : 'Hello'}
-                </Dropdown.Toggle>
-                <Dropdown.Menu className='user-menu'>
-                <Dropdown.Item className='user-item' >
-                <FontAwesomeIcon className='user-icon' icon={faUser} />  <Link to='/user/profile' >
-                  Mon Profil
-                  </Link>
-                
-                  </Dropdown.Item>
-                  <Dropdown.Item className='user-item'>
-                  <Link to="/user/history">
-                  <FontAwesomeIcon className='user-icon' icon={faClock} />    Historique des réservations
-                  
-                  </Link></Dropdown.Item>
-                  <Dropdown.Item className='user-item' >
-                    <Link to="/user/password">
-                  <FontAwesomeIcon className='user-icon' icon={faLock} /> Changer mon Mot De Passe
-                  </Link>
-                  
-                  </Dropdown.Item>
-                  <Dropdown.Item  onClick={handleLogout} className='user-item'>
-                  <FontAwesomeIcon icon={faArrowRightFromBracket} className='user-icon logout-icon' />Déconnexion
-                  </Dropdown.Item>
-                 
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
+          <UserDropdown userInfo={userInfo} handleLogout={handleLogout}/>
           ) : (
             <a className='icon-with-info' href='#' onClick={handleShowModal}><FontAwesomeIcon icon={faUser} /> Connexion ou inscription</a>
           )}

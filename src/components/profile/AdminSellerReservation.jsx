@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import SellerDashborad from '../carSellerprofile/SellerDashborad';
 import SellerReservationList from '../carSellerprofile/SellerReservationList';
+import ApartmentReservationList from '../apartmentSellerProfile/ApartmentReservations';
 const AdminSellerReservation = () => {
     const [key, setKey] = useState('voitures'); // State to manage active tab
 
@@ -16,7 +17,7 @@ const AdminSellerReservation = () => {
             <SellerReservationList/>
           </Tab>
           <Tab eventKey="appartements" title="Appartements">
-            <h2>Appartements Content</h2>
+        <ApartmentReservationList/>
           </Tab>
         </Tabs>
       </div>

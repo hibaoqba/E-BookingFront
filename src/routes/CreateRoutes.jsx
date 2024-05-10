@@ -28,6 +28,8 @@ import ApReservationConfirmation from '../components/apartmentComponents/ApReser
 import AdminSellerDashboard from '../components/profile/AdminSellerDashboard';
 import AdminSellerReservation from '../components/profile/AdminSellerReservation';
 import AdminDashboard from '../components/profile/AdminDashboard'
+import ProtectedRoutes from './ProtectedRoutes';
+import AllReservations from '../components/adminComponents/AllReservations';
 const CreateRoutes = () => {
   return (
     <BrowserRouter>
@@ -46,7 +48,11 @@ const CreateRoutes = () => {
       <Route path="/car/confirmation" element={<ReservationConfirmation />} />
       <Route path="/carInvoice/:reservationId" element={<Invoice/>} />
 
-      <Route path="/user" element={<Profile />}>
+      <Route path="/user" element={
+      <ProtectedRoutes>
+      <Profile />
+      </ProtectedRoutes>
+      }>
         <Route path="profile" element={<Outlet />}>
           <Route index element={<ProfileRightSection />} />
         </Route>
@@ -64,6 +70,8 @@ const CreateRoutes = () => {
         <Route path="adminDashboard" element={<AdminDashboard />} />
 
         <Route path="reservations" element={<SellerReservationList />} />
+        <Route path="adminReservations" element={<AllReservations />} />
+
         <Route path="apartment/reservations" element={<ApartmentReservations />} />
         <Route path="apartment/dashboard" element={<ApartmentDashboard />} />
 

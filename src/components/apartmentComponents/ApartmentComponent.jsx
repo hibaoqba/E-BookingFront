@@ -22,10 +22,12 @@ const ApartmentComponent = () => {
 
 
   const today = new Date().toISOString().split('T')[0];
+  
   const [reservationData, setReservationData] = useState({
     startDate: '',
     endDate: '',
-  
+    breakfast: false,
+    cleaning: false
   });
   useEffect(() => {
     const fetchReservationDates = async () => {
@@ -80,7 +82,7 @@ const ApartmentComponent = () => {
   }
 
   if (!apartment) {
-    return <div>Car not found</div>;
+    return <div>ap not found</div>;
   }
 
   return (
