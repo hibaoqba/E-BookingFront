@@ -11,7 +11,7 @@ const UserDropdown = ({userInfo,handleLogout}) => {
         <div className='icon-with-info'>
               <Dropdown className='user-dropdown'>
                 <Dropdown.Toggle variant="transparent" id="dropdown-basic" className='user-toggle'>
-                <FontAwesomeIcon icon={faUser} /> {userInfo ? `Hello ${userInfo.firstname}` : 'Hello'}
+                <FontAwesomeIcon icon={faUser} /> {userInfo ? `Bonjour ${userInfo.firstname}` : 'Hello'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className='user-menu'>
                 <Dropdown.Item className='user-item' >

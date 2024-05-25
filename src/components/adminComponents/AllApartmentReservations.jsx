@@ -8,6 +8,7 @@ import GetApartmentInvoiceById from '../profile/GetApartmentInvoiceById';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DeleteApartmentReservation } from '../../actions/DeleteApartmentReservation';
+import '../../styles/requests.css'
 import SearchBar from '../common/SearchBar';
 
 const ApartmentReservationList = () => {

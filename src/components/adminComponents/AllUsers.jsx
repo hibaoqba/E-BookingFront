@@ -27,7 +27,7 @@ const AllUsers = () => {
 
   const handleUpdateRole = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/users/role/${selectedUser.id}`, { role: newRole });
+      await axios.put(`http://localhost:8080/api/users/role/${selectedUser.email}`, { role: newRole });
       // Fetch users again after role update
       const response = await axios.get('http://localhost:8080/api/users');
       setUsers(response.data);
@@ -82,7 +82,7 @@ const AllUsers = () => {
               <td>{user.email}</td>
               <td>{user.phoneNumber}</td>
               <td>
-                {selectedUser === user.email ? (
+                {selectedUser === user ? (
                   <div className="status-select-container">
                     <select
                       className="role-select"

@@ -16,10 +16,10 @@ const ApartmentSellerLinks = () => {
     return (
         <div>
             <Link className={`profile-link ${location.pathname === '/user/apartment/dashboard' ? 'selected-profile' : ''}`} to='/user/apartment/dashboard'>
-                <FontAwesomeIcon icon={faChartLine} />Dashboard
+                <FontAwesomeIcon icon={faChartLine} />Tableau de bord
             </Link>
             <Link className={`profile-link ${location.pathname === '/user/apartment/reservations' ? 'selected-profile' : ''} `} to='/user/apartment/reservations'>
-                <IoPieChart/> apt rapport de réservations
+                <IoPieChart/>Rapport de réservations
             </Link> 
             <div className={`profile-link ${apartmentsExpanded ? 'expanded' : ''}`} onClick={handleApartmentsToggle}>
                 <BsBuildings/> Appartements

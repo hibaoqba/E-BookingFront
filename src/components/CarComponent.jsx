@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Carousel } from 'react-bootstrap'; 
-import '../styles/carComponent.css'
+import { Carousel } from 'react-bootstrap';
+import '../styles/carComponent.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import { TbManualGearbox, TbGps } from "react-icons/tb";
 import { FaPeopleGroup, FaSnowflake } from "react-icons/fa6";
 import { BsSuitcaseLg, BsFuelPumpDiesel } from "react-icons/bs";
 import { PiEngineBold } from "react-icons/pi";
-import FAQs from './common/FAQs'
+import FAQs from './common/FAQs';
 import DoubleDateInput from './DoubleDateInput';
 import Loading from './common/Loading';
 import UseFetchUserInfo from './UseFetchUserInfo';
-import CarImages from './profile/CarImages'; // Import CarImages component
+import CarImages from './profile/CarImages';
+import LoginModal from './modals/LoginModal';
 
 const CarComponent = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
-  const userInfo = UseFetchUserInfo();
   const [disabledDates, setDisabledDates] = useState([]);
-  const today = new Date().toISOString().split('T')[0];
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
+  const [reservationAttempted, setReservationAttempted] = useState(false);
   const [reservationData, setReservationData] = useState({
     startDate: '',
     endDate: '',
@@ -44,6 +46,7 @@ const CarComponent = () => {
 
     fetchCar();
   }, [id]);
+
   useEffect(() => {
     const fetchReservationDates = async () => {
       try {
@@ -56,7 +59,6 @@ const CarComponent = () => {
 
     fetchReservationDates();
   }, [id]);
-
 
   const handleDateRangeSelect = (dateRange) => {
     setReservationData(prevData => ({
@@ -75,9 +77,42 @@ const CarComponent = () => {
   };
 
   const handleReservationSubmit = () => {
-    navigate(`/car/confirmation`, { state: { reservationData, car } });
+    if (!reservationData.startDate || !reservationData.endDate) {
+      setReservationAttempted(true); 
+      return; 
+    }
+  
+    if (userInfo) {
+      navigate(`/car/confirmation`, { state: { reservationData, car } });
+    } else {
+      setShowLoginModal(true);
+    }
   };
 
+  const  handleLoginSuccess = async ()  => {
+    
+    try {
+      setShowLoginModal(false);
+      const authToken = localStorage.getItem('authToken');
+      const response = await axios.get('http://localhost:8080/api/users/currentUser', {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      });
+      setUserInfo(response.data);
+      localStorage.setItem('authToken', authToken);
+      localStorage.setItem('userInfo', JSON.stringify(response.data));
+      const userInfoFromStorage = JSON.parse(localStorage.getItem('userInfo'));
+      setUserInfo(userInfoFromStorage);
+      navigate(`/car/confirmation`, { state: { reservationData, car } });
+      window.location.reload()
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+       
+  };
+  
+  
   if (loading) {
     return <Loading />;
   }
@@ -96,19 +131,19 @@ const CarComponent = () => {
           <hr />
           <div className='car-features'>
             <div className='details-feature'>
-              <div className='details-icon'><BsFuelPumpDiesel/></div>
+              <div className='details-icon'><BsFuelPumpDiesel /></div>
               <div className='features-text'>{car.carFeatures.fuelType}</div>
             </div>
             <div className='details-feature'>
-              <div className='details-icon'><TbManualGearbox/></div>
+              <div className='details-icon'><TbManualGearbox /></div>
               <div className='features-text'>{car.carFeatures.transmissionType}</div>
             </div>
             <div className='details-feature'>
-              <div className='details-icon'><FaPeopleGroup/></div>
+              <div className='details-icon'><FaPeopleGroup /></div>
               <div className='features-text'>{car.carFeatures.place} places</div>
             </div>
             <div className='details-feature'>
-              <div className='details-icon'><BsSuitcaseLg/></div>
+              <div className='details-icon'><BsSuitcaseLg /></div>
               <div className='features-text'>{car.carFeatures.suitCases} bagages</div>
             </div>
           </div>
@@ -136,31 +171,32 @@ const CarComponent = () => {
           <hr />
           <div className='additional-features'>
             <ul>
-              <li><BsFuelPumpDiesel className="additional-icon"/> {car.carFeatures.fuelType}</li>
-              <li><TbManualGearbox className="additional-icon"/> {car.carFeatures.transmissionType}</li>
-              <li><FaPeopleGroup className="additional-icon"/> {car.carFeatures.place} places</li>
-              {car.carFeatures.ac && <li><FaSnowflake className="additional-icon"/> AC</li>}
-              {car.carFeatures.gps && <li><TbGps className="additional-icon"/> GPS</li>}
-              <li><PiEngineBold className="additional-icon"/> {car.carFeatures.horsePower} ch</li>
+              <li><BsFuelPumpDiesel className="additional-icon" /> {car.carFeatures.fuelType}</li>
+              <li><TbManualGearbox className="additional-icon" /> {car.carFeatures.transmissionType}</li>
+              <li><FaPeopleGroup className="additional-icon" /> {car.carFeatures.place} places</li>
+              {car.carFeatures.ac && <li><FaSnowflake className="additional-icon" /> AC</li>}
+              {car.carFeatures.gps && <li><TbGps className="additional-icon" /> GPS</li>}
+              <li><PiEngineBold className="additional-icon" /> {car.carFeatures.horsePower} ch</li>
             </ul>
           </div>
           <hr />
           <h4>Localisation</h4>
           <MapContainer center={[car.latitude, car.longitude]} zoom={4} style={{ height: '400px', width: '100%' }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <Marker position={[car.latitude, car.longitude]}>
-        <Popup><div>{car.brand} {car.model}-{car.year}</div> 
-         <img
-                      className="car-carousel-image"
-                      src={`data:image/png;base64,${car.images[0]}`}
-                      
-                      style={{ width: '150px' }}
-                    /></Popup>
-      </Marker>
-    </MapContainer>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={[car.latitude, car.longitude]}>
+              <Popup>
+                <div>{car.brand} {car.model}-{car.year}</div>
+                <img
+                  className="car-carousel-image"
+                  src={`data:image/png;base64,${car.images[0]}`}
+                  style={{ width: '150px' }}
+                />
+              </Popup>
+            </Marker>
+          </MapContainer>
           <hr />
           <div className='FAQs'>
             <h4>FAQs</h4>
@@ -175,13 +211,19 @@ const CarComponent = () => {
             <hr />
             <div className='date-picker'>
               <div className='pick-text'>Veuillez choisir une date:</div>
-              <div className='date-picker-car'> 
-              <DoubleDateInput 
-            onDateRangeSelect={handleDateRangeSelect}  
-            disabledDates={disabledDates} 
-          />
-</div>
+              <div className='date-picker-car'>
+                <DoubleDateInput
+                  onDateRangeSelect={handleDateRangeSelect}
+                  disabledDates={disabledDates}
+                />
+              </div>
             </div>
+            {reservationAttempted && !reservationData.startDate && !reservationData.endDate && (
+  <div className="error-message">
+    Veuillez sélectionner une période de location.
+  </div>
+)}
+
             <hr />
             <div className='tarif-supp'>
               <h4>Tarifs supplémentaires</h4>
@@ -194,7 +236,7 @@ const CarComponent = () => {
                       onChange={handleCheckboxChange}
                       checked={reservationData.childSeat}
                     />
-                    <label htmlFor="childSeat">Siège enfant    100dh</label>
+                    <label htmlFor="childSeat">Siège enfant 100dh</label>
                   </li>
                   <li>
                     <input
@@ -203,7 +245,7 @@ const CarComponent = () => {
                       onChange={handleCheckboxChange}
                       checked={reservationData.gps}
                     />
-                    <label htmlFor="gps">GPS Satellite  100dh</label>
+                    <label htmlFor="gps">GPS Satellite 100dh</label>
                   </li>
                 </ul>
               </div>
@@ -213,6 +255,11 @@ const CarComponent = () => {
           <div className='why-us'></div>
         </div>
       </div>
+      <LoginModal
+        show={showLoginModal}
+        handleClose={() => setShowLoginModal(false)}
+        handleLoginSuccess={handleLoginSuccess}
+      />
     </div>
   );
 };

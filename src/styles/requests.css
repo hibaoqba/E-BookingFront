@@ -1,0 +1,43 @@
+.name-info{
+    display: flex;
+    justify-content: space-between;
+}
+.info-button{
+    color: rgb(0, 111, 202);
+    background-color: transparent;
+    width: auto;
+
+}
+.info-button:hover{
+    background-color: transparent;
+    color: rgb(35, 141, 228);
+
+}
+.info-button>svg{
+height: 22px;
+}
+
+.action-div{
+    display: flex;
+ justify-content: flex-start;
+}
+.confirmer-button {
+    width: auto;
+    background-color: rgb(0, 121, 173);
+    margin-right: 10px;
+
+}
+.confirmer-button:hover {
+    background-color: rgb(58, 149, 205);
+
+}
+
+.supprimer-button {
+    width: auto;
+    background-color: rgb(210, 49, 49);
+
+}
+.supprimer-button:hover {
+    background-color: rgb(222, 79, 79);
+
+}

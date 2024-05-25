@@ -9,6 +9,7 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import { FaWifi } from 'react-icons/fa';
 import DoubleDateInput from '../DoubleDateInput';
 import Loading from '../common/Loading';
+import LoginModal from '../modals/LoginModal';
 import UseFetchUserInfo from '../UseFetchUserInfo';
 import { FaKitchenSet, FaPerson,FaChildren } from 'react-icons/fa6';
 
@@ -17,12 +18,10 @@ const ApartmentComponent = () => {
   const navigate = useNavigate();
   const [apartment, setApartment] = useState(null);
   const [loading, setLoading] = useState(true);
-  const userInfo = UseFetchUserInfo();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
   const [disabledDates, setDisabledDates] = useState([]);
-
-
   const today = new Date().toISOString().split('T')[0];
-  
   const [reservationData, setReservationData] = useState({
     startDate: '',
     endDate: '',
@@ -74,9 +73,35 @@ const ApartmentComponent = () => {
   };
 
   const handleReservationSubmit = () => {
+    if (userInfo) {
     navigate(`/apartment/confirmation`, { state: { reservationData, apartment } });
+    }
+    else {
+      setShowLoginModal(true); 
+    }
+  
   };
-
+  const handleLoginSuccess = async () => {
+    try {
+      setShowLoginModal(false);
+      const authToken = localStorage.getItem('authToken');
+      const response = await axios.get('http://localhost:8080/api/users/currentUser', {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      });
+      setUserInfo(response.data);
+      localStorage.setItem('authToken', authToken);
+      localStorage.setItem('userInfo', JSON.stringify(response.data));
+      const userInfoFromStorage = JSON.parse(localStorage.getItem('userInfo'));
+      setUserInfo(userInfoFromStorage);
+      navigate(`/apartment/confirmation`, { state: { reservationData, car } });
+      window.location.reload()
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+       
+  };
   if (loading) {
     return <Loading />;
   }
@@ -183,6 +208,11 @@ const ApartmentComponent = () => {
           <div className='why-us'></div>
         </div>
       </div>
+      <LoginModal 
+        show={showLoginModal} 
+        handleClose={() => setShowLoginModal(false)} 
+        handleLoginSuccess={handleLoginSuccess} 
+      />
     </div>
   );
 };

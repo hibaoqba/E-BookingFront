@@ -3,6 +3,7 @@ import UseFetchUserInfo from '../UseFetchUserInfo';
 import '../../styles/reservationConfirmation.css'
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk,faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 import {faCheck  } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +12,8 @@ import '../../styles/profileRightSection.css';
 import { countries } from 'countries-list';
 import Select from 'react-select';
 import * as Yup from 'yup';
+import PaymentForm from '../common/PaymentForm';
+
 const ApReservationConfirmation = () => {
   const location = useLocation();
   const { reservationData, apartment } = location.state;
@@ -20,7 +23,9 @@ const ApReservationConfirmation = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [errorMessages, setErrorMessages] = useState([]);
   const [successMessage, setSuccessMessage] = useState('');
-
+  const [termsAccepted, setTermsAccepted] = useState(false); // State for terms acceptance
+  const [paymentMethod, setPaymentMethod] = useState(''); // State for selected payment method
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   useEffect(() => {
     // Fetch user data on component mount
     const authToken = localStorage.getItem('authToken');
@@ -74,36 +79,47 @@ const ApReservationConfirmation = () => {
 
   const handleConfirmReservation = async () => {
     try {
-      // Validate user input
+      if (!termsAccepted) {
+        setErrorMessages(['Veuillez accepter les conditions générales']);
+        return;
+      }
+  
       await validationSchema.validate(userData, { abortEarly: false });
   
       await updateUser();
   
-      const response = await axios.post('http://localhost:8080/api/apt_reservations', {
-        user: { id: userInfo.id },
-        apartment: { id: apartment.id },
-        startDate: reservationData.startDate,
-        endDate: reservationData.endDate,
-        breakfasts:reservationData.breakfast,
-        clearning:reservationData.cleaning,
-        
-    
-      });
-      console.log('Reservation created:', response.data);
-      navigate(`/apartmentInvoice/${response.data.id}`);
+      // Check if a payment method is selected
+      if (!paymentMethod) {
+        setErrorMessages(['Veuillez sélectionner une méthode de paiement']);
+        return;
+      }
+  
+      if (paymentMethod === 'online') {
+        navigate(`/apartment/payment`, { state: { reservationData, apartment } });
+      }else if (paymentMethod === 'onSite') {
+        // Handle on-site payment
+        const response = await axios.post('http://localhost:8080/api/apt_reservations', {
+          user: { id: userInfo.id },
+          apartment: { id: apartment.id },
+          startDate: reservationData.startDate,
+          endDate: reservationData.endDate,
+          breakfasts: reservationData.breakfast,
+          clearning: reservationData.cleaning,
+        });
+  
+        navigate(`/apartmentInvoice/${response.data.id}`);
+      }
     } catch (error) {
       if (error.name === 'ValidationError') {
-        // Handle validation errors
         const validationErrors = error.inner.map(err => err.message);
         setErrorMessages(validationErrors);
       } else {
-        // Handle other errors
         console.error('Error creating reservation:', error);
         navigate('/error');
       }
     }
   };
-  
+
   
   
 
@@ -179,12 +195,27 @@ const ApReservationConfirmation = () => {
     <span className="error-message">Vous devez avoir au moins 18ans</span>
   )}
 </div>
+<div className="payment-field">
 
+<div>
+  <input className='online-radio' type="radio" id="online" name="paymentMethod" value="online" onChange={() => setPaymentMethod('online')} />
+  <label htmlFor="online">Paiement en ligne</label>
+</div>
+<div>
+  <input  className='cash-radio' type="radio" id="onSite" name="paymentMethod" value="onSite" onChange={() => setPaymentMethod('onSite')} />
+  <label htmlFor="onSite">Paiement sur place</label>
+</div>
+</div>
           
           
     {successMessage && <div className="success-message"> <FontAwesomeIcon icon={faCheck}/> {successMessage}</div>}
 
-        
+    <div className="condition-field">
+                <input type="checkbox" id="termsCheckbox" checked={termsAccepted} onChange={() => setTermsAccepted(!termsAccepted)} />
+                <label htmlFor="termsCheckbox">
+                  J'accepte les <a href="/src/assets/conditions.pdf" target="_blank" rel="noopener noreferrer" style={{color:"blue",borderBottom:"1px solid blue"}}>conditions générales</a>
+                </label>
+              </div>
         </div>
         <div className="column">
           <div className="profile-field">
@@ -217,6 +248,7 @@ const ApReservationConfirmation = () => {
         </div>
         
       </div>
+     
       <button onClick={handleConfirmReservation} className='confirm-button' > <FontAwesomeIcon icon={faCalendarCheck} />Confirmer la réservation</button>
     </div>
       </div>
@@ -224,6 +256,8 @@ const ApReservationConfirmation = () => {
       <ApartmentReservationCard apartment={apartment} reservation={reservationData} />
 
       </div>
+     
+  
     </div>
   );
 };

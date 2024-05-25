@@ -19,6 +19,7 @@ import Profile from '../components/profile/Profile';
 import ReservationConfirmation from '../components/CarReservation/ReservationConfirmation';
 import Invoice from '../components/invoice/Invoice';
 import Apartment from '../pages/Apartment';
+import Requests from '../components/adminComponents/Requests'
 import SellerApartments from '../components/apartmentSellerProfile/SellerApartments';
 import SellerAddApartment from '../components/apartmentSellerProfile/SellerAddApartment';
 import ApartmentComponent from '../components/apartmentComponents/ApartmentComponent';
@@ -34,6 +35,8 @@ import ApartmentInvoice from '../components/invoice/ApartmentInvoice';
 import AllCars from '../components/adminComponents/AllCars';
 import AllApartments from '../components/adminComponents/AllApartments';
 import AllUsers from '../components/adminComponents/AllUsers';
+import PayCarReservation from '../components/CarReservation/PayCarReservation';
+import PayApartmentReservation from '../components/apartmentComponents/PayApartmentReservation';
 const CreateRoutes = () => {
   return (
     <BrowserRouter>
@@ -46,10 +49,12 @@ const CreateRoutes = () => {
       <Route path="/apartment/:id" element={<ApartmentComponent />} />
       <Route path="/apartment/confirmation" element={<ApReservationConfirmation />} />
       <Route path="/apartmentInvoice/:reservationId" element={<ApartmentInvoice/>} />
-
+      <Route path="/apartment/payment" element={<PayApartmentReservation />} />
       <Route path="/agadir-description" element={<AgadirDescription />} />
       <Route path="/car/:id" element={<CarComponent />} />
       <Route path="/car/confirmation" element={<ReservationConfirmation />} />
+      <Route path="/car/payment" element={<PayCarReservation />} />
+
       <Route path="/carInvoice/:reservationId" element={<Invoice/>} />
 
       <Route path="/user" element={
@@ -75,6 +80,7 @@ const CreateRoutes = () => {
         <Route path="adminDashboard" element={<AdminDashboard />} />
         <Route path="allCars" element={<AllCars />} />
         <Route path="allApartments" element={<AllApartments />} />
+        <Route path="requests" element={<Requests />} />
 
         <Route path="reservations" element={<SellerReservationList />} />
         <Route path="adminReservations" element={<AllReservations />} />

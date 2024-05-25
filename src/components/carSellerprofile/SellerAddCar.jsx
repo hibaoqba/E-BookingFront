@@ -88,9 +88,9 @@ const SellerAddCar = () => {
     <div className="form-container">
     <FormWizard onComplete={handleSubmit}>
       <FormWizard.TabContent title="informations" icon={<FontAwesomeIcon icon={faCar}/>}>
-        <h2>Add Car</h2>
+        <h2>Ajouter une voiture </h2>
         <div className="form-field">
-          <label>Brand:</label>
+          <label>Marque:</label>
           <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} />
         </div>
         <div className="form-field">
@@ -102,18 +102,18 @@ const SellerAddCar = () => {
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
         <div className="form-field">
-          <label>Year:</label>
+          <label>Année:</label>
           <input type="number" value={year} onChange={(e) => setYear(e.target.value)} />
         </div>
         <div className="form-field">
-          <label>Price:</label>
+          <label>Prix:</label>
           <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
         </div>
       </FormWizard.TabContent>
   
       <FormWizard.TabContent title="Caractéristiques" icon={<FontAwesomeIcon icon={faGear}/>}>
         <div className="form-field">
-          <label>Fuel Type:</label>
+          <label>Carburant:</label>
           <select value={fuelType} onChange={(e) => setFuelType(e.target.value)}>
             <option value="">Select Fuel Type</option>
             <option value="GASOLINE">Essence</option>
@@ -123,24 +123,24 @@ const SellerAddCar = () => {
           </select>
         </div>
         <div className="form-field">
-          <label>Transmission Type:</label>
+          <label>Transmission:</label>
           <select value={transmissionType} onChange={(e) => setTransmissionType(e.target.value)}>
             <option value="">Select Transmission Type</option>
-            <option value="AUTOMATIC">Automatic</option>
+            <option value="AUTOMATIC">Automatique</option>
             <option value="MANUAL">Manuelle</option>
             <option value="SEMIAUTOMATIC">CVT</option>
           </select>
         </div>
         <div className="form-field">
-          <label>Horse Power:</label>
+          <label>Puissance:</label>
           <input type="number" value={horsePower} onChange={(e) => setHorsePower(e.target.value)} />
         </div>
         <div className="form-field">
-          <label>Place:</label>
+          <label>Places:</label>
           <input type="number" value={place} onChange={(e) => setPlace(e.target.value)} />
         </div>
         <div className="form-field">
-          <label>Suit Cases:</label>
+          <label>Bagages:</label>
           <input type="number" value={suitCases} onChange={(e) => setSuitCases(e.target.value)} />
         </div>
         <div className='form-check'>
@@ -148,7 +148,7 @@ const SellerAddCar = () => {
           <input type="checkbox" checked={gps} onChange={(e) => setGPS(e.target.checked)} />
         </div>
         <div className='form-check'>
-          <label>AC:</label>
+          <label>Clim:</label>
           <input type="checkbox" checked={ac} onChange={(e) => setAC(e.target.checked)} />
         </div>
       </FormWizard.TabContent>

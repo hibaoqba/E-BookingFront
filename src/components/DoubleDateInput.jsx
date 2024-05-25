@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-
+import '../styles/doubleDateInput.css'
 const DoubleDateInput = ({ onDateRangeSelect, disabledDates }) => {
   const today = new Date();
   const isDayReserved = (date) => {
@@ -20,7 +20,7 @@ const DoubleDateInput = ({ onDateRangeSelect, disabledDates }) => {
   };
   const [dateRange, setDateRange] = useState(findNearestUnreservedDay());
   const [formattedDisabledDates, setFormattedDisabledDates] = useState([]);
-
+  const [disabledMessage, setDisabledMessage] = useState('');
   useEffect(() => {
     const formattedDates = disabledDates.map(({ startDate, endDate }) => ({
       startDate: new Date(startDate),
@@ -48,7 +48,7 @@ const DoubleDateInput = ({ onDateRangeSelect, disabledDates }) => {
     
       const deYear = de.getFullYear();
       const deMonth = de.getMonth();
-      const deDay = de.getDate();
+      const deDay = de.getDate()+1;
     
       return (
         (startYear >= dsYear && startYear <= deYear && startMonth >= dsMonth && startMonth <= deMonth && startDay >= dsDay && startDay <= deDay) ||
@@ -58,6 +58,12 @@ const DoubleDateInput = ({ onDateRangeSelect, disabledDates }) => {
         (startYear >= dsYear && endYear <= deYear && startMonth >= dsMonth && endMonth <= deMonth && startDay >= dsDay && endDay <= deDay)
       );
     });
+    if (isOverlap) {
+      setDisabledMessage('Cette date est déjà réservée.');
+    } else {
+      setDisabledMessage('');
+      onDateRangeSelect(ranges.selection);
+    }
   
     if (!isOverlap) {
       setDateRange([ranges.selection]);
@@ -88,6 +94,7 @@ const DoubleDateInput = ({ onDateRangeSelect, disabledDates }) => {
   
 
   return (
+    <div>
     <DateRange
       editableDateInputs={true}
       onChange={handleSelect}
@@ -98,6 +105,8 @@ const DoubleDateInput = ({ onDateRangeSelect, disabledDates }) => {
       renderDay={renderCell}
       
     />
+    {disabledMessage}
+    </div>
   );
 };
 

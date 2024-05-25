@@ -11,9 +11,9 @@ const Hero = () => {
         <div className='hero'>
             <div className='hero-content'>
                 <div className='hero-text'>
-                    <h1>Votre Aventure Commence Ici : Réservations Instantanées Simplifiées</h1>
+                    <h1>Réservations Instantanées Simplifiées</h1>
                     <br />
-                    <h4>Trouvez d'excellents hôtels, circuits, voitures et activités au Maroc.</h4>
+                    <h4>Trouvez d'excellents Appartement et Voitures</h4>
                 </div>
                 <TabComponent/>
             </div>

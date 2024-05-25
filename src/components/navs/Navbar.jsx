@@ -26,9 +26,15 @@ const Navbar = () => {
   return (
     <nav className={`middle-navbar ${isScrolled ? 'fixed-navbar' : ''} ${location.pathname !== '/' ? 'dark-middle-nav' : ''}`}>
       <ul className={`right ${isScrolled ? 'grey-links' : ''}`}>
-        <li><Link to="/">Accueil</Link></li>
-        <li><Link to='/car'>Voiture</Link></li>
-        <li><Link to='/apartment'>Appartement</Link></li>
+      <li >
+        <Link className={`${location.pathname === '/' ? 'selected-link' : 'normal-link'}`} to="/" >Accueil</Link>
+      </li>
+      <li >
+        <Link  className={`${location.pathname === '/car' ? 'selected-link' : 'normal-link'}`} to="/car">Voiture</Link>
+      </li>
+      <li>
+        <Link  className={`${location.pathname === '/apartment' ? 'selected-link' : 'normal-link'}`} to="/apartment">Appartement</Link>
+      </li>
       </ul>
     </nav>
   );

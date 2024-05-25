@@ -1,8 +1,10 @@
 .confirmation-container{
     display: flex;
-    flex-wrap: wrap;
+
     justify-content: center;
     margin-top: 200px;
+   
+
 }
 .confirmation-left-section{
 background-color:#ffff;
@@ -30,4 +32,40 @@ background-color:#ffff;
 .confirmation-right-section{
     margin-bottom: 50px;
     margin-left: 20px;
+}
+.payment-modal {
+   
+    
+    margin-top: 100px;
+  
+    
+
+  
+ 
+  }
+  
+.payment-modal h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.payment-modal .payment-form {
+  /* Add your styles for the payment form here */
+}
+
+.payment-modal .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.payment-modal .close-button:hover {
+  color: #000;
+}
+.online-radio .cash-radio{
+    background-color: transparent;
+    width: 10px;
 }

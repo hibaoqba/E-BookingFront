@@ -154,7 +154,7 @@ const SellerAddApartment = () => {
 
                 </FormWizard.TabContent>
 
-                <FormWizard.TabContent title="Features" icon={<FontAwesomeIcon icon={faBed} />} isValid={validateTab1()} validationError={() => setErrorMessage1('Veuillez remplir tous les champs')}>
+                <FormWizard.TabContent title="Caractéristiques" icon={<FontAwesomeIcon icon={faBed} />} isValid={validateTab1()} validationError={() => setErrorMessage1('Veuillez remplir tous les champs')}>
                 <div className="form-field">
                         <label>Lits:</label>
                         <input type="number" value={noBed} onChange={(e) => setNoBed(e.target.value)} />
@@ -199,7 +199,7 @@ const SellerAddApartment = () => {
 
                 </FormWizard.TabContent>
 
-                <FormWizard.TabContent title="Location" icon={<FontAwesomeIcon icon={faMapMarkerAlt} />} isValid={validateTab2()} validationError={() => setErrorMessage2('Veuillez remplir tous les champs')}>
+                <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faMapMarkerAlt} />} isValid={validateTab2()} validationError={() => setErrorMessage2('Veuillez remplir tous les champs')}>
                 <MapPicker 
                     defaultPosition={[0,0]}
                     onLocationChange={handleLocationChange} 

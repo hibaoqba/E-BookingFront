@@ -1,0 +1,5 @@
+.rdrDayDisabled {
+    color: red; /* Sets the text color of disabled cells to red */
+    background-color: #f2f2f2; /* Sets the background color of disabled cells to light gray */
+  }
+  

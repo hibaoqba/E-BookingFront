@@ -3,7 +3,7 @@ import ProfileHeader from './ProfileHeader';
 import '../../styles/profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
-import { faUser, faLock, faArrowRightFromBracket, faCar,faPlus,faCarSide,faChartLine ,faChevronDown,faChevronUp, faUserGroup, faUserTie, faBuilding, faGaugeHigh, faList, faNewspaper, faFile} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faArrowRightFromBracket, faCar,faPlus,faCarSide,faChartLine ,faChevronDown,faChevronUp, faUserGroup, faUserTie, faBuilding, faGaugeHigh, faList, faNewspaper, faFile, faBell} from '@fortawesome/free-solid-svg-icons';
 import { faClock, faHeart, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { Outlet } from 'react-router-dom';
 import UseFetchUserInfo from '../UseFetchUserInfo';
@@ -62,7 +62,7 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
               <>
               
             <Link className={`profile-link ${location.pathname === '/user/dashboard' ? 'selected-profile' : ''}`} to='/user/dashboard'>
-                    <FontAwesomeIcon icon={faChartLine} />Dashboard
+                    <FontAwesomeIcon icon={faChartLine} />Tableau de bord
                   </Link>
                   <Link className={`profile-link ${location.pathname === '/user/reservations' ? 'selected-profile' : ''} `} to='/user/reservations'>
                  <IoPieChart/>rapport de réservations
@@ -92,7 +92,7 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
                   
               <>
                 <Link className={`profile-link ${location.pathname === '/user/admin/sellerDashboard' ? 'selected-profile' : ''}`} to='/user/admin/sellerDashboard'>
-                    <FontAwesomeIcon icon={faChartLine} />Dashboard
+                    <FontAwesomeIcon icon={faChartLine} />Tableau de bord
                   </Link>
                   <Link className={`profile-link ${location.pathname === '/user/admin/sellerReservation' ? 'selected-profile' : ''} `} to='/user/admin/sellerReservation'>
                  <IoPieChart/>rapport de réservations
@@ -133,7 +133,7 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
                         <hr className="hr-text gradient" data-content="Espace Admin"/>  
 
             <Link className={`profile-link ${location.pathname === '/user/adminDashboard' ? 'selected-profile' : ''}`} to='/user/adminDashboard'>
-                    <FontAwesomeIcon icon={faGaugeHigh} />admin   Dashboard
+                    <FontAwesomeIcon icon={faGaugeHigh} />Tableau de bord Admin
                   </Link>
                   <Link className={`profile-link ${location.pathname === '/user/adminReservations' ? 'selected-profile' : ''} `} to='/user/adminReservations'>
                   <FontAwesomeIcon icon={faFile} /> toutes les réservations
@@ -146,6 +146,9 @@ const isApartmentSeller = userInfo && userInfo.role === "APARTMENTSELLER";
                   </Link>
                   <Link className={`profile-link ${location.pathname === '/user/allUsers' ? 'selected-profile' : ''} `} to='/user/allUsers'>
                   <FontAwesomeIcon icon={faUserGroup} /> Utilisateurs
+                  </Link>
+                  <Link className={`profile-link ${location.pathname === '/user/requests' ? 'selected-profile' : ''} `} to='/user/requests'>
+                  <FontAwesomeIcon icon={faBell} /> Demandes
                   </Link>
                   </>
                 

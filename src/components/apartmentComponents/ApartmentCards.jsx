@@ -141,7 +141,7 @@ const ApartmentCards = () => {
           {sortedApartments.map(apartment => (
               <div key={apartment.id} className="apartment-link">
                 <div className="apartment-card" onClick={() => handleApartmentClick(apartment.id)}>
-                 <div><ApartmentImage apartmentId={apartment.id} left={10} right={10} /> </div>
+                 <div><ApartmentImage apartmentId={apartment.id} left={0} right={0} /> </div>
                   <div className="apartment-card-details">
                     <h2 className="apartment-card-title">{apartment.titre} </h2>
                     <div className="apartment-price"><LuBadgeDollarSign className='dollar'/> {apartment.price}</div>
