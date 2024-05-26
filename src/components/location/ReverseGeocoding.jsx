@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const ReverseGeocoding = ({ latitude, longitude }) => {
+const ReverseGeocoding = ({ latitude, longitude, onAddressFetched }) => {
   const [address, setAddress] = useState('');
+
   useEffect(() => {
     const fetchAddress = async () => {
       try {
@@ -14,9 +15,10 @@ const ReverseGeocoding = ({ latitude, longitude }) => {
           },
         });
 
-        // Extract address components from the response
         if (response.data) {
-          setAddress(response.data.display_name);
+          const fetchedAddress = response.data.display_name;
+          setAddress(fetchedAddress);
+          onAddressFetched(fetchedAddress); // Pass the address back to the parent component
         } else {
           throw new Error('No results found');
         }
@@ -25,15 +27,12 @@ const ReverseGeocoding = ({ latitude, longitude }) => {
       }
     };
 
-    fetchAddress();
-  }, [latitude, longitude]);
+    if (latitude && longitude) {
+      fetchAddress();
+    }
+  }, [latitude, longitude, onAddressFetched]);
 
-  return (
-    <div>
-     
-      <p>{address}</p>
-    </div>
-  );
+  return <p>{address}</p>;
 };
 
 export default ReverseGeocoding;

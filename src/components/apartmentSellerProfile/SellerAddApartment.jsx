@@ -7,6 +7,7 @@ import 'react-form-wizard-component/dist/style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faImage, faMapMarkerAlt, faBed } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/sellerAddApartment.css';
+import ReverseGeocoding from '../location/ReverseGeocoding';
 
 const SellerAddApartment = () => {
     const [titre, setTitre] = useState('');
@@ -34,6 +35,7 @@ const SellerAddApartment = () => {
     const [errorMessage2, setErrorMessage2] = useState('');
     const [errorMessage3, setErrorMessage3] = useState('');
     const [errorMessage4, setErrorMessage4] = useState('');
+    const [address, setAddress] = useState(''); // New state for address
 
     const userInfo = UseFetchUserInfo();
 
@@ -83,7 +85,9 @@ const SellerAddApartment = () => {
                 price,
                 latitude,
                 longitude,
+                address,
                 images,
+                address,  
                 apartmentFeatures: {
                     noBed,
                     noBathroom,
@@ -131,7 +135,7 @@ const SellerAddApartment = () => {
         <div className="form-container">
             <FormWizard onComplete={handleSubmit} >
                 <FormWizard.TabContent title="Informations" icon={<FontAwesomeIcon icon={faHome} />}>
-                    <h2>Add Apartment</h2>
+                    <h2>Ajouter un appartement</h2>
                     <div className="form-field">
                         <label>Titre:</label>
                         <input type="text" value={titre} onChange={(e) => setTitre(e.target.value)} />
@@ -204,6 +208,9 @@ const SellerAddApartment = () => {
                     defaultPosition={[0,0]}
                     onLocationChange={handleLocationChange} 
                 />
+                  <ReverseGeocoding latitude={latitude} longitude={longitude} onAddressFetched={setAddress} />
+          <div className="form-field">
+          </div>
                     {errorMessage3 && <p className='error-message'>{errorMessage3}</p>}
 
                 </FormWizard.TabContent>

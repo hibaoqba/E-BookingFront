@@ -7,7 +7,7 @@ import '../../styles/sellerAddApartment.css';
 import FormWizard from 'react-form-wizard-component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faImage, faMapMarkerAlt, faBed } from '@fortawesome/free-solid-svg-icons';
-
+import ReverseGeocoding from '../location/ReverseGeocoding';
 const ApartmentUpdateModal = ({ apartment, onClose }) => {
     const [titre, setTitre] = useState(apartment.titre);
     const [description, setDescription] = useState(apartment.description);
@@ -32,6 +32,7 @@ const ApartmentUpdateModal = ({ apartment, onClose }) => {
     const [errorMessage3, setErrorMessage3] = useState('');
     const [errorMessage4, setErrorMessage4] = useState('');
     const [message, setMessage] = useState('');
+    const [address, setAddress] = useState(''); // New state for address
 
   const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
@@ -80,7 +81,7 @@ const ApartmentUpdateModal = ({ apartment, onClose }) => {
         price,
         latitude,
         longitude,
-        
+        address,
         apartmentFeatures: {
             noBed,
             noBathroom,
@@ -195,6 +196,8 @@ const validateTab4 = () => {
                     defaultPosition={[latitude,longitude]}
                     onLocationChange={handleLocationChange} 
                 />
+                <ReverseGeocoding latitude={latitude} longitude={longitude} onAddressFetched={setAddress} />
+          
                     {errorMessage3 && <p className='error-message'>{errorMessage3}</p>}
 
                 </FormWizard.TabContent>

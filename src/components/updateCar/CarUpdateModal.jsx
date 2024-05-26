@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
+import ReverseGeocoding from '../location/ReverseGeocoding';
 import MapPicker from '../common/MapPicker';
 import '../../styles/sellerAddCar.css';
 import FormWizard from 'react-form-wizard-component';
@@ -18,6 +19,7 @@ const CarUpdateModal = ({ car, onClose }) => {
   const [price, setPrice] = useState(car.price);
   const [fuelType, setFuelType] = useState(car.carFeatures.fuelType);
   const [transmissionType, setTransmissionType] = useState(car.carFeatures.transmissionType);
+  const [address, setAddress] = useState(''); // New state for address
   const [horsePower, setHorsePower] = useState(car.carFeatures.horsePower);
   const [place, setPlace] = useState(car.carFeatures.place);
   const [suitCases, setSuitCases] = useState(car.carFeatures.suitCases);
@@ -64,6 +66,7 @@ const CarUpdateModal = ({ car, onClose }) => {
         latitude,
         longitude,
         price,
+        address, 
         carFeatures: {
           fuelType,
           transmissionType,
@@ -163,7 +166,13 @@ const CarUpdateModal = ({ car, onClose }) => {
            
 
             <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faLocation} />}>
-              <MapPicker onLocationChange={handleLocationChange} defaultPosition={[latitude,longitude]} />
+              <MapPicker onLocationChange={handleLocationChange} defaultPosition={[latitude,longitude]} onAddressFetched={setAddress} />
+              <ReverseGeocoding latitude={latitude} longitude={longitude} onAddressFetched={setAddress} />
+
+              <div className="form-field">
+            <label>Adresse:</label>
+            <input type="text" value={address} readOnly /> 
+          </div>
             </FormWizard.TabContent>
             <FormWizard.TabContent title="images" icon={<FontAwesomeIcon icon={faImage} />}>
               <div className="form-field">
