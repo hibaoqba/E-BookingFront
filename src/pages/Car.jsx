@@ -209,7 +209,7 @@ const Car = () => {
                                         </div>
                                         <div className="car-card-details">
                                             <h2 className="car-card-title">{car.brand} - {car.model}</h2>
-                                            <p className="car-card-text">Year: {car.year}</p>
+                                            <p className="car-card-text">Année: {car.year}</p>
                                             <div className="car-price"><LuBadgeDollarSign className='dollar'/> {car.price}</div>
                                             <hr />
                                             <div className="features-container">
