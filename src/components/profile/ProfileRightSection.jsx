@@ -101,7 +101,7 @@ const ProfileRightSection = () => {
         <p>Paramètres</p>
       </div>
       <hr className='profile-divider1' />
-      <h2 className='header2'>Information personnelles </h2>
+      <h2 className='header2'>Informations personnelles </h2>
 
      
 
