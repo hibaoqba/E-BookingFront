@@ -213,7 +213,7 @@ const ApReservationConfirmation = () => {
     <div className="condition-field">
                 <input type="checkbox" id="termsCheckbox" checked={termsAccepted} onChange={() => setTermsAccepted(!termsAccepted)} />
                 <label htmlFor="termsCheckbox">
-                  J'accepte les <a href="/src/assets/conditions.pdf" target="_blank" rel="noopener noreferrer" style={{color:"blue",borderBottom:"1px solid blue"}}>conditions générales</a>
+                  J'accepte les <a href="/src/assets/conditionsApp.pdf" target="_blank" rel="noopener noreferrer" style={{color:"blue",borderBottom:"1px solid blue"}}>conditions générales</a>
                 </label>
               </div>
         </div>

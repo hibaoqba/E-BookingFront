@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 const CountUpAnimation = ({ iconComponent, initialValue, targetValue, text , className}) => {
     const [count, setCount] = useState(initialValue);
-    const duration = 1000;
+    const duration = 0;
 
     useEffect(() => {
         let startValue = initialValue;

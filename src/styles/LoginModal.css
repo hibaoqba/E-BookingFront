@@ -77,4 +77,6 @@
   .error{
     color:red;
   }
-  
+  .recovery-modal{
+    height: 700px;
+  }

@@ -11,6 +11,7 @@ const SellerDashborad = () => {
  
   const [carNumber,setCarNumber]=useState('');
   const [reservationNumber,setReservationNumber]=useState('');
+  const [earning,setEarning]=useState(0);
 
   const [userInfo,setUserInfo]=useState('');
   useEffect(() => {
@@ -23,12 +24,31 @@ const SellerDashborad = () => {
       })
       .then(response => {
         setUserInfo(response.data);
+  
       })
       .catch(error => {
         console.error('Error fetching user info:', error);
       });
     }
   }, []);
+
+
+  useEffect(() => {
+    const fetchEarning = async () => {
+      try {
+        if (userInfo && userInfo.id) {
+          const response = await axios.get(`http://localhost:8080/api/payments/user/${userInfo.id}/totalEarningAmount`);
+          setEarning(parseInt(response.data));
+        }
+      } catch (error) {
+        console.error('Error fetching cars:', error);
+      }
+    };
+
+    fetchEarning();
+  }, [userInfo]);
+
+
 
   useEffect(() => {
     const fetchCarNumber = async () => {
@@ -65,18 +85,13 @@ const SellerDashborad = () => {
     <div>
      
       <div className="countup-elements">
-          <Link> <CountUpAnimation
-                iconComponent={<FaUser className='client-icon' />}
-                initialValue={0}
-                className='client-count-up countup-container' 
-                targetValue={100}
-                text="Clients"
-            /></Link>
-       <Link className='count-up-link' to="/user/reservations">    <CountUpAnimation
+          
+       <Link className='count-up-link' to="/user/reservations">   
+        <CountUpAnimation
              className='revenue-count-up countup-container'    
              iconComponent={<FaDollarSign className='dollar-icon' />}
                 initialValue={0}
-                targetValue={200}
+                targetValue={earning}
                 text="revenus"
             /></Link> 
             <Link className='count-up-link' to="/user/cars">     <CountUpAnimation

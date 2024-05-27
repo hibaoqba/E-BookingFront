@@ -37,6 +37,7 @@ import AllApartments from '../components/adminComponents/AllApartments';
 import AllUsers from '../components/adminComponents/AllUsers';
 import PayCarReservation from '../components/CarReservation/PayCarReservation';
 import PayApartmentReservation from '../components/apartmentComponents/PayApartmentReservation';
+import ResetPassword from '../components/auth/ResetPassword';
 const CreateRoutes = () => {
   return (
     <BrowserRouter>
@@ -45,6 +46,8 @@ const CreateRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/car" element={<Car />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+
       <Route path="/apartment" element={<Apartment />} />
       <Route path="/apartment/:id" element={<ApartmentComponent />} />
       <Route path="/apartment/confirmation" element={<ApReservationConfirmation />} />

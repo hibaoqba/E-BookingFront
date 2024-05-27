@@ -109,11 +109,16 @@ span.text {
 .countup-elements{
     display: flex;
 }
-
+.revenue-count-up{
+    color: black;
+}
 
 
 .chart-icon{
     margin-bottom: 10px;
     height: 40px;
     width: 40px;
+}
+.dollar-icon{
+    color:black
 }

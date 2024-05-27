@@ -34,7 +34,7 @@ const SignUpModal = ({ show, handleClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isChecked) {
-      alert('Please accept the terms and conditions.');
+      alert('Accepter les termes et conditions');
       return;
     }
     const success = await signUp(formData);
@@ -49,7 +49,7 @@ const SignUpModal = ({ show, handleClose }) => {
     <>
       <Modal show={show} onHide={handleClose} centered className="signup-modal">
         <Modal.Header closeButton>
-          <Modal.Title>Sign Up</Modal.Title>
+          <Modal.Title>Créer un compte</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit}>
@@ -63,9 +63,9 @@ const SignUpModal = ({ show, handleClose }) => {
               <label htmlFor="termsCheckbox">J'ai lu et j'accepte les </label>
               <a href="#">conditions et la politique de confidentialité</a>
             </div>
-            <Button variant="primary" type="submit">Sign Up</Button>
+            <Button variant="primary" type="submit">créer un comtpe</Button>
             <label htmlFor="termsCheckbox">vous avez deja un compte? </label>
-            <a onClick={handleClose}> log in</a>
+            <a onClick={handleClose} style={{color:"blue"}}>connectez-vous </a>
           </form>
         </Modal.Body>
       </Modal>

@@ -11,6 +11,7 @@ const ApartmentDashborad = () => {
  
   const [carNumber,setCarNumber]=useState('');
   const [reservationNumber,setReservationNumber]=useState('');
+  const [earning,setEarning]=useState(0);
 
   const [userInfo,setUserInfo]=useState('');
   useEffect(() => {
@@ -29,6 +30,20 @@ const ApartmentDashborad = () => {
       });
     }
   }, []);
+  useEffect(() => {
+    const fetchEarning = async () => {
+      try {
+        if (userInfo && userInfo.id) {
+          const response = await axios.get(`http://localhost:8080/api/payments/user/${userInfo.id}/totalEarningAmount`);
+          setEarning(parseInt(response.data));
+        }
+      } catch (error) {
+        console.error('Error fetching cars:', error);
+      }
+    };
+
+    fetchEarning();
+  }, [userInfo]);
 
   useEffect(() => {
     const fetchCarNumber = async () => {
@@ -69,7 +84,7 @@ const ApartmentDashborad = () => {
                 iconComponent={<FaDollarSign className='dollar-icon' />}
                 initialValue={0}
                 className='client-count-up countup-container' 
-                targetValue={100}
+                targetValue={earning}
                 text="Revenues"
             /></Link>
        <Link className='count-up-link' to="/user/reservations">   
