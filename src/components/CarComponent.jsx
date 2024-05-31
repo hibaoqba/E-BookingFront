@@ -15,6 +15,7 @@ import Loading from './common/Loading';
 import UseFetchUserInfo from './UseFetchUserInfo';
 import CarImages from './profile/CarImages';
 import LoginModal from './modals/LoginModal';
+import UserDetailsComponent from './common/UserDetailsComponent';
 
 const CarComponent = () => {
   const { id } = useParams();
@@ -89,8 +90,7 @@ const CarComponent = () => {
     }
   };
 
-  const  handleLoginSuccess = async ()  => {
-    
+  const handleLoginSuccess = async ()  => {
     try {
       setShowLoginModal(false);
       const authToken = localStorage.getItem('authToken');
@@ -109,9 +109,7 @@ const CarComponent = () => {
     } catch (error) {
       console.error('Error fetching user info:', error);
     }
-       
   };
-  
   
   if (loading) {
     return <Loading />;
@@ -198,6 +196,10 @@ const CarComponent = () => {
             </Marker>
           </MapContainer>
           <hr />
+          <strong>Locateur</strong>
+          
+          <UserDetailsComponent user={car.seller}/>
+          <hr />
           <div className='FAQs'>
             <h4>FAQs</h4>
             <div className='FAQs-accordion'><FAQs /></div>
@@ -206,8 +208,9 @@ const CarComponent = () => {
         <div className='details-right-section'>
           <div className='reservation'>
             <div className='price-header'>
-              <div>A partir de : </div><div className='price'><h4>{car.price}</h4></div>
-            </div>
+              <div>A partir de : </div><div className='price'><h4>{car.price} </h4></div>
+           
+             dh </div>
             <hr />
             <div className='date-picker'>
               <div className='pick-text'>Veuillez choisir une date:</div>
@@ -219,11 +222,10 @@ const CarComponent = () => {
               </div>
             </div>
             {reservationAttempted && !reservationData.startDate && !reservationData.endDate && (
-  <div className="error-message">
-    Veuillez sélectionner une période de location.
-  </div>
-)}
-
+              <div className="error-message">
+                Veuillez sélectionner une période de location.
+              </div>
+            )}
             <hr />
             <div className='tarif-supp'>
               <h4>Tarifs supplémentaires</h4>

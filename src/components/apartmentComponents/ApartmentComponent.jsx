@@ -12,6 +12,7 @@ import Loading from '../common/Loading';
 import LoginModal from '../modals/LoginModal';
 import UseFetchUserInfo from '../UseFetchUserInfo';
 import { FaKitchenSet, FaPerson,FaChildren } from 'react-icons/fa6';
+import UserDetailsComponent from '../common/UserDetailsComponent';
 
 const ApartmentComponent = () => {
   const { id } = useParams();
@@ -28,6 +29,8 @@ const ApartmentComponent = () => {
     breakfast: false,
     cleaning: false
   });
+  const [reservationAttempted, setReservationAttempted] = useState(false); // Add state for reservation attempt
+  
   useEffect(() => {
     const fetchReservationDates = async () => {
       try {
@@ -73,14 +76,18 @@ const ApartmentComponent = () => {
   };
 
   const handleReservationSubmit = () => {
-    if (userInfo) {
-    navigate(`/apartment/confirmation`, { state: { reservationData, apartment } });
+    if (!reservationData.startDate || !reservationData.endDate) {
+      setReservationAttempted(true);
+      return;
     }
-    else {
+
+    if (userInfo) {
+      navigate(`/apartment/confirmation`, { state: { reservationData, apartment } });
+    } else {
       setShowLoginModal(true); 
     }
-  
   };
+
   const handleLoginSuccess = async () => {
     try {
       setShowLoginModal(false);
@@ -95,19 +102,19 @@ const ApartmentComponent = () => {
       localStorage.setItem('userInfo', JSON.stringify(response.data));
       const userInfoFromStorage = JSON.parse(localStorage.getItem('userInfo'));
       setUserInfo(userInfoFromStorage);
-      navigate(`/apartment/confirmation`, { state: { reservationData, car } });
+      navigate(`/apartment/confirmation`, { state: { reservationData, apartment } });
       window.location.reload()
     } catch (error) {
       console.error('Error fetching user info:', error);
     }
-       
   };
+
   if (loading) {
     return <Loading />;
   }
 
   if (!apartment) {
-    return <div>ap not found</div>;
+    return <div>Apartment not found</div>;
   }
 
   return (
@@ -169,23 +176,21 @@ const ApartmentComponent = () => {
               {apartment.apartmentFeatures.breakfast && <li><FaCoffee className="additional-icon"/>Petit déjeuner</li>}
               {apartment.apartmentFeatures.kitchen && <li><FaUtensils className="additional-icon"/>Cuisine</li>}
               {apartment.apartmentFeatures.airConditioning && <li><FaThermometerHalf className="additional-icon"/>Climatiseur</li>}
-
-
             </ul>
           </div>
           <hr />
           <h4>Localisation</h4>
           <MapContainer center={[apartment.latitude, apartment.longitude]} zoom={6} style={{ height: '400px', width: '100%' }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <Marker position={[apartment.latitude, apartment.longitude]}>
-       
-      </Marker>
-    </MapContainer>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={[apartment.latitude, apartment.longitude]}></Marker>
+          </MapContainer>
           <hr />
-         
+          <strong>Locateur</strong>
+          <UserDetailsComponent user={apartment.seller}/>
+          <hr />
         </div>
         <div className='details-right-section'>
           <div className='reservation'>
@@ -201,6 +206,11 @@ const ApartmentComponent = () => {
               disabledDates={disabledDates} 
                /></div>
             </div>
+            {reservationAttempted && !reservationData.startDate && !reservationData.endDate && (
+              <div className="error-message">
+                Veuillez sélectionner une période de location.
+              </div>
+            )}
             <hr />
            
             <button onClick={handleReservationSubmit}>Réserver</button>
@@ -218,3 +228,4 @@ const ApartmentComponent = () => {
 };
 
 export default ApartmentComponent;
+

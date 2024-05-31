@@ -22,6 +22,7 @@
   .apartment-details {
     flex-grow: 1;
     padding: 20px;
+    max-width: 700px;
   }
   
   .apartment-details h2 {

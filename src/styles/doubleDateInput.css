@@ -1,5 +1,53 @@
-.rdrDayDisabled {
-    color: red; /* Sets the text color of disabled cells to red */
-    background-color: #f2f2f2; /* Sets the background color of disabled cells to light gray */
-  }
-  
+.double-date-input-container {
+  font-family: Arial, sans-serif;
+}
+
+.react-datepicker {
+  font-size: 16px;
+  margin-top: 30px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.react-datepicker__header {
+  background-color: #ffffff;
+  border-bottom: none;
+}
+
+.react-datepicker__day {
+  color: #333333;
+}
+
+.react-datepicker__day--disabled {
+  color: #ff4949;
+}
+
+.react-datepicker__day--today {
+  font-weight: bold;
+}
+
+.react-datepicker__day--selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.react-datepicker__day--in-range {
+  background-color: #3e89d8;
+}
+
+.react-datepicker__day:hover {
+  background-color: #f0f0f0;
+}
+
+.react-datepicker__day:hover:not(.react-datepicker__day--disabled) {
+  color: #007bff;
+}

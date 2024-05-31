@@ -11,7 +11,7 @@ import { BsSuitcaseLg, BsFuelPumpDiesel } from "react-icons/bs";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faMagnifyingGlass, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Card, Dropdown } from 'react-bootstrap';
-import DoubleDateInput from '../components/DoubleDateInput';
+import DoubleDateInput from '../components/common/DoubleDateInput'
 import CarImage from '../components/CarImage';
 
 const Car = () => {

@@ -123,13 +123,13 @@ const validateTab4 = () => {
   return (
     <Modal show={true} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modifier la voiture</Modal.Title>
+        <Modal.Title>Modifier l'appartement</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="form-container">
         <FormWizard onComplete={handleSubmit} >
                 <FormWizard.TabContent title="Informations" icon={<FontAwesomeIcon icon={faHome} />}>
-                    <h2>Add Apartment</h2>
+                   
                     <div className="form-field">
                         <label>Titre:</label>
                         <input type="text" value={titre} onChange={(e) => setTitre(e.target.value)} />

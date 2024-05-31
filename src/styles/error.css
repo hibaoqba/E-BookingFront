@@ -1,0 +1,19 @@
+.error-page-container{
+    margin-top: 170px;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    
+}
+.error-page-text{
+    width: auto;
+    text-align: center;
+    height: 200px;
+    
+
+    font-size: 22px;
+}
+.error-page-text > svg{
+    height: 70px;
+    width: 70px;
+}

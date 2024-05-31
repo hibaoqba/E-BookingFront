@@ -86,7 +86,6 @@ const SellerReservationList = () => {
                     >
                       <option value="non payé">non payée</option>
                       <option value="payé">payée</option>
-                      <option value="annulée">annulée</option>
                     </select>
                     <button className="status-save-button" onClick={handleUpdateStatus}><FontAwesomeIcon icon={faCheck} /></button>
                     <button className="status-cancel-button" onClick={() => setSelectedReservationId(null)}><FontAwesomeIcon icon={faTimes} /></button>
@@ -102,7 +101,16 @@ const SellerReservationList = () => {
               </td>
               <td>{reservation.totalPrice}</td>
               <td>
-                <GetInvoiceById reservationId={reservation.id} />
+              {reservation.status==='payé' ? (
+                     
+                     <GetInvoiceById reservationId={reservation.id} name={'Facture'} />
+                  
+                 ) : (
+                  
+                     <GetInvoiceById reservationId={reservation.id} name={'Reçu'} />
+                    
+                
+                 )}
                 <GetReservationDetails reservationId={reservation.id} />
               </td>
               <td><button className='btn btn-danger delete-reservation-button' onClick={() => DeleteReservation(reservation.id, fetchReservations)}><FontAwesomeIcon icon={faTrash} /></button></td>

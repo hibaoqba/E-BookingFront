@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
-
-import {faCheck  } from '@fortawesome/free-solid-svg-icons';
-
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/profileRightSection.css';
 import { countries } from 'countries-list';
 import Select from 'react-select';
 import * as Yup from 'yup';
+
 const ProfileRightSection = () => {
   const [userData, setUserData] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -23,14 +22,17 @@ const ProfileRightSection = () => {
   }));
 
   const validationSchema = Yup.object().shape({
+    firstname: Yup.string().required('Prénom obligatoire'),
+    lastname: Yup.string().required('Nom obligatoire'),
     phoneNumber: Yup.string()
       .matches(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, 'Phone number is not valid'),
     birthDate: Yup.date()
-      .test('is-over-18', 'Birthday must be at least 18 years ago', function (value) {
+      .required('Entrez votre date de naissance')
+      .test('is-over-18', 'Vous devez avoir au moins 18 ans', function (value) {
         const today = new Date();
         const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
         return value <= eighteenYearsAgo;
-      })
+      }),
   });
 
   useEffect(() => {
@@ -80,7 +82,6 @@ const ProfileRightSection = () => {
         axios.put(`http://localhost:8080/api/users/${validData.email}`, updatedUserData)
           .then(response => {
             setSuccessMessage('Modifications enregistrées');
-            // Optionally, you can update the local state with the updated user data
           })
           .catch(error => {
             setErrorMessages(['Error updating user: ' + error.message]);
@@ -101,53 +102,54 @@ const ProfileRightSection = () => {
         <p>Paramètres</p>
       </div>
       <hr className='profile-divider1' />
-      <h2 className='header2'>Informations personnelles </h2>
-
-     
-
-     
-
+      <h2 className='header2'>Informations personnelles</h2>
       <div className="profile-right-section">
         <div className="column">
           <div className="profile-field">
             <label>E-mail *</label>
-            <input type="email" name="email" value={userData.email} disabled/>
+            <input type="email" name="email" value={userData.email} disabled />
           </div>
           <div className="profile-field">
             <label>Prénom</label>
             <input type="text" name="firstName" defaultValue={userData.firstname} onChange={(e) => setUserData({ ...userData, firstname: e.target.value })} />
+            {errorMessages.includes('Prénom obligatoire') && (
+              <span className="error-message">Prénom obligatoire</span>
+            )}
           </div>
           <div className="profile-field">
             <label>Nom</label>
             <input type="text" name="lastName" defaultValue={userData.lastname} onChange={(e) => setUserData({ ...userData, lastname: e.target.value })} />
+            {errorMessages.includes('Nom obligatoire') && (
+              <span className="error-message">Nom obligatoire</span>
+            )}
           </div>
           <div className="profile-field">
-  <label>Numéro de téléphone</label>
-  <input
-    type="tel"
-    name="phone"
-    defaultValue={userData.phoneNumber}
-    onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
-  />
-
-  {errorMessages.includes('Phone number is not valid') && (
-    <span className="error-message">Numéro de téléphone n'est pas valide</span>
-  )}
-</div>
-<div className="profile-field">
-  <label>Anniversaire</label>
-  <input
-    type="date"
-    name="birthday"
-    defaultValue={userData.birthDate}
-    onChange={(e) => setUserData({ ...userData, birthDate: e.target.value })}
-  />
- 
-  {errorMessages.includes('Birthday must be at least 18 years ago') && (
-    <span className="error-message">Vous devez avoir au moins 18ans</span>
-  )}
-</div>
-
+            <label>Numéro de téléphone</label>
+            <input
+              type="tel"
+              name="phone"
+              defaultValue={userData.phoneNumber}
+              onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
+            />
+            {errorMessages.includes('Phone number is not valid') && (
+              <span className="error-message">Numéro de téléphone n'est pas valide</span>
+            )}
+          </div>
+          <div className="profile-field">
+            <label>Anniversaire</label>
+            <input
+              type="date"
+              name="birthday"
+              defaultValue={userData.birthDate}
+              onChange={(e) => setUserData({ ...userData, birthDate: e.target.value })}
+            />
+            {!userData.birthDate && (
+              <span className="error-message">Entrez votre date de naissance</span>
+            )}
+            {errorMessages.includes('Vous devez avoir au moins 18 ans') && (
+              <span className="error-message">Vous devez avoir au moins 18 ans</span>
+            )}
+          </div>
           <div className="profile-field">
             <div>
               <img
@@ -158,10 +160,8 @@ const ProfileRightSection = () => {
               <input type="file" onChange={handleFileChange} />
             </div>
           </div>
-    {successMessage && <div className="success-message"> <FontAwesomeIcon icon={faCheck}/> {successMessage}</div>}
-
+          {successMessage && <div className="success-message"> <FontAwesomeIcon icon={faCheck} /> {successMessage}</div>}
           <div>
-
             <button className='save-button' onClick={updateUser}>
               <FontAwesomeIcon className='save-icon' icon={faFloppyDisk} />
               Enregistrer vos modifications
@@ -178,8 +178,7 @@ const ProfileRightSection = () => {
               onChange={(option) => setSelectedCountry(option)}
               placeholder="Sélectionner un pays"
             />
-          </div> 
-
+          </div>
           <div className="profile-field">
             <label>Adresse ligne 1:</label>
             <input type="text" name="addressLine1" placeholder='Ligne 1' defaultValue={userData.address ? userData.address.addressLine1 || '' : ''} onChange={(e) => setUserData({ ...userData, address: { ...userData.address, addressLine1: e.target.value } })} />

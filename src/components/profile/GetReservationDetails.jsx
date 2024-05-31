@@ -8,6 +8,8 @@ import '../../styles/getReservationDetails.css'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import CarImage from '../CarImage';
+import UserDetailsComponent from '../common/UserDetailsComponent';
+import CarDetails from '../common/CarDetails';
 const GetReservationDetails = ({ reservationId }) => {
   const [reservation, setReservation] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -53,28 +55,24 @@ const GetReservationDetails = ({ reservationId }) => {
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Reservation Details</Modal.Title>
+          <Modal.Title>Détails de la réservation</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-       
-     
-   
-          <div className='details-modal-image'><CarImage className='details-modal-image' carId={reservation.car.id}left={10} right={10} /></div>
-          <h2> {reservation.titre}</h2>
-          <div>numero: {reservation.id}</div>
-          
-          <div>Brand: {reservation.car.brand}</div>
-          <div>Model: {reservation.car.model}</div>
-          <div>Description: {reservation.car.description}</div>
-          <div>Year: {reservation.car.year}</div>
-         <div>Client: {reservation.user.id}</div>
-          <div>Vendeur: {reservation.car.seller.id}</div>
+        <h4>Voiture</h4> 
+        <CarDetails car={reservation.car}/>
+        <hr />
+        <h4>Locateur</h4>  
+         <UserDetailsComponent user={reservation.car.seller}/>
+         <hr />
+         <h4>Locataire</h4>  
+         <UserDetailsComponent user={reservation.user}/>
+
 
 
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
-            Close
+            fermer
           </Button>
         </Modal.Footer>
       </Modal>

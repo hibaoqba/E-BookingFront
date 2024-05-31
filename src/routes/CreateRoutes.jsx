@@ -38,6 +38,7 @@ import AllUsers from '../components/adminComponents/AllUsers';
 import PayCarReservation from '../components/CarReservation/PayCarReservation';
 import PayApartmentReservation from '../components/apartmentComponents/PayApartmentReservation';
 import ResetPassword from '../components/auth/ResetPassword';
+import Error from '../pages/Error';
 const CreateRoutes = () => {
   return (
     <BrowserRouter>
@@ -47,6 +48,7 @@ const CreateRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/car" element={<Car />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/error" element={<Error />} />
 
       <Route path="/apartment" element={<Apartment />} />
       <Route path="/apartment/:id" element={<ApartmentComponent />} />

@@ -7,6 +7,8 @@ import '../../styles/getInvoiceById.css'
 import '../../styles/getReservationDetails.css'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import ApartmentDetails from '../common/ApartmentDetails'
+import UserDetailsComponent from '../common/UserDetailsComponent'
 import ApartmentImage from '../apartmentComponents/ApartmentImage'
 const GetApartmentReservationDetails = ({ reservationId }) => {
   const [reservation, setReservation] = useState(null);
@@ -53,26 +55,23 @@ const GetApartmentReservationDetails = ({ reservationId }) => {
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Reservation Details</Modal.Title>
+          <Modal.Title>Details de la réservation</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-       
-      <div className='details-modal-image'><ApartmentImage apartmentId={reservation.apartment.id} left={10} right={10} /></div>
+        <h4>Appartement</h4>
+        <ApartmentDetails apartment={reservation.apartment}/>
+       <h4>Locateur</h4>
 
-          <h2> {reservation.titre}</h2>
-          <div>numero: {reservation.id}</div>
-          
-          <div>titre: {reservation.apartment.titre}</div>
-          <div>Description: {reservation.apartment.description}</div>
-          <div> id Client: {reservation.user.id}</div>
-          <div>id Vendeur: {reservation.apartment.seller.id}</div>
-     
-      
+        <UserDetailsComponent user={reservation.apartment.seller}/>
+        <h4>Locataire</h4>
+
+        <UserDetailsComponent user={reservation.user}/>
+
     
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
-            Close
+            Fermer
           </Button>
         </Modal.Footer>
       </Modal>

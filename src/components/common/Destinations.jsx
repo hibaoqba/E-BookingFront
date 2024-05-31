@@ -36,7 +36,7 @@ const DestinationsCarousel = () => {
             />
             <Carousel.Caption>
               <h3>{city.name}</h3>
-              <p><a href={city.descriptionUrl}>Learn more</a></p>
+              <p><a href={city.descriptionUrl}>En savoir plus</a></p>
             </Carousel.Caption>
           </Carousel.Item>
         ))}

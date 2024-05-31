@@ -107,9 +107,10 @@ const AllUsers = () => {
                 )}
               </td>
               <td>
-                <button className="btn btn-danger car-delete-button" onClick={() => handleshowDeleteModal(user.id)}>
+                {user.email!=='admin@gmail.com'? ( <button className="btn btn-danger car-delete-button" onClick={() => handleshowDeleteModal(user.id)}>
                   <FontAwesomeIcon icon={faTrash}/>
-                </button>
+                </button>) :
+                ("")}
               </td>
             </tr>
           ))}

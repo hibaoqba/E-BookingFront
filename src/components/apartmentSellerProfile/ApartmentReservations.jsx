@@ -86,7 +86,6 @@ const ApartmentReservationList = () => {
                     >
                       <option value="non payé">non payée</option>
                       <option value="payé">payée</option>
-                      <option value="annulée">annulée</option>
                     </select>
                     <button className="status-save-button" onClick={handleUpdateStatus}><FontAwesomeIcon icon={faCheck} /></button>
                     <button className="status-cancel-button" onClick={() => setSelectedReservationId(null)}><FontAwesomeIcon icon={faTimes} /></button>
@@ -102,8 +101,16 @@ const ApartmentReservationList = () => {
               </td>
               <td>{reservation.totalPrice}</td>
               <td>
-                <GetApartmentInvoiceById reservationId={reservation.id} />
-                <GetApartmentReservationDetails reservationId={reservation.id} />
+              {reservation.status==='payé' ? (
+                     
+                     <GetApartmentInvoiceById reservationId={reservation.id} name={'Facture'} />
+                  
+                 ) : (
+                  
+                     <GetApartmentInvoiceById reservationId={reservation.id} name={'Reçu'} />
+                    
+                
+                 )}                <GetApartmentReservationDetails reservationId={reservation.id} />
               </td>
               <td><button className='btn btn-danger delete-reservation-button' onClick={() => DeleteApartmentReservation(reservation.id, fetchReservations)}><FontAwesomeIcon icon={faTrash} /></button></td>
             </tr>

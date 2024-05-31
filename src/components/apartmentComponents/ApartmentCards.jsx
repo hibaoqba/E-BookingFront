@@ -4,7 +4,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import Loading from '../common/Loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, Dropdown } from 'react-bootstrap';
-import DoubleDateInput from '../DoubleDateInput';
+import DoubleDateInput from '../common/DoubleDateInput'
 import { LuBadgeDollarSign } from "react-icons/lu";
 import { FaBed,FaBath} from "react-icons/fa";
 import '../../styles/apartment.css'

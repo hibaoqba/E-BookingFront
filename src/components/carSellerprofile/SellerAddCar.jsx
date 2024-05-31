@@ -25,7 +25,13 @@ const SellerAddCar = () => {
   const [gps, setGPS] = useState(true);
   const [ac, setAC] = useState(true);
   const [images, setImages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [message, setMessage] = useState('');
+  const [errorMessage1, setErrorMessage1] = useState('');
+  const [errorMessage2, setErrorMessage2] = useState('');
+  const [errorMessage3, setErrorMessage3] = useState('');
+  const [errorMessage4, setErrorMessage4] = useState('');
   const [address, setAddress] = useState(''); // New state for address
   const userInfo = UseFetchUserInfo();
 
@@ -59,6 +65,17 @@ const SellerAddCar = () => {
     if (e) {
       e.preventDefault();
     }
+    setMessage('');
+        setErrorMessage('');
+        setErrorMessage1('');
+        setErrorMessage2('');
+        setErrorMessage3('');
+        setErrorMessage4('');
+        if(!validateTab4())
+        {
+            setErrorMessage4('veuillez choisir au moins une image')
+             return;
+        }
     try {
       const response = await axios.post('http://localhost:8080/api/cars', {
         brand,
@@ -81,14 +98,34 @@ const SellerAddCar = () => {
         images,
         seller: { id: userInfo.id },
       });
-      setMessage('Car added successfully');
+      setMessage('Voiture ajoutée');
       console.log(response.data);
     } catch (error) {
       setMessage('Error adding car');
       console.error(error);
     }
   };
+  const validateTab1 = () => {
+    return brand !== '' && model !== '' && description !== '' && year !== ''
+    && price !== ''
 
+    ;
+};
+
+const validateTab2 = () => {
+    return fuelType !== '' && transmissionType !== ''
+    && horsePower !== ''
+    && place !== ''
+    && suitCases !== ''
+    ;
+};
+
+const validateTab3 = () => {
+    return latitude !=='' && longitude !=='';
+};
+const validateTab4 = () => {
+    return images.length > 0;
+};
   return (
     <div className="form-container">
       <FormWizard onComplete={handleSubmit}>
@@ -114,9 +151,11 @@ const SellerAddCar = () => {
             <label>Prix:</label>
             <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
           </div>
+          {errorMessage1 && <p className='error-message'>{errorMessage1}</p>}
+
         </FormWizard.TabContent>
 
-        <FormWizard.TabContent title="Caractéristiques" icon={<FontAwesomeIcon icon={faGear} />}>
+        <FormWizard.TabContent title="Caractéristiques" icon={<FontAwesomeIcon icon={faGear}  />} isValid={validateTab1()} validationError={() => setErrorMessage1('Veuillez remplir tous les champs')}>
           <div className="form-field">
             <label>Carburant:</label>
             <select value={fuelType} onChange={(e) => setFuelType(e.target.value)}>
@@ -156,23 +195,29 @@ const SellerAddCar = () => {
             <label>Clim:</label>
             <input type="checkbox" checked={ac} onChange={(e) => setAC(e.target.checked)} />
           </div>
+          {errorMessage2 && <p className='error-message'>{errorMessage2}</p>}
+
         </FormWizard.TabContent>
 
-        <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faLocation} />}>
+        <FormWizard.TabContent title="Localisation" icon={<FontAwesomeIcon icon={faLocation} />} isValid={validateTab2()} validationError={() => setErrorMessage2('Veuillez remplir tous les champs')}>
           <MapPicker onLocationChange={handleLocationChange} defaultPosition={[0, 0]} />
           <ReverseGeocoding latitude={latitude} longitude={longitude} onAddressFetched={setAddress} />
           <div className="form-field">
             <label>Adresse:</label>
             <input type="text" value={address} readOnly /> {/* Display the fetched address */}
           </div>
+          {errorMessage3 && <p className='error-message'>{errorMessage3}</p>}
+
         </FormWizard.TabContent>
 
-        <FormWizard.TabContent title="Images" icon={<FontAwesomeIcon icon={faImage} />}>
+        <FormWizard.TabContent title="Images" icon={<FontAwesomeIcon icon={faImage} />} isValid={validateTab3()} validationError={() => setErrorMessage3('Veuillez choisir un emplacement')}>
           <div className="form-field">
             <label>Images:</label>
             <input type="file" accept="image/*" multiple onChange={handleImageChange} />
           </div>
           {message && <p>{message}</p>}
+          {errorMessage4 && <p className='error-message'>{errorMessage4}</p>}
+
           <div>
             {images.map((image, index) => (
               <img
@@ -182,7 +227,9 @@ const SellerAddCar = () => {
                 style={{ width: '200px', height: 'auto', margin: '5px' }}
               />
             ))}
+
           </div>
+          
         </FormWizard.TabContent>
       </FormWizard>
     </div>

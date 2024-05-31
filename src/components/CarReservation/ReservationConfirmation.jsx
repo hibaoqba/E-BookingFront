@@ -178,6 +178,17 @@ const ReservationConfirmation = () => {
                   J'accepte les <a href="/src/assets/conditions.pdf" target="_blank" rel="noopener noreferrer" style={{color:"blue",borderBottom:"1px solid blue"}}>conditions générales</a>
                 </label>
               </div>
+              <br />
+              <strong style={{color:'grey'}}>Mode de paiement</strong>
+              <div>
+            <input className='online-radio' type="radio" id="online" name="paymentMethod" value="online" onChange={() => setPaymentMethod('online')} />
+            <label htmlFor="online">Paiement en ligne</label>
+          </div>
+         
+          <div>
+            <input  className='cash-radio' type="radio" id="onSite" name="paymentMethod" value="onSite" onChange={() => setPaymentMethod('onSite')} />
+            <label htmlFor="onSite">Paiement sur place</label>
+          </div>
               {successMessage && <div className="success-message"><FontAwesomeIcon icon={faCheck}/> {successMessage}</div>}
             </div>
             <div className="column">
@@ -207,18 +218,12 @@ const ReservationConfirmation = () => {
                 <label>Ville:</label>
                 <input type="text" name="city" defaultValue={userData.address ? userData.address.city || '' : ''} onChange={(e) => setUserData({ ...userData, address: { ...userData.address, city: e.target.value } })} />
               </div>
+              
             </div>
           </div>
           <div className="payment-field">
 
-          <div>
-            <input className='online-radio' type="radio" id="online" name="paymentMethod" value="online" onChange={() => setPaymentMethod('online')} />
-            <label htmlFor="online">Paiement en ligne</label>
-          </div>
-          <div>
-            <input  className='cash-radio' type="radio" id="onSite" name="paymentMethod" value="onSite" onChange={() => setPaymentMethod('onSite')} />
-            <label htmlFor="onSite">Paiement sur place</label>
-          </div>
+         
         </div>
         <button onClick={handleConfirmReservation} className='confirm-button'><FontAwesomeIcon icon={faCalendarCheck} /> Confirmer la réservation</button>
 

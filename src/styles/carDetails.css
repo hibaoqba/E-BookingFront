@@ -1,0 +1,13 @@
+.car-reservation-details-container{
+    display: flex;
+    
+   
+}
+.reservation-details-image{
+width: 300px;
+}
+.car-reservation-details-info{
+    margin-left: 30px;
+    text-align: left;
+    max-width: 250px;
+}

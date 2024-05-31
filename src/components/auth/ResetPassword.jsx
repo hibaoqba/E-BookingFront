@@ -24,7 +24,7 @@ const ResetPassword = () => {
       });
       setMessage('Réinitialisation du mot de passe réussie');
       setTimeout(() => {
-        window.location.href = '/login';
+        window.location.href = '/';
       }, 2000);
     } catch (error) {
       if (error.response && error.response.status === 400) {
